@@ -44,4 +44,33 @@
         active="{{ request()->routeIs('admin.settings') ? ' active' : '' }}"
     />
     @endcan
+
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Klien" 
+        icon="male" 
+        url="{{ route('admin.klien') }}" 
+        active="{{ request()->routeIs('admin.klien') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Projects" 
+        icon="archive" 
+        url="{{ route('admin.project') }}" 
+        active="{{ request()->routeIs('admin.project') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Tim" 
+        icon="male" 
+        url="{{ route('admin.tim') }}" 
+        active="{{ request()->routeIs('admin.tim') ? ' active' : '' }}"
+    />
+
+    
 </ul>
