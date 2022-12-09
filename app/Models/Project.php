@@ -19,6 +19,6 @@ class Project extends Model
 
     public function tim()
     {
-        return $this->hasMany(Tim::class);
+        return $this->hasMany(Tim::class, 'id_project');
     }
 }

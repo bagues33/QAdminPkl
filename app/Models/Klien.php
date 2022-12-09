@@ -19,6 +19,7 @@ class Klien extends Model
         'photo',
         'website',
         'deskripsi',
+        'id_user',
     ];
 
     protected $primaryKey = 'id_klien';

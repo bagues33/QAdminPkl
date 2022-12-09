@@ -15,16 +15,12 @@ class CreateAnggotasTable extends Migration
     {
         Schema::create('anggotas', function (Blueprint $table) {
             $table->bigIncrements('id_anggota');
-            $table->string('nama');
-            $table->char('no_telpon', 12);
-            $table->string('alamat');
-            $table->string('username');
-            $table->string('password');
-            $table->string('photo')->nullable();
-            $table->string('posisi');
-            $table->string('peran');
             $table->unsignedBigInteger('id_tim');
             $table->foreign('id_tim')->references('id_tim')->on('tims');
+            $table->unsignedBigInteger('id_users');
+            $table->foreign('id_users')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

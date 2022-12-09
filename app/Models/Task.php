@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama', 'deskripsi', 'type', 'prioritas', 'id_anggota'
+    ];
+
+    protected $table = 'tasks';
+
+    protected $primaryKey = 'id_task';
+
+    public function anggota()
+    {
+        return $this->belongsTo(Anggota::class, 'id_anggota');
+    }
+
+    // public function user()
+    // {
+    //     return $this->belongsToMany(User::class, 'id_anggota');
+    // }
+
 }

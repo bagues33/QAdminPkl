@@ -1,13 +1,13 @@
 <x-app-layout>
-	<x-slot name="title">Tim</x-slot>
+	<x-slot name="title">Task</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<x-slot name="title">All Tim</x-slot>
+		<x-slot name="title">All Task</x-slot>
 		<x-slot name="option">
-			<a href="{{ route('admin.tim.create') }}" class="btn btn-success">
+			<a href="{{ route('admin.task.create') }}" class="btn btn-success">
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
@@ -15,24 +15,25 @@
 			<thead>
 				<th>Nama</th>
 				<th>Deskripsi</th>
-				<th>Nama Project</th>
-				<!-- <th>Daftar Anggota</th> -->
+				<th>Type</th>
+				<th>Prioritas</th>
 			</thead>
 			<tbody>
-				@forelse($tims as $tim)
+				@forelse($tasks as $task)
 				<tr>
-					<td>{{ $tim->nama}}</td>
-					<td>{{ $tim->deskripsi }}</td>
-					<td>{{ $tim->project->nama }}</td>
+					<td>{{ $task->nama}}</td>
+					<td>{{ $task->deskripsi }}</td>
+					<td>{{ $task->type }}</td>
+					<td>{{ $task->prioritas }}</td>
 					<td class="text-center">
-						<!-- <button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $tim->nama }}" data-deskripsi="{{ $tim->deskripsi }}" data-id_project="{{ $tim->project->nama }}">
+						<button type="button" class="btn btn-info mr-1 info"
+						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-anggota="{{ $task->anggota->user->name }}">
 							<i class="fas fa-eye"></i>
-						</button> -->
-						<a href="{{ route('admin.tim.show', $tim->id_tim) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a> 
-						<a href="{{ route('admin.tim.edit', $tim->id_tim) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
+						</button>
+						<!-- <a href="{{ route('admin.task.show', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a>  -->
+						<a href="{{ route('admin.task.edit', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
 						
-						<form action="{{ route('admin.tim.delete', $tim->id_tim) }}" style="display: inline-block;" method="POST">
+						<form action="{{ route('admin.task.delete', $task->id_task) }}" style="display: inline-block;" method="POST">
 							@csrf
 							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
 						</form>
@@ -65,9 +66,21 @@
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
-				<b>Nama Project</b>
+				<b>Type</b>
 			</div>
-			<div class="col-6" id="id_project-modal"></div>
+			<div class="col-6" id="type-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Prioritas</b>
+			</div>
+			<div class="col-6" id="prioritas-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Nama Anggota</b>
+			</div>
+			<div class="col-6" id="anggota-modal"></div>
 		</div>
 	</x-modal>
 
@@ -75,10 +88,11 @@
 		<script>
 			$('.info').click(function(e) {
 				e.preventDefault()
-
 				$('#nama-modal').text($(this).data('nama'))
 				$('#deskripsi-modal').text($(this).data('deskripsi'))
-				$('#id_project-modal').text($(this).data('id_project'))
+				$('#type-modal').text($(this).data('type'))
+				$('#prioritas-modal').text($(this).data('prioritas'))
+				$('#anggota-modal').text($(this).data('anggota'))
 
 				$('#infoModal').modal('show')
 			})

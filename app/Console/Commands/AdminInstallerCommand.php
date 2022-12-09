@@ -41,6 +41,8 @@ class AdminInstallerCommand extends Command
         $this->call('migrate:fresh');
         $this->call('db:seed', ['--class' => 'PermissionTableSeeder']);
         $this->call('db:seed', ['--class' => 'CreateAdminUserSeeder']);
+        $this->call('db:seed', ['--class' => 'DatabaseSeeder']);
+        // $this->call('db:seed', ['--class' => 'CreateAnggotaUserSeeder']);
         $this->call('storage:link');
     }
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tim;
 use App\Models\Project;
-
+use App\Models\Anggota;
+use Illuminate\Support\Facades\Auth;
 
 class TimController extends Controller
 {
@@ -17,8 +18,9 @@ class TimController extends Controller
     public function index()
     {
         //
-        $tims = Tim::with('project')->latest()->get();
-        // dd($tims);
+        $user = Auth::user();
+        $tims = Tim::with('project', 'project.tim')->where('id_user', '=', $user->id)->latest()->get();
+        // dd($tims[0]->project->tim);
         return view('admin.tim.index', compact('tims'));
     }
 
@@ -50,11 +52,14 @@ class TimController extends Controller
             'id_project' => 'required'
         ]);
 
+        $iduser = Auth::id();
+
         //create post
         Tim::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'id_project'   => $request->id_project,
+            'id_user'     => $iduser
         ]);
 
         //redirect to index
@@ -70,6 +75,9 @@ class TimController extends Controller
     public function show($id)
     {
         //
+        $tims = Tim::with('project')->where('id_tim','=',$id)->firstOrFail();
+        $anggotas = Anggota::with('user')->where('id_tim','=',$id)->get();
+        return view('admin.tim.detail', compact('anggotas','tims'));
     }
 
     /**
@@ -105,12 +113,14 @@ class TimController extends Controller
         // $klien = Klien::findOrFail($id);
         $tims = Tim::where('id_tim','=',$id)->firstOrFail();
 
+        $iduser = Auth::id();
 
         //update post with new image
         $tims->update([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
-            'id_project'   => $request->id_project
+            'id_project'   => $request->id_project,
+            'id_user'   => $iduser
 
         ]);
 

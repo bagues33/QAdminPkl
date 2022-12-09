@@ -16,7 +16,8 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::latest()->get();
+        $user = Auth::user();
+        $projects = Project::latest()->where('id_user', '=', $user->id)->get();
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -41,7 +42,6 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
-                //
         //validate form
         $this->validate($request, [
             'nama'  => 'required',
@@ -49,11 +49,11 @@ class ProjectController extends Controller
             'tgl_mulai' => 'required',
             'deadline' => 'required',
             'tgl_selesai' => 'required',
-            'status' => 'required',
             'id_klien' => 'required'
         ]);
 
         $iduser = Auth::id();
+        $status = "On Progress";
 
         //create post
         Project::create([
@@ -63,7 +63,7 @@ class ProjectController extends Controller
             'tgl_selesai'   => $request->tgl_selesai,
             'deadline'   => $request->deadline,
             'budget'   => $request->budget,
-            'status'   => $request->status,
+            'status'   => $status,
             'id_klien'   => $request->id_klien,
             'id_user' => $iduser
         ]);

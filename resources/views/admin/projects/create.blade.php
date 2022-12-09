@@ -41,14 +41,13 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
-			        <!-- <x-input text="Status" name="status" type="text" /> -->
+				<!-- <div class="col-md-6">
 			        <label for="status">Status</label>
 			        <select id="status" class="form-control" text="Status" name="status">
 			        	<option value="onprogress">On Progress</option>
 			        	<option value="done">Done</option>
 			        </select>
-				</div>
+				</div> -->
 				<div class="col-md-6">
 					<!-- <x-input text="Klien" name="klien" type="text" /> -->
 					<label for="klien">Klien</label>

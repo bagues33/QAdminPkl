@@ -19,6 +19,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/admin/dashboard';
 
+    public const ANGGOTA = '/anggota/task/dashboard';
+
     /**
      * The controller namespace for the application.
      *

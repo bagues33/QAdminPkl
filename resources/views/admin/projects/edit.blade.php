@@ -10,7 +10,7 @@
 	<x-card>
 		<form action="{{ route('admin.project.create') }}" method="post">
 			@csrf
-
+			@method('PUT')
 			<div class="row">
 				<div class="col-md-6">
 					<x-input text="Nama Project" value="{{ $project->nama }}" name="nama" type="text" />

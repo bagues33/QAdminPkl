@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'anggota' => [
+            'driver' => 'session',
+            'provider' => 'anggotas',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,6 +76,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'anggotas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Anggota::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +105,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'anggotas' => [
+            'provider' => 'anggotas',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

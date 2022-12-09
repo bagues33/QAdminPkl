@@ -7,16 +7,27 @@
     </a>
     <hr class="sidebar-divider my-0">
 
+    @can('admin')
     <x-nav-link 
         text="Dashboard" 
         icon="tachometer-alt" 
         url="{{ route('admin.dashboard') }}"
         active="{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
     />
-    
-    <hr class="sidebar-divider mb-0">
+    @endcan
+
+    @can('anggota')
+    <x-nav-link 
+        text="Dashboard" 
+        icon="tachometer-alt" 
+        url="{{ route('anggota.dashboard') }}"
+        active="{{ request()->routeIs('anggota.dashboard') ? ' active' : '' }}"
+    />
+    @endcan
 
     @can('member-list')
+    <hr class="sidebar-divider mb-0">
+
     <x-nav-link 
         text="Member" 
         icon="users" 
@@ -33,10 +44,10 @@
         active="{{ request()->routeIs('admin.roles') ? ' active' : '' }}"
     />
     @endcan
-
-    <hr class="sidebar-divider mb-0">
     
     @can('setting-list')
+    <hr class="sidebar-divider mb-0">
+
     <x-nav-link 
         text="Settings" 
         icon="cogs" 
@@ -45,6 +56,7 @@
     />
     @endcan
 
+    @can('pm')
     <hr class="sidebar-divider mb-0">
     
     <x-nav-link 
@@ -72,5 +84,27 @@
         active="{{ request()->routeIs('admin.tim') ? ' active' : '' }}"
     />
 
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Anggota" 
+        icon="male" 
+        url="{{ route('anggota.index') }}" 
+        active="{{ request()->routeIs('anggota.index') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Task" 
+        icon="male" 
+        url="{{ route('admin.task') }}" 
+        active="{{ request()->routeIs('task.index') ? ' active' : '' }}"
+    />
+    @endcan
+
+    @can('anggota')
+   
+    @endcan
     
 </ul>

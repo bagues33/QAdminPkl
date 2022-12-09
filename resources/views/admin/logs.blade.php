@@ -8,7 +8,7 @@
 	<x-card>
 		<x-slot name="title">All Activity Log</x-slot>
 		<x-slot name="option">
-			<form action="{{ route('admin.logs.delete') }}" method="post">
+			<form action="{{ route('logs.delete') }}" method="post">
 				@csrf
 				<button type="submit" class="btn btn-danger">Delete 7 days ago</button>
 			</form>

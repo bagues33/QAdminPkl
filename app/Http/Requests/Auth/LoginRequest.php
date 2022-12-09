@@ -43,6 +43,7 @@ class LoginRequest extends FormRequest
      */
     public function authenticate()
     {
+        // dd(Auth::user());
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->filled('remember'))) {
@@ -52,6 +53,9 @@ class LoginRequest extends FormRequest
                 'email' => __('auth.failed'),
             ]);
         }
+
+        // $user = Auth::user();
+        // dd($user);
 
         RateLimiter::clear($this->throttleKey());
     }

@@ -19,6 +19,8 @@ class CreateTimsTable extends Migration
             $table->text('deskripsi');
             $table->unsignedBigInteger('id_project');
             $table->foreign('id_project')->references('id_project')->on('projects');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

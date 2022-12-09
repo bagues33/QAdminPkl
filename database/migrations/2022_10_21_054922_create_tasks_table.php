@@ -16,17 +16,11 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id_task');
             $table->string('nama');
-            $table->date('tgl_mulai');
-            $table->date('tgl_selesai');
-            $table->date('deadline');
             $table->text('deskripsi');
-            $table->string('status');
+            $table->string('type');
             $table->string('prioritas');
             $table->unsignedBigInteger('id_anggota');
             $table->foreign('id_anggota')->references('id_anggota')->on('anggotas');
-            $table->unsignedBigInteger('parent_task_id');
-            $table->foreign('parent_task_id')->references('id_task')->on('tasks');
-            $table->text('subtask');
             $table->timestamps();
         });
     }

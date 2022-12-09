@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Klien;
+use App\Models\User;
+use Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -17,7 +19,8 @@ class KlienController extends Controller
     public function index()
     {
         //
-        $kliens = Klien::latest()->get();
+        $user = Auth::user();
+        $kliens = Klien::latest()->where('id_user', '=', $user->id)->get();
         return view('admin.klien.index', compact('kliens'));
     }
 
@@ -41,11 +44,11 @@ class KlienController extends Controller
     public function store(Request $request)
     {
 
-        // return $request->file('photo')->store('posts');
+        // return $request->file('photo')->hashName();
         //
         //validate form
         $this->validate($request, [
-            'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama'      => 'required',
             'no_telpon' => 'required',
             'alamat' => 'required',
@@ -54,20 +57,37 @@ class KlienController extends Controller
             'deskripsi' => 'required',
         ]);
 
+        $user = Auth::id();
+
         //upload image
-        $photo = $request->file('photo');
-        $photo->storeAs('posts', $photo->hashName());
+        if ($request->photo) {
+            $photo = $request->file('photo');
+            $photo->storeAs('posts', $photo->hashName());
+
+            Klien::create([
+                'photo'     => $photo->hashName(),
+                'nama'     => $request->nama,
+                'no_telpon'   => $request->no_telpon,
+                'alamat'   => $request->alamat,
+                'email'   => $request->email,
+                'website'   => $request->website,
+                'deskripsi'   => $request->deskripsi,
+                'id_user'   => $user
+            ]);
+        } else {
+            Klien::create([
+                'nama'     => $request->nama,
+                'no_telpon'   => $request->no_telpon,
+                'alamat'   => $request->alamat,
+                'email'   => $request->email,
+                'website'   => $request->website,
+                'deskripsi'   => $request->deskripsi,
+                'id_user'   => $user
+            ]);
+        }
 
         //create post
-        Klien::create([
-            'photo'     => $photo->hashName(),
-            'nama'     => $request->nama,
-            'no_telpon'   => $request->no_telpon,
-            'alamat'   => $request->alamat,
-            'email'   => $request->email,
-            'website'   => $request->website,
-            'deskripsi'   => $request->deskripsi,
-        ]);
+        
 
         //redirect to index
         return redirect()->route('admin.klien')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -128,10 +148,10 @@ class KlienController extends Controller
 
             //upload new image
             $image = $request->file('photo');
-            $image->storeAs('public/posts', $image->hashName());
+            $image->storeAs('posts', $image->hashName());
 
             //delete old image
-            Storage::delete('public/posts/'.$klien->photo);
+            Storage::delete('posts'.$klien->photo);
 
             //update post with new image
             $klien->update([
@@ -174,7 +194,7 @@ class KlienController extends Controller
         //delete image
         $klien = Klien::where('id_klien','=',$id)->firstOrFail();
 
-        Storage::delete('public/posts/'. $klien->photo);
+        Storage::delete('posts'. $klien->photo);
         
         //delete post
         $klien->delete();

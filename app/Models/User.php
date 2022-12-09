@@ -22,8 +22,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'avatar'
     ];
+
+    protected $table = 'users';
 
     protected static $logAttributes = ['name', 'email'];
 
@@ -62,5 +65,15 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->hasRole('Admin');
+    }
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class, 'id_users');
+    }
+
+    public function task()
+    {
+        return $this->hasMany(Task::class);
     }
 }

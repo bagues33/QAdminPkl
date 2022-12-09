@@ -22,6 +22,8 @@ class CreateKliensTable extends Migration
             $table->string('photo')->nullable();
             $table->string('website')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

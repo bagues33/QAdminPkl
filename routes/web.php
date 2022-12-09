@@ -1,31 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController};
+use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController, AnggotaController, TaskController};
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::group([
-	'middleware' => 'auth',
+	'middleware' => ['auth','role:Admin|pm'],
 	'prefix' => 'admin',
 	'as' => 'admin.'
 ], function(){
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-	Route::get('/logs', [DashboardController::class, 'activity_logs'])->name('logs');
-	Route::post('/logs/delete', [DashboardController::class, 'delete_logs'])->name('logs.delete');
 	
 	// Settings menu
 	Route::view('/settings', 'admin.settings')->name('settings');
 	Route::post('/settings', [DashboardController::class, 'settings_store'])->name('settings');
-	
-	// Profile menu
-	Route::view('/profile', 'admin.profile')->name('profile');
-	Route::post('/profile', [DashboardController::class, 'profile_update'])->name('profile');
-	Route::post('/profile/upload', [DashboardController::class, 'upload_avatar'])
-		->name('profile.upload');
 
 	// Member menu
 	Route::get('/member', [UserController::class, 'index'])->name('member');
@@ -71,10 +62,53 @@ Route::group([
 	Route::get('/tim', [TimController::class, 'index'])->name('tim');
 	Route::get('/tim/create', [TimController::class, 'create'])->name('tim.create');
 	Route::post('/tim/create', [TimController::class, 'store'])->name('tim.create');
+	Route::get('/tim/{id_tim}/show', [TimController::class, 'show'])->name('tim.show');
 	Route::get('/tim/{id_tim}/edit', [TimController::class, 'edit'])->name('tim.edit');
 	Route::put('/tim/{id_tim}/update', [TimController::class, 'update'])->name('tim.update');
 	Route::post('/tim/{id}/delete', [TimController::class, 'destroy'])->name('tim.delete');
 
+	Route::get('/task', [TaskController::class, 'index'])->name('task');
+	Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
+	Route::post('/task/create', [TaskController::class, 'store'])->name('task.create');
+	Route::get('/task/{id_task}/show', [TaskController::class, 'show'])->name('task.show');
+	Route::get('/task/{id_task}/edit', [TaskController::class, 'edit'])->name('task.edit');
+	Route::put('/task/{id_task}/update', [TaskController::class, 'update'])->name('task.update');
+	Route::post('/task/{id}/delete', [TaskController::class, 'destroy'])->name('task.delete');
+
+	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/index', [AnggotaController::class, 'index'])->name('index');
+	Route::get('/create', [AnggotaController::class, 'create'])->name('create');
+	Route::post('/create', [AnggotaController::class, 'store'])->name('create');
+	Route::get('/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
+	Route::put('/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
+	Route::post('/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
+
+});
+
+Route::group([
+	'middleware' => ['auth','role:anggota'],
+	'prefix' => 'anggota',
+	'as' => 'anggota.'
+], function(){
+	Route::get('/task/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/task/index', [AnggotaController::class, 'index'])->name('index');
+	Route::get('/task/create', [AnggotaController::class, 'create'])->name('create');
+	Route::post('/task/create', [AnggotaController::class, 'store'])->name('create');
+	Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
+	Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
+	Route::post('/task/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
+});
+
+Route::group([
+	'middleware' => 'auth'
+], function(){
+	// Profile menu
+	Route::view('/profile', 'admin/profile')->name('profile');
+	Route::post('/profile', [DashboardController::class, 'profile_update'])->name('profile');
+	Route::post('/profile/upload', [DashboardController::class, 'upload_avatar'])
+		->name('profile.upload');
+	Route::get('/logs', [DashboardController::class, 'activity_logs'])->name('logs');
+	Route::post('/logs/delete', [DashboardController::class, 'delete_logs'])->name('logs.delete');
 });
 
 
