@@ -75,13 +75,13 @@ Route::group([
 	Route::put('/task/{id_task}/update', [TaskController::class, 'update'])->name('task.update');
 	Route::post('/task/{id}/delete', [TaskController::class, 'destroy'])->name('task.delete');
 
-	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-	Route::get('/index', [AnggotaController::class, 'index'])->name('index');
-	Route::get('/create', [AnggotaController::class, 'create'])->name('create');
-	Route::post('/create', [AnggotaController::class, 'store'])->name('create');
-	Route::get('/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
-	Route::put('/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
-	Route::post('/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
+	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
+	Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota.create');
+	Route::post('/anggota/create', [AnggotaController::class, 'store'])->name('anggota.create');
+	Route::get('anggota/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('anggota.edit');
+	Route::put('anggota/{id_anggota}/update', [AnggotaController::class, 'update'])->name('anggota.update');
+	Route::post('anggota/{id}/delete', [AnggotaController::class, 'destroy'])->name('anggota.delete');
 
 });
 
@@ -91,12 +91,12 @@ Route::group([
 	'as' => 'anggota.'
 ], function(){
 	Route::get('/task/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-	Route::get('/task/index', [AnggotaController::class, 'index'])->name('index');
-	Route::get('/task/create', [AnggotaController::class, 'create'])->name('create');
-	Route::post('/task/create', [AnggotaController::class, 'store'])->name('create');
-	Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
-	Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
-	Route::post('/task/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
+	Route::get('/task/index', [TaskController::class, 'showTaskForAnggota'])->name('task.index');
+	Route::get('/task/{id_task}/edit', [TaskController::class, 'createSubmitTask'])->name('task.create');
+	Route::put('/task/{id_task}/update', [TaskController::class, 'storeSubmitTask'])->name('task.update');
+	// Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
+	// Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
+	// Route::post('/task/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
 });
 
 Route::group([

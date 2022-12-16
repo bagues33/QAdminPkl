@@ -57,6 +57,13 @@
     @endcan
 
     @can('pm')
+    <x-nav-link 
+        text="Dashboard" 
+        icon="tachometer-alt" 
+        url="{{ route('admin.dashboard') }}"
+        active="{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
+    />
+    
     <hr class="sidebar-divider mb-0">
     
     <x-nav-link 
@@ -79,7 +86,7 @@
     
     <x-nav-link 
         text="Tim" 
-        icon="male" 
+        icon="users" 
         url="{{ route('admin.tim') }}" 
         active="{{ request()->routeIs('admin.tim') ? ' active' : '' }}"
     />
@@ -88,23 +95,30 @@
     
     <x-nav-link 
         text="Anggota" 
-        icon="male" 
-        url="{{ route('anggota.index') }}" 
-        active="{{ request()->routeIs('anggota.index') ? ' active' : '' }}"
+        icon="user" 
+        url="{{ route('admin.anggota') }}" 
+        active="{{ request()->routeIs('admin.anggota') ? ' active' : '' }}"
     />
 
     <hr class="sidebar-divider mb-0">
     
     <x-nav-link 
         text="Task" 
-        icon="male" 
+        icon="tasks" 
         url="{{ route('admin.task') }}" 
         active="{{ request()->routeIs('task.index') ? ' active' : '' }}"
     />
     @endcan
 
     @can('anggota')
-   
+    <hr class="sidebar-divider mb-0">
+    
+    <x-nav-link 
+        text="Task" 
+        icon="tasks" 
+        url="{{ route('anggota.task.index') }}" 
+        active="{{ request()->routeIs('anggota.task') ? ' active' : '' }}"
+    />
     @endcan
     
 </ul>

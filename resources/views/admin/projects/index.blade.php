@@ -29,11 +29,11 @@
 					<td>{{ $project->tgl_mulai }}</td>
 					<td>{{ $project->tgl_selesai }}</td>
 					<td>{{ $project->deadline }}</td>
-					<td>{{ $project->budget }}</td>
+					<td>@currency($project->budget)</td>
 					<td>{{ $project->status }}</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $project->nama }}" data-deskripsi="{{ $project->deskripsi }}" data-tgl_mulai="{{ $project->tgl_mulai }}" data-tgl_selesai="{{ $project->tgl_selesai }}" data-deadline="{{ $project->deadline }}" data-budget="{{ $project->budget }}" data-status="{{ $project->status }}">
+						data-nama="{{ $project->nama }}" data-deskripsi="{{ $project->deskripsi }}" data-tgl_mulai="{{ $project->tgl_mulai }}" data-tgl_selesai="{{ $project->tgl_selesai }}" data-deadline="{{ $project->deadline }}" data-budget="@currency($project->budget)" data-status="{{ $project->status }}">
 							<i class="fas fa-eye"></i>
 						</button>
 						<a href="{{ route('admin.project.edit', $project->id_project) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 

@@ -20,7 +20,7 @@ class AnggotaController extends Controller
         //
         // $anggotas = Anggota::with('tim')->latest()->get();
         $user = Auth::user();
-        $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->get();;
+        $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->get();
         // dd($anggotas);
         return view('admin.anggota.index', compact('anggotas'));
 

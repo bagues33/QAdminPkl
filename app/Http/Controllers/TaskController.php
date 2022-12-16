@@ -24,6 +24,16 @@ class TaskController extends Controller
         return view('admin.task.index', compact('tasks'));
     }
 
+    public function showTaskForAnggota() {
+        $user = Auth::user()->id;
+    
+        $tasks = Task::with(['anggota'])->whereHas('anggota', function($q) use($user) {
+            $q->where('id_users', '=', $user);
+        })->get();
+
+        return view('anggota.index', compact('tasks'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +46,17 @@ class TaskController extends Controller
         $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->latest()->get();
         return view('admin.task.create', compact('anggotas'));
         
+    }
+
+    public function createSubmitTask($id) 
+    {
+        $user = Auth::user()->id;
+        $task = Task::where('id_task','=',$id)->firstOrFail();  
+        // $tasks = Task::with(['anggota'])->whereHas('anggota', function($q) use($user) {
+        //     $q->where('id_users', '=', $user);
+        // })->get();
+        // dd($tasks);
+        return view('anggota.create', compact('task'));
     }
 
     /**
@@ -72,6 +93,42 @@ class TaskController extends Controller
 
     }
 
+    public function storeSubmitTask(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama'  => 'required',
+            'deskripsi'  => 'required',
+            'type' => 'required',
+            'prioritas' => 'required',
+            'id_anggota' => 'required',
+            'parent_id_task' => 'required',
+            'status' => 'required',
+        ]);
+
+        // $klien = Klien::findOrFail($id);
+        $task = Task::where('id_task','=',$id)->firstOrFail();
+        // dd($task);
+
+        //update post with new image
+        $task->update([
+            'nama'     => $request->nama,
+            'deskripsi'   => $request->deskripsi,
+            'type'   => $request->type,
+            'prioritas'   => $request->prioritas,
+            'id_anggota'   => $request->id_anggota,
+            'parent_id_task'  => $request->parent_id_task,
+            'status'   =>   $request->status,
+            'submit_task' => $request->submit_task,
+
+        ]);
+
+        // dd($task);
+
+        //redirect to index
+        return redirect()->route('anggota.task.index')->with(['success' => 'Submit Task Berhasil Disimpan!']);
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -92,6 +149,11 @@ class TaskController extends Controller
     public function edit($id)
     {
         //
+        // $kliens = Klien::latest()->get();
+        $user = Auth::user();
+        $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->latest()->get();
+        $task = Task::where('id_task','=',$id)->firstOrFail();
+        return view('admin.task.edit', compact('anggotas','task'));
     }
 
     /**
@@ -104,6 +166,30 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //
+         //
+         $this->validate($request, [
+            'nama'  => 'required',
+            'deskripsi'  => 'required',
+            'type' => 'required',
+            'prioritas' => 'required',
+            'id_anggota' => 'required',
+        ]);
+
+        // $klien = Klien::findOrFail($id);
+        $task = Task::where('id_task','=',$id)->firstOrFail();
+
+        //update post with new image
+        $task->update([
+            'nama'     => $request->nama,
+            'deskripsi'   => $request->deskripsi,
+            'type'   => $request->type,
+            'prioritas'   => $request->prioritas,
+            'id_anggota'   => $request->id_anggota,
+
+        ]);
+
+        //redirect to index
+        return redirect()->route('admin.task')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -115,5 +201,13 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+        //delete image
+        $task = Task::where('id_task','=',$id)->firstOrFail();
+        
+        //delete post
+        $task->delete();
+
+        //redirect to index
+        return redirect()->route('admin.task')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

@@ -36,7 +36,12 @@
 			        <x-input text="Estimasi Tanggal Selesai" name="tgl_selesai" type="date" />
 				</div>
 				<div class="col-md-6">
-					<x-input text="Budget" name="budget" type="text" />
+					<label for="budget">Budget</label>
+					<div class="input-group mb-3">
+  						<span class="input-group-text" id="budget">Rp</span>
+  						<input type="text" class="form-control" placeholder="Enter Budget" aria-label="Enter Budget" aria-describedby="budget">
+					</div>
+					<!-- <x-input text="Budget" name="budget" type="text" /> -->
 				</div>
 			</div>
 

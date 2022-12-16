@@ -30,7 +30,7 @@
                     <label for="type">Type</label>
                     <select id="type" class="form-control" text="type" name="type">
                             <option value="hard">Hard</option>
-                            <option value="easy">easy</option>
+                            <option value="easy">Easy</option>
                     </select>
 				</div>
                 <div class="col-md-6">

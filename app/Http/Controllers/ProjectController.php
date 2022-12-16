@@ -53,7 +53,7 @@ class ProjectController extends Controller
         ]);
 
         $iduser = Auth::id();
-        $status = "On Progress";
+        $status = "Not Started";
 
         //create post
         Project::create([

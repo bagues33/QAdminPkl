@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\SettingRequest;
 use Carbon\Carbon;
+use App\Models\Klien;
+use App\Models\Project;
+use App\Models\Tim;
+use App\Models\Anggota;
+use App\Models\Task;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -17,9 +23,19 @@ class DashboardController extends Controller
     */
     public function index()
     {
+        $user = Auth::user()->id;
         $logs = Activity::where('causer_id', auth()->id())->latest()->paginate(5);
+        $totalklien = Klien::latest()->where('id_user', '=', $user)->count();
+        $totalproject = Project::latest()->where('id_user', '=', $user)->count();
+        $totaltim = Tim::with('project', 'project.tim')->where('id_user', '=', $user)->latest()->count();
+        $totalanggota = Anggota::with('user')->where('id_user', '=', $user)->count();
+        $totaltaskanggota = Task::with(['anggota'])->whereHas('anggota', function($q) use($user) {
+            $q->where('id_users', '=', $user);
+        })->count();
 
-        return view('admin.dashboard', compact('logs'));
+        // dd($totalklien);
+
+        return view('admin.dashboard', compact('logs', 'totalklien', 'totalproject', 'totaltim', 'totalanggota', 'totaltaskanggota'));
     }
 
     /**
@@ -125,5 +141,9 @@ class DashboardController extends Controller
         $logs = Activity::where('created_at', '<=', Carbon::now()->subWeeks())->delete();
 
         return back()->with('success', $logs.' Logs successfully deleted!');
+    }
+
+    public function tampilKlien() {
+
     }
 }

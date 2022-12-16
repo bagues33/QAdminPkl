@@ -35,9 +35,9 @@ class Anggota extends Authenticatable
         return $this->belongsTo(User::class, 'id_users');
     }
 
-
     public function task()
     {
         return $this->hasMany(Task::class, 'id_anggota');
     }
+
 }

@@ -7,7 +7,7 @@
 	<x-card>
 		<x-slot name="title">All Anggota</x-slot>
 		<x-slot name="option">
-			<a href="{{ route('anggota.create') }}" class="btn btn-success">
+			<a href="{{ route('admin.anggota.create') }}" class="btn btn-success">
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
@@ -29,8 +29,8 @@
 						data-nama="{{ $anggota->user->name }}" data-no_telpon="{{ $anggota->no_telpon }}" data-alamat="{{ $anggota->alamat }}" data-username="{{ $anggota->username }}" data-photo="{{ url('storage/posts/'.$anggota->photo) }}" data-posisi="{{ $anggota->posisi }}" data-peran="{{ $anggota->peran }}" data-tim="{{ $anggota->tim->nama }}" data-password="{{ $anggota->password }}">
 							<i class="fas fa-eye"></i>
 						</button>
-						<a href="{{ route('anggota.edit', $anggota->id_anggota) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						<form action="{{ route('anggota.delete', $anggota->id_anggota) }}" style="display: inline-block;" method="POST">
+						<a href="{{ route('admin.anggota.edit', $anggota->id_anggota) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
+						<form action="{{ route('admin.anggota.delete', $anggota->id_anggota) }}" style="display: inline-block;" method="POST">
 							@csrf
 							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
 						</form>

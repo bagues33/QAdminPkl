@@ -45,9 +45,10 @@
 			        <!-- <x-input text="Status" name="status" type="text" /> -->
 			        <label for="status">Status</label>
 			        <select id="status" class="form-control" value="{{ $project->status }}" text="Status" name="status">
-
-			        	<option value="onprogress">On Progress</option>
-			        	<option value="done">Done</option>
+						<option value="Not Started">Not Started</option>
+						<option value="Cancelled">Cancelled</option>
+			        	<option value="In Progress">In Progress</option>
+			        	<option value="Completed">Completed</option>
 			        </select>
 				</div>
 				<div class="col-md-6">

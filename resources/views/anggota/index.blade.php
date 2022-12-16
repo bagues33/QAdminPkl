@@ -7,42 +7,31 @@
 	<x-card>
 		<x-slot name="title">All Task</x-slot>
 		<x-slot name="option">
-			<a href="{{ route('admin.task.create') }}" class="btn btn-success">
-				<i class="fas fa-plus"></i>
-			</a>
+
+		</x-slot>
 		</x-slot>
 		<table class="table table-bordered">
 			<thead>
-				<th>Nama</th>
-				<th>Type</th>
-				<th>Prioritas</th>
-				<th>Status</th>
+				<th>Nama Task</th>
+				<!-- <th>Deskripsi</th> -->
+                <th>Type</th>
+                <th>Prioritas</th>
 			</thead>
 			<tbody>
 				@forelse($tasks as $task)
 				<tr>
-					<td>{{ $task->nama}}</td>
-					<td>{{ $task->type }}</td>
-					<td>{{ $task->prioritas }}</td>
-					<td>
-						@if ($task->status)
-    						{{ $task->status }}
-						@else
-							In Review
-						@endif
-					</td>
+					<td>{{ $task->nama }}</td>
+					<!-- <td>{{ $task->deskripsi }}</td> -->
+                    <td>{{ $task->type }}</td>
+                    <td>{{ $task->prioritas }}</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-anggota="{{ $task->anggota->user->name }}" data-status="{{ $task->status }}" data-submittask=" @if ($task->submit_task) {{ $task->submit_task }} @else Submit task belum ada! @endif">
+						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-status="{{ $task->status }}" data-submittask="@if($task->submit_task) {{ $task->submit_task }} @else Belum submit task! @endif">
 							<i class="fas fa-eye"></i>
 						</button>
-						<!-- <a href="{{ route('admin.task.show', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a>  -->
-						<a href="{{ route('admin.task.edit', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						
-						<form action="{{ route('admin.task.delete', $task->id_task) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
+						<a href="{{ route('anggota.task.create', $task->id_task) }}" class="btn btn-success">
+							<i class="fas fa-plus"></i>
+						</a>
 					</td>
 				</tr>
 				@empty
@@ -60,7 +49,7 @@
 
 		<div class="row mb-2">
 			<div class="col-6">
-				<b>Nama</b>
+				<b>Nama Task</b>
 			</div>
 			<div class="col-6" id="nama-modal"></div>
 		</div>
@@ -76,42 +65,39 @@
 			</div>
 			<div class="col-6" id="type-modal"></div>
 		</div>
+		
 		<div class="row mb-2">
 			<div class="col-6">
 				<b>Prioritas</b>
 			</div>
 			<div class="col-6" id="prioritas-modal"></div>
 		</div>
-		<div class="row mb-2">
-			<div class="col-6">
-				<b>Nama Anggota</b>
-			</div>
-			<div class="col-6" id="anggota-modal"></div>
-		</div>
 		<hr>
 		<div class="row mb-2">
 			<div class="col-6">
-				<b>Status Task</b>
+				<b>Status</b>
 			</div>
 			<div class="col-6" id="status-modal"></div>
 		</div>
+
 		<div class="row mb-2">
 			<div class="col-6">
 				<b>Submit Task</b>
 			</div>
 			<div class="col-6" id="submittask-modal"></div>
 		</div>
+		
 	</x-modal>
 
 	<x-slot name="script">
 		<script>
 			$('.info').click(function(e) {
 				e.preventDefault()
+
 				$('#nama-modal').text($(this).data('nama'))
 				$('#deskripsi-modal').text($(this).data('deskripsi'))
 				$('#type-modal').text($(this).data('type'))
 				$('#prioritas-modal').text($(this).data('prioritas'))
-				$('#anggota-modal').text($(this).data('anggota'))
 				$('#status-modal').text($(this).data('status'))
 				$('#submittask-modal').text($(this).data('submittask'))
 				$('#infoModal').modal('show')

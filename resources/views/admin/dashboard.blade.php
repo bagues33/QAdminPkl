@@ -4,30 +4,40 @@
     </x-slot>
 
     <section class="row">
+        @can('pm')
         <x-card-sum 
-            text="Total Customer" 
-            value="22" 
-            icon="users" 
+            text="Total Klien" 
+            value="{{ $totalklien }}" 
+            icon="male" 
             color="warning"
         />
         <x-card-sum 
-            text="Total Visitor" 
-            value="1450" 
-            icon="chart-line" 
+            text="Total Project" 
+            value="{{ $totalproject }}" 
+            icon="archive" 
             color="primary"
         />
         <x-card-sum 
-            text="Income" 
-            value="$1200" 
-            icon="money-bill" 
+            text="Total Tim" 
+            value="{{ $totaltim }}" 
+            icon="users" 
             color="success"
         />
         <x-card-sum 
-            text="Total Product" 
-            value="42" 
-            icon="box" 
+            text="Total Anggota" 
+            value="{{ $totalanggota }}" 
+            icon="user" 
             color="danger"
         />
+        @endcan
+        @can('anggota')
+        <x-card-sum 
+            text="Total Task" 
+            value="{{ $totaltaskanggota }}" 
+            icon="tasks" 
+            color="danger"
+        />
+        @endcan
     </section>
 
     <section class="row">

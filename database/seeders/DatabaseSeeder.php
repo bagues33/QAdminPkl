@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Klien;
+use App\Models\Anggota;
+use App\Models\Tim;
+use App\Models\Task;
 use App\Models\Project;
 use Carbon\Carbon;
 
@@ -38,6 +41,30 @@ class DatabaseSeeder extends Seeder
             'status' => 'On Progress',
             'id_klien' => 1,
             'id_user' => 3
+        ]);
+
+        Tim::create([
+            'nama' => 'Front End Developer',
+            'deskripsi' => 'lorem ipsum',
+            'id_project' => 1,
+            'id_user' => 3
+        ]);
+
+        Anggota::create([
+            'id_tim' => 1,
+            'id_users' => 1,
+            'id_user' => 3
+        ]);
+
+        Task::create([
+            'nama' => 'buat form',
+            'deskripsi' => 'lorem ipsum',
+            'type' => 'hard',
+            'prioritas' => 'yes',
+            'id_anggota' => 1,
+            'parent_id_task' => 1,
+            'status' => 'done',
+            'submit_task' => 'udah selesai'
         ]);
 
     }
