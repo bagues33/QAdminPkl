@@ -21,12 +21,12 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123')
         ]);
-    
+        
         $role = Role::create(['name' => 'Admin']);
-     
-        $permissions = Permission::pluck('id','id')->all();
+        $role->givePermissionTo(['role-list', 'role-create', 'role-edit', 'role-delete', 'member-list', 'member-create', 'member-edit', 'member-delete', 'setting-list', 'setting-edit', 'klien', 'project']);
+        // $permissions = Permission::pluck('id','id')->all();
    
-        $role->syncPermissions($permissions);
+        // $role->syncPermissions($permissions);
      
         $user->assignRole([$role->id]);
     }

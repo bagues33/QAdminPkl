@@ -12,21 +12,45 @@
 		</x-slot>
 		<table class="table table-bordered">
 			<thead>
+				<th>Nama Project Manager</th>
 				<th>Nama Task</th>
 				<!-- <th>Deskripsi</th> -->
                 <th>Type</th>
                 <th>Prioritas</th>
+				<th>Status</th>
 			</thead>
 			<tbody>
 				@forelse($tasks as $task)
 				<tr>
+					<td>{{ $task->anggota->getPm->name }}</td>
 					<td>{{ $task->nama }}</td>
 					<!-- <td>{{ $task->deskripsi }}</td> -->
                     <td>{{ $task->type }}</td>
                     <td>{{ $task->prioritas }}</td>
+					<td>
+						@if ($task->status == 'notstarted')
+							<span class="badge bg-primary text-white">Not Started</span>
+						@elseif($task->status == 'inprogress')
+							<span class="badge bg-warning text-white">In Progress</span>
+						@elseif($task->status == 'done')
+							<span class="badge bg-success text-white">Done</span>
+						@elseif($task->status == 'cancel')
+							<span class="badge bg-danger text-white">Cancel</span>
+						@endif
+					</td>
 					<td class="text-center">
-						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-status="{{ $task->status }}" data-submittask="@if($task->submit_task) {{ $task->submit_task }} @else Belum submit task! @endif">
+						<button type="button" class="btn btn-info mr-1 info" data-pm="{{ $task->anggota->getPm->name }}"
+						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-status="
+						@if ($task->status == 'notstarted')
+							<span class='badge bg-primary text-white'>Not Started</span> 
+						@elseif($task->status == 'inprogress')
+							<span class='badge bg-warning text-white'>In Progress</span>
+						@elseif($task->status == 'done')
+							<span class='badge bg-success text-white'>Done</span>
+						@elseif($task->status == 'cancel')
+							<span class='badge bg-danger text-white'>Cancel</span>
+						@endif
+						" data-submittask="@if($task->submit_task) {{ $task->submit_task }} @else Belum submit task! @endif">
 							<i class="fas fa-eye"></i>
 						</button>
 						<a href="{{ route('anggota.task.create', $task->id_task) }}" class="btn btn-success">
@@ -36,7 +60,7 @@
 				</tr>
 				@empty
 				<tr>
-					<td colspan="3" class="text-center">No Member</td>
+					<td colspan="3" class="text-center">No Data</td>
 				</tr>
 				@endforelse
 			</tbody>
@@ -47,6 +71,12 @@
 		<x-slot name="id">infoModal</x-slot>
 		<x-slot name="title">Information</x-slot>
 
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Nama Project Manager</b>
+			</div>
+			<div class="col-6" id="pm-modal"></div>
+		</div>
 		<div class="row mb-2">
 			<div class="col-6">
 				<b>Nama Task</b>
@@ -94,11 +124,12 @@
 			$('.info').click(function(e) {
 				e.preventDefault()
 
+				$('#pm-modal').text($(this).data('pm'))
 				$('#nama-modal').text($(this).data('nama'))
 				$('#deskripsi-modal').text($(this).data('deskripsi'))
 				$('#type-modal').text($(this).data('type'))
 				$('#prioritas-modal').text($(this).data('prioritas'))
-				$('#status-modal').text($(this).data('status'))
+				$('#status-modal').html($(this).data('status'))
 				$('#submittask-modal').text($(this).data('submittask'))
 				$('#infoModal').modal('show')
 			})

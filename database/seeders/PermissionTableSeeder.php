@@ -27,12 +27,20 @@ class PermissionTableSeeder extends Seeder
            'member-delete',
            'setting-list',
            'setting-edit',
+           'klien',
+           'project',
+           'tim',
+           'task-pm',
+           'task-anggota',
         ];
 
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+       }
+
         // for anggota
-        Permission::create(['name' => 'anggota']);
         $anggotaRole = Role::create(['name' => 'anggota']);
-        $anggotaRole->givePermissionTo('anggota');
+        $anggotaRole->givePermissionTo('task-anggota');
 
         $user = User::factory()->create([
             'name' => 'tofan',
@@ -49,9 +57,8 @@ class PermissionTableSeeder extends Seeder
         $user2->assignRole($anggotaRole);
 
         // for pm
-        Permission::create(['name' => 'pm']);
         $pmRole = Role::create(['name' => 'pm']);
-        $pmRole->givePermissionTo('pm');
+        $pmRole->givePermissionTo(['tim','task-pm']);
 
         $pm = User::factory()->create([
             'name' => 'bagus',
@@ -67,8 +74,6 @@ class PermissionTableSeeder extends Seeder
         $pm->assignRole($pmRole);
         $pm2->assignRole($pmRole);
 
-        foreach ($permissions as $permission) {
-             Permission::create(['name' => $permission]);
-        }
+        
     }
 }

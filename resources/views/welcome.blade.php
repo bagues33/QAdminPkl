@@ -1,135 +1,945 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}
-        </style>
-
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Sistem Informasi Project Management</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-                        <!-- <a href="{{ route('login-anggota') }}" class="text-sm text-gray-700 underline">Anggota</a> -->
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register PM</a>
-                        <br>
-                        <a href="{{ route('register-anggota') }}" class="ml-4 text-sm text-gray-700 underline">Register Anggota</a>
-                        @endif
-                    @endauth
-                </div>
-                
-            @endif
+    <body>
+       <section class="h-100 w-100" style="
+				box-sizing: border-box;
+				position: relative;
+				background-color: #FAFCFF;
+			">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                        <g clip-path="url(#clip0)" fill="#EF3B2D">
-                            <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                        </g>
+      .header-3-3 .modal-backdrop.show {
+        background-color: #000;
+        opacity: 0.6;
+      }
+
+      .header-3-3 .modal-item.modal {
+        top: 2rem;
+      }
+
+      .header-3-3 .navbar {
+        padding: 2rem 2rem;
+      }
+
+      .header-3-3 .navbar-light .navbar-nav .nav-link {
+        font: 300 0.875rem/1.5rem Poppins, sans-serif;
+        color: #8B9CAF;
+        padding: 0rem 1.25rem 0rem 0rem;
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .header-3-3 .navbar-light .navbar-nav .nav-link:hover {
+        font: 500 0.875rem/1.5rem Poppins, sans-serif;
+        color: #243142;
+      }
+
+      .header-3-3 .navbar-light .navbar-nav .active {
+        position: relative;
+        width: fit-content;
+      }
+
+      .header-3-3 .navbar-light .navbar-nav .active>.nav-link,
+      .header-3-3 .navbar-light .navbar-nav .nav-link.active,
+      .header-3-3 .navbar-light .navbar-nav .nav-link.show,
+      .header-3-3 .navbar-light .navbar-nav .show>.nav-link {
+        font-weight: 500;
+      }
+
+      .header-3-3 .navbar-light .navbar-toggler-icon {
+        background-image: urlurl("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+
+      .header-3-3 .btn:focus,
+      .header-3-3 .btn:active {
+        outline: none !important;
+      }
+
+      .header-3-3 .btn-fill {
+        font: 500 0.875rem/1.25rem Poppins, sans-serif;
+        border: 1px solid #4E91F9;
+        background-color: #4E91F9;
+        border-radius: 999px;
+        padding: 0.75rem 1.5rem;
+        transition: 0.3s;
+      }
+
+      .header-3-3 .btn-fill:hover {
+        background-color: #6DA4F9;
+        border: 1px solid #6DA4F9;
+      }
+
+      .header-3-3 .btn-no-fill {
+        font: 500 0.875rem/1.25rem Poppins, sans-serif;
+        color: #8B9CAF;
+        padding: 0.75rem 2rem;
+      }
+
+      .header-3-3 .btn-no-fill:hover {
+        color: #243142;
+      }
+
+      .header-3-3 .modal-item .modal-dialog .modal-content {
+        border-radius: 8px;
+      }
+
+      .header-3-3 .responsive li {
+        padding: 1rem;
+      }
+
+      .header-3-3 .hr {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .header-3-3 .hero {
+        padding: 4rem 2rem;
+      }
+
+      .header-3-3 .left-column {
+        margin-bottom: 0.75rem;
+        width: 100%;
+      }
+
+      .header-3-3 .title-text-big {
+        font: 600 2.25rem / normal Poppins, sans-serif;
+        margin-bottom: 1.25rem;
+        color: #243142;
+      }
+
+      .header-3-3 .text-caption {
+        font: 300 1rem/1.5rem Poppins, sans-serif;
+        letter-spacing: 0.025em;
+        color: #8B9CAF;
+        margin-bottom: 5rem;
+      }
+
+      .header-3-3 .btn-get {
+        font: 600 1rem/1.5rem Poppins, sans-serif;
+        padding: 1rem 2rem;
+        border-radius: 999px;
+        border: 1px solid #4E91F9;
+        background-color: #4E91F9;
+        transition: 0.3s;
+      }
+
+      .header-3-3 .btn-get:hover {
+        background-color: #6DA4F9;
+        border: 1px solid #6DA4F9;
+      }
+
+      .header-3-3 .btn-outline {
+        font: 400 1rem/1.5rem Poppins, sans-serif;
+        padding: 1rem 1.5rem;
+        border-radius: 999px;
+        background-color: transparent;
+        border: 1px solid #A6B1BE;
+        color: #A6B1BE;
+        transition: 0.3s;
+      }
+
+      .header-3-3 .btn-outline:hover {
+        border: 1px solid #6DA4F9;
+        color: #6DA4F9;
+      }
+
+      .header-3-3 .btn-outline:hover div path {
+        fill: #6DA4F9;
+      }
+
+      .header-3-3 .btn-outline:hover div rect {
+        stroke: #6DA4F9;
+      }
+
+      .header-3-3 .right-column {
+        width: 100%;
+      }
+
+      .header-3-3 .hero-right {
+        right: 2rem;
+        bottom: 0;
+      }
+
+      .header-3-3 .card-outer {
+        padding-left: 0;
+        z-index: 1;
+      }
+
+      .header-3-3 .card {
+        transition: 0.4s;
+        top: 0px;
+        left: 0px;
+        background-color: #FFFFFF;
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+        width: 100%;
+        margin-top: 2.5rem;
+        box-shadow: -4px 4px 10px 0px rgba(224, 224, 224, 0.25);
+      }
+
+      .header-3-3 .card:hover {
+        top: -3px;
+        left: -3px;
+        transition: 0.4s;
+        box-shadow: -4px 8px 15px 0px rgba(167, 167, 167, 0.25);
+      }
+
+      .header-3-3 .card-name {
+        font: 600 1rem/1.5rem Poppins, sans-serif;
+        margin-bottom: 0.25rem;
+      }
+
+      .header-3-3 .card-job {
+        font: 300 0.75rem/1rem Poppins, sans-serif;
+        color: #aaa6a6;
+        margin-bottom: 0;
+      }
+
+      .header-3-3 .card-price-left {
+        font: 500 1rem/1.5rem Poppins, sans-serif;
+        margin-bottom: 0.125rem;
+        color: #1B8171;
+      }
+
+      .header-3-3 .card-caption {
+        font: 300 0.75rem/1rem Poppins, sans-serif;
+        color: #aaa6a6;
+        margin-bottom: 0;
+      }
+
+      .header-3-3 .card-price-right {
+        font: 500 1rem/1.5rem Poppins, sans-serif;
+        margin-bottom: 0.125rem;
+        color: #FF7468;
+      }
+
+      .header-3-3 .btn-hire {
+        font: 600 1rem/1.5rem Poppins, sans-serif;
+        padding: 0.75rem 4rem;
+        border-radius: 0.75rem;
+        margin-bottom: 0.125rem;
+        border: 1px solid #4E91F9;
+        background-color: #4E91F9;
+        transition: 0.3s;
+      }
+
+      .header-3-3 .btn-hire:hover {
+        background-color: #6DA4F9;
+        border: 1px solid #6DA4F9;
+      }
+
+      .header-3-3 .form {
+        border-radius: 999px;
+        background-color: #eef4fd;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 0rem 1rem;
+        padding-right: 0.5rem;
+        outline: none;
+      }
+
+      .header-3-3 .form div input[type="text"] {
+        background-color: #eef4fd;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 0rem 0.5rem;
+        outline: none;
+        width: 100%;
+      }
+
+      .header-3-3 .center-search {
+        bottom: 0.5rem;
+      }
+
+      @media (min-width: 576px) {
+        .header-3-3 .modal-item .modal-dialog {
+          max-width: 95%;
+          border-radius: 12px;
+        }
+
+        .header-3-3 .navbar {
+          padding: 2rem;
+        }
+
+        .header-3-3 .title-text-big {
+          font-size: 3rem;
+          line-height: 1.2;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .header-3-3 .navbar {
+          padding: 2rem 4rem;
+        }
+
+        .header-3-3 .hr {
+          padding-left: 4rem;
+          padding-right: 4rem;
+        }
+
+        .header-3-3 .hero {
+          padding: 4rem;
+        }
+
+        .header-3-3 .left-column {
+          margin-bottom: 3rem;
+        }
+
+        .header-3-3 .hero-right {
+          right: 4rem;
+        }
+
+        .header-3-3 .card {
+          margin-left: auto;
+          margin-top: 0;
+        }
+      }
+
+      @media (min-width: 992px) {
+
+        .header-3-3 .navbar-light .navbar-nav .active:before {
+          content: "";
+          position: absolute;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+          bottom: 0;
+          height: 0px;
+          width: 80%;
+          /* or 100px */
+          border-bottom: 2px solid #4E91F9;
+        }
+
+        .header-3-3 .navbar {
+          padding: 2rem 6rem;
+        }
+
+        .header-3-3 .navbar-light .navbar-nav .nav-link {
+          padding: 0;
+          margin-right: 1rem;
+          margin-left: 1rem;
+        }
+
+        .header-3-3 .navbar-light .navbar-nav .active:before {
+          width: 40%;
+        }
+
+        .header-3-3 .hr {
+          padding-left: 6rem;
+          padding-right: 6rem;
+        }
+
+        .header-3-3 .hero {
+          padding: 4rem 6rem 5rem;
+        }
+
+        .header-3-3 .left-column {
+          width: 50%;
+          margin-bottom: 0;
+        }
+
+        .header-3-3 .title-text-big {
+          font-size: 3.75rem;
+          line-height: 1.25;
+        }
+
+        .header-3-3 .right-column {
+          width: 50%;
+        }
+
+        .header-3-3 .hero-right {
+          right: 6rem;
+        }
+
+        .header-3-3 .card-outer {
+          padding-left: 4rem;
+        }
+
+        .header-3-3 .center-search {
+          left: 48%;
+          top: 50%;
+          bottom: auto;
+          transform: translate(-48%, -50%);
+        }
+
+        .header-3-3 .form {
+          width: 340px;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        .header-3-3 .form div input[type="text"] {
+          width: 100%;
+        }
+      }
+    </style>
+    <div class="header-3-3 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a href="#">
+          <img style="margin-right: 0.75rem"
+            src="{{ asset('dist/img/logo-picsi.png') }}" alt="" />
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="modal" data-bs-target="#targetModal-item">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="modal-item modal fade" id="targetModal-item" tabindex="-1" role="dialog"
+          aria-labelledby="targetModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content bg-white border-0">
+              <div class="modal-header border-0" style="padding: 2rem; padding-bottom: 0">
+                <a class="modal-title" id="targetModalLabel">
+                  <img style="margin-top: 0.5rem"
+                    src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-6.png"
+                    alt="" />
+                </a>
+                <button type="button" class="close btn-close text-white" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body" style="padding: 2rem; padding-top: 0; padding-bottom: 0">
+                <ul class="navbar-nav responsive me-auto mt-2 mt-lg-0">
+                  <li class="nav-item active position-relative">
+                    <a class="nav-link main" style="color: #243142;" href="#">Home</a>
+                  </li>
+                  <li class="nav-item position-relative">
+                    <a class="nav-link" href="#">Feature</a>
+                  </li>
+                  <li class="nav-item position-relative">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item position-relative">
+                    <a class="nav-link" href="#">Blog</a>
+                  </li>
+                  <li class="nav-item position-relative">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false"
+                      aria-controls="collapse">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M5.85 1.69346C3.5304 1.69346 1.65 3.57386 1.65 5.89346C1.65 8.21305 3.5304 10.0935 5.85 10.0935C8.1696 10.0935 10.05 8.21305 10.05 5.89346C10.05 3.57386 8.1696 1.69346 5.85 1.69346ZM0.25 5.89346C0.25 2.80066 2.75721 0.293457 5.85 0.293457C8.94279 0.293457 11.45 2.80066 11.45 5.89346C11.45 8.98625 8.94279 11.4935 5.85 11.4935C2.75721 11.4935 0.25 8.98625 0.25 5.89346Z"
+                          fill="#8B9CAF" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M8.85503 8.89848C9.12839 8.62512 9.57161 8.62512 9.84497 8.89848L14.045 13.0985C14.3183 13.3718 14.3183 13.8151 14.045 14.0884C13.7716 14.3618 13.3284 14.3618 13.055 14.0884L8.85503 9.88843C8.58166 9.61506 8.58166 9.17185 8.85503 8.89848Z"
+                          fill="#8B9CAF" />
+                      </svg>
+                    </a>
+                    <form method class="collapse position-absolute form center-search border-0" id="collapse">
+                      <div class="d-flex">
+                        <input type="text" class="rounded-full border-0 focus:outline-none" placeholder="Search" />
+                        <button class="btn" type="button">
+                          <svg style="width: 20px; height: 20px" data-bs-toggle="collapse" href="#collapse"
+                            role="button" aria-expanded="false" aria-controls="collapse" fill="none" stroke="#273B56"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+              <div class="modal-footer border-0" style="padding: 2rem; padding-top: 0.75rem">
+                <a href="{{ route('login') }}"><button class="btn btn-default btn-no-fill">Sign In</button></a>
+                <a href="{{ route('register') }}"><button class="btn btn-fill text-white">Register</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo">
+          <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+            <li class="nav-item active position-relative">
+              <a class="nav-link main=" style="color: #243142;" href="#">Home</a>
+            </li>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="#">Feature</a>
+            </li>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item my-auto">
+              <a class="nav-link" data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false"
+                aria-controls="collapse">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M5.85 1.69346C3.5304 1.69346 1.65 3.57386 1.65 5.89346C1.65 8.21305 3.5304 10.0935 5.85 10.0935C8.1696 10.0935 10.05 8.21305 10.05 5.89346C10.05 3.57386 8.1696 1.69346 5.85 1.69346ZM0.25 5.89346C0.25 2.80066 2.75721 0.293457 5.85 0.293457C8.94279 0.293457 11.45 2.80066 11.45 5.89346C11.45 8.98625 8.94279 11.4935 5.85 11.4935C2.75721 11.4935 0.25 8.98625 0.25 5.89346Z"
+                    fill="#8B9CAF" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.85503 8.89848C9.12839 8.62512 9.57161 8.62512 9.84497 8.89848L14.045 13.0985C14.3183 13.3718 14.3183 13.8151 14.045 14.0884C13.7716 14.3618 13.3284 14.3618 13.055 14.0884L8.85503 9.88843C8.58166 9.61506 8.58166 9.17185 8.85503 8.89848Z"
+                    fill="#8B9CAF" />
+                </svg>
+              </a>
+              <form class="collapse position-absolute form center-search border-0" id="collapse">
+                <div class="d-flex">
+                  <input type="text" class="rounded-full border-0 focus:outline-none" placeholder="Search" />
+                  <button class="btn" type="button">
+                    <svg style="width: 20px; height: 20px" data-bs-toggle="collapse" href="#collapse" role="button"
+                      aria-expanded="false" aria-controls="collapse" fill="none" stroke="#273B56" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                      </path>
                     </svg>
+                  </button>
                 </div>
+              </form>
+            </li>
+          </ul>
+          <a href="{{ route('login') }}"><button class="btn btn-default btn-no-fill">Sign In</button></a>
+            <a href="{{ route('register') }}"><button class="btn btn-fill text-white">Register</button></a>
+        </div>
+      </nav>
+      <div class="hr">
+        <hr style="
+							border-color: #F4F4F4;
+							background-color: #F4F4F4;
+							opacity: 1;
+							margin: 0 !important;
+						" />
+      </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div>
+        <div class="mx-auto d-flex flex-lg-row flex-column hero">
+          <!-- Left Column -->
+          <div
+            class="left-column flex-lg-grow-1 d-flex flex-column align-items-lg-start text-lg-start align-items-center text-center">
+            <h1 class="title-text-big">
+              PT.<span style="color: #4E91F9"> PILAR CIPTA</span><br class="d-lg-block d-none" />
+              SOLUSI<br class="d-lg-block d-none" />
+              INTEGRATIKA
+            </h1>
+            <p class="text-caption">
+              Hard to find a good mentor according to your wishes?<br class="d-sm-block d-none" />Don't
+              worry because we
+              are here to help you
+            </p>
+            <div class="d-flex flex-sm-row flex-column align-items-center mx-auto mx-lg-0 justify-content-center gap-3">
+              <button class="btn btn-get text-white d-inline-flex">
+                Get Started
+              </button>
+              <button class="btn btn-outline">
+                <div class="d-flex align-items-center">
+                  <svg class="me-2" width="26" height="26" viewBox="0 0 26 26" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15.9295 13L11.6668 10.158V15.842L15.9295 13ZM17.9175 13.2773L10.8515 17.988C10.8013 18.0214 10.743 18.0406 10.6828 18.0434C10.6225 18.0463 10.5627 18.0328 10.5095 18.0044C10.4563 17.9759 10.4119 17.9336 10.3809 17.8818C10.3499 17.8301 10.3335 17.771 10.3335 17.7107V8.28933C10.3335 8.22904 10.3499 8.16988 10.3809 8.11816C10.4119 8.06644 10.4563 8.0241 10.5095 7.99564C10.5627 7.96718 10.6225 7.95367 10.6828 7.95655C10.743 7.95943 10.8013 7.9786 10.8515 8.012L17.9175 12.7227C17.9631 12.7531 18.0006 12.7943 18.0265 12.8427C18.0524 12.8911 18.0659 12.9451 18.0659 13C18.0659 13.0549 18.0524 13.1089 18.0265 13.1573C18.0006 13.2057 17.9631 13.2469 17.9175 13.2773Z"
+                      fill="#A6B1BE" />
+                    <rect x="0.5" y="0.5" width="25" height="25" rx="12.5" stroke="#A6B1BE" />
+                  </svg>
+                  Watch the video
                 </div>
+              </button>
+            </div>
+          </div>
 
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
-                            </a>
-
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
-                        </div>
+          <!-- Right Column -->
+          <div class="right-column d-flex justify-content-center justify-content-lg-start text-center pe-0">
+            <img class="position-absolute d-lg-block d-none hero-right"
+              src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-2.png"
+              alt="" />
+            <div class="d-flex align-items-end card-outer">
+              <div class="mx-auto d-flex flex-wrap align-items-center">
+                <div class="card border-0 position-relative d-flex flex-column">
+                  <div class="d-flex align-items-center" style="margin-bottom: 1.25rem">
+                    <div>
+                      <img style="margin-right: 1rem"
+                        src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-3.png"
+                        alt="" />
                     </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                    <div class="text-start">
+                      <p class="card-name">Felix Potah</p>
+                      <p class="card-job">Pro Mentor</p>
                     </div>
+                  </div>
+                  <div class="row text-start" style="margin-bottom: 1.25rem">
+                    <div class="col-6">
+                      <p class="card-price-left">64,100</p>
+                      <p class="card-caption">Followers</p>
+                    </div>
+                    <div class="col-6 ps-0">
+                      <p class="card-price-right">106</p>
+                      <p class="card-caption">Reviews</p>
+                    </div>
+                  </div>
+                  <button class="btn btn-hire text-white">
+                    <div class="test d-none">show</div>
+                    Hire Me
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><section class="famouly-brands">
+
+    <style scoped>
+      body .famouly-brands {
+        background: radial-gradient(100% 100% at 50% 0%, #F9FAFE 0%, #FAFAFD 100%);
+        padding-top: 90px;
+        padding-bottom: 90px;
+      }
+
+      body .famouly-brands .brand img {
+        width: 200px !important;
+      }
+    </style>
+    <div class="container">
+      <div class="row brand">
+        <div class="col-md-3 col-6 text-center my-md-auto">
+          <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/Slack-Logo.png"
+            alt="" class="img-fluid">
+        </div>
+        <div class="col-md-3 col-6 text-center my-md-auto">
+          <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/Microsoft-Logo.png"
+            alt="" class="img-fluid">
+        </div>
+        <div class="col-md-3 col-6 text-center my-md-auto mt-5 mt-md-0">
+          <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/Google-Logo.png"
+            alt="" class="img-fluid">
+        </div>
+        <div class="col-md-3 col-6 text-center my-md-auto mt-5 mt-md-0">
+          <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/Airbnb-Logo.png"
+            alt="" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section><section class="content text-center">
+    <style scoped>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+      * {
+        font-family: 'Poppins', sans-serif !important;
+      }
+
+      body .content {
+        background: #FFFFFF;
+      }
+
+      body .content .content {
+        padding-top: 90px;
+        padding-bottom: 90px;
+      }
+
+      body .content .content .tagline {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+        text-align: center;
+        color: #0D3ADB;
+      }
+
+      body .content .content .headline {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 45px;
+        line-height: 67px;
+        text-align: center;
+        color: #111F37;
+      }
+
+      body .content .content .benefits {
+        margin-top: 50px;
+      }
+
+      body .content .content .benefits .rectangle {
+        max-width: 302px;
+        max-height: 334px;
+        border: 1px solid #9BA8BE;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border-radius: 26px;
+      }
+
+      body .content .content .benefits .rectangle img {
+        margin-top: 50px;
+      }
+
+      body .content .content .benefits .rectangle .headline-benefit {
+        margin-top: 40px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+        text-align: center;
+        color: #111F37;
+      }
+
+      body .content .content .benefits .rectangle .subheadline-benefit {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 28px;
+        /* or 175% */
+        text-align: center;
+        color: #627492;
+        margin-bottom: 40px;
+      }
+
+      body .content .content .button-header {
+        margin-top: 40px;
+      }
+
+      body .content .content .button-header .btn-started {
+        width: 150px;
+        height: 50px;
+        background: #0DDB93 !important;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        color: #001D01;
+      }
+
+      body .content .content .button-header .btn-story {
+        width: 150px;
+        height: 50px;
+        border: 1px solid #9BA8BE;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border-radius: 8px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+        text-align: center;
+        color: #627492;
+      }
+
+      /*# sourceMappingURL=main.css.map */
+    </style>
+    <div class="container">
+      <div class="row content">
+        <div class="col-12 px-md-0 my-auto">
+          <div class="tagline">
+            OUR FORMULA
+          </div>
+          <div class="headline mt-3">
+            3-Steps to Work at <br class="d-none d-md-block">
+            Your Dream Companies
+          </div>
+          <div class="row benefits">
+            <div class="col-md-4 mt-md-0">
+              <div class="rectangle mx-auto px-1">
+                <img
+                  src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-1.png"
+                  alt="benefits-1" class="img-fluid">
+                <div class="headline-benefit">
+                  Sign Up
+                </div>
+                <div class="subheadline-benefit mt-2">
+                  Get yourself ready and join <br class="d-none d-md-block">
+                  our great adventures
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mt-5 mt-md-0">
+              <div class="rectangle mx-auto px-1">
+                <img
+                  src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-2.png"
+                  alt="benefits-1" class="img-fluid">
+                <div class="headline-benefit">
+                  Finish The Quiz
+                </div>
+                <div class="subheadline-benefit mt-2">
+                  Answer the question that we’ve <br class="d-none d-md-block">
+                  prepared for your career
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mt-5 mt-md-0">
+              <div class="rectangle mx-auto px-1">
+                <img
+                  src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-3.png"
+                  alt="benefits-1" class="img-fluid">
+                <div class="headline-benefit">
+                  Interview
+                </div>
+                <div class="subheadline-benefit mt-2">
+                  We will setup the meeting with <br class="d-none d-md-block">
+                  your dream companies
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-header">
+            <button class="btn btn-started">Get Started</button>
+            <button class="btn btn-story ml-3">Read Story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><footer class="page-footer font-small blue">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&display=swap");
+
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        body .font-red-hat-display {
+            font-family: 'Red Hat Display', sans-serif !important;
+        }
+
+        body footer {
+            background: #313E60;
+            padding-top: 50px;
+            padding-bottom: 70px;
+        }
+
+        body footer .logo {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 38px;
+            color: #FAFAFD;
+        }
+
+        body footer .social-media {
+            margin-top: 55px;
+        }
+
+        body footer .copyright {
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 135%;
+            color: #FAFAFD;
+            margin-top: 20px;
+        }
+
+        body footer .nav-footer p {
+            font-weight: 700 !important;
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-size: 20px;
+            line-height: 135%;
+            color: #FAFAFD;
+        }
+
+        body footer .nav-footer a {
+            font-weight: 400 !important;
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-size: 20px;
+            line-height: 135%;
+            color: #FAFAFD;
+        }
+
+        body footer li {
+            margin-bottom: 16px;
+        }
+    </style>
+    <div class="container text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3 address">
+                <div class="logo font-red-hat-display">
+                    GivMoney
+                </div>
+                <div class="social-media">
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_linkedin.svg"
+                            alt="linkedin" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_facebook.svg"
+                            alt="facebook" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_twitter.svg"
+                            alt="twitter" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_instagram.svg"
+                            alt="twitch" class="img-fluid mr-4">
+                    </a>
+                </div>
+                <div class="copyright font-red-hat-display">
+                    2021 All rights reserved.
+                </div>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="row col-md-6 nav-footer">
+                <div class="col-md-4 mb-md-0 mb-3">
+                    <p>
+                        Features
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Payments</a>
+                        </li>
+                        <li>
+                            <a href="#!">Collections</a>
+                        </li>
+                        <li>
+                            <a href="#!">Conversions</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-md-0 mb-3">
+                    <p>
+                        Resources
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#!">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#!">Partnerships</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-md-0 mb-3">
+                    <p>
+                        Our Company
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#!">Careers</a>
+                        </li>
+                        <li>
+                            <a href="#!">News & Media</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+</footer> 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </body>
-</html>
+  </html>

@@ -15,6 +15,7 @@
 			<thead>
 				<th>Nama Anggota</th>
 				<th>Nama Tim</th>
+				<th>Nama Project</th>
 			</thead>
 			<tbody>
 				@forelse($anggotas as $anggota)
@@ -23,10 +24,10 @@
 					<!-- <td>{{ $anggota->deskripsi }}</td> -->
 					<td>{{ $anggota->tim->nama }}</td>
 					<!-- <td><img class="img-fluid w-50" src="{{ url('storage/posts/'.$anggota->photo) }}" alt=""></td> -->
-
+					<td>{{ $anggota->tim->project->nama }}</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $anggota->user->name }}" data-no_telpon="{{ $anggota->no_telpon }}" data-alamat="{{ $anggota->alamat }}" data-username="{{ $anggota->username }}" data-photo="{{ url('storage/posts/'.$anggota->photo) }}" data-posisi="{{ $anggota->posisi }}" data-peran="{{ $anggota->peran }}" data-tim="{{ $anggota->tim->nama }}" data-password="{{ $anggota->password }}">
+						data-nama="{{ $anggota->user->name }}" data-namaproject="{{ $anggota->tim->project->nama }}" data-alamat="{{ $anggota->alamat }}" data-username="{{ $anggota->username }}" data-photo="{{ url('storage/posts/'.$anggota->photo) }}" data-posisi="{{ $anggota->posisi }}" data-peran="{{ $anggota->peran }}" data-tim="{{ $anggota->tim->nama }}" data-password="{{ $anggota->password }}">
 							<i class="fas fa-eye"></i>
 						</button>
 						<a href="{{ route('admin.anggota.edit', $anggota->id_anggota) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
@@ -91,17 +92,17 @@
 			</div>
 			<div class="col-6" id="posisi-modal"></div>
 		</div> -->
-		<!-- <div class="row mb-2">
-			<div class="col-6">
-				<b>Peran</b>
-			</div>
-			<div class="col-6" id="peran-modal"></div>
-		</div> -->
 		<div class="row mb-2">
 			<div class="col-6">
 				<b>Nama Tim</b>
 			</div>
 			<div class="col-6" id="tim-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Nama Project</b>
+			</div>
+			<div class="col-6" id="namaproject-modal"></div>
 		</div>
 		
 	</x-modal>
@@ -112,7 +113,7 @@
 				e.preventDefault()
 
 				$('#nama-modal').text($(this).data('nama'))
-				$('#no_telpon-modal').text($(this).data('no_telpon'))
+				$('#namaproject-modal').text($(this).data('namaproject'))
 				$('#alamat-modal').text($(this).data('alamat'))
 				$('#username-modal').text($(this).data('username'))
 				$('#password-modal').text($(this).data('password'))

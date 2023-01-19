@@ -42,9 +42,10 @@
 				<div class="col-6">
 					<label for="status">Status</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="In Progress">In Progress</option>
-						<option value="Paused">Paused</option>
-                        <option value="Completed">Completed</option>
+                        <option value="notstarted">Not Started</option>
+						<option value="inprogress">In Progress</option>
+                        <option value="done">Done</option>
+						<option value="cancel">Cancel</option>
                         <!-- <option value="done">Done</option> -->
                     </select>
 				</div>

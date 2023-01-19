@@ -8,7 +8,7 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<form action="{{ route('admin.task.update', $task->id_task) }}" method="post" enctype="multipart/form-data">
+		<form action="{{ route('pm.task.update', $task->id_task) }}" method="post" enctype="multipart/form-data">
 			@csrf
             @method('PUT')
 			<div class="row">
@@ -18,8 +18,8 @@
                 <div class="col-md-6">
                     <label for="prioritas">Prioritas</label>
                     <select id="prioritas" class="form-control" text="prioritas" name="prioritas">
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
+                            <option value="Low">Low</option>
+                            <option value="High">High</option>
                     </select>
                     
 				</div>
@@ -29,8 +29,9 @@
 				<div class="col-md-6">
                     <label for="type">Type</label>
                     <select id="type" class="form-control" text="type" name="type">
-                            <option value="hard">Hard</option>
-                            <option value="easy">Easy</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+							<option value="Hard">Hard</option>
                     </select>
 				</div>
                 <div class="col-md-6">
@@ -44,7 +45,24 @@
 			</div>
 
 			<div class="row">
-                <div class="col-md-6">
+				<div class="col-md-6">
+                    <br>
+			        <x-input text="Deadline" name="deadline" type="date" value="{{ $task->deadline }}" />
+				</div>
+				<div class="col-md-6">
+					<br>
+                    <label for="type">Status</label>
+                    <select id="type" class="form-control" text="type" name="status">
+                            <option value="notstarted">Not Started</option>
+                            <option value="inprogress">In Progress</option>
+							<option value="done">Done</option>
+							<option value="cancel">Cancel</option>
+                    </select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
                     <br>
 			        <x-textarea text="Deskripsi" name="deskripsi" value="{{ $task->deskripsi }}">{{ $task->deskripsi }}</x-textarea>
 				</div>

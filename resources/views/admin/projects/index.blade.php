@@ -16,8 +16,8 @@
 				<th>Nama Project</th>
 				<!-- <th>Deskripsi</th> -->
 				<th>Tanggal Mulai</th>
-				<th>Estimasi Tanggal Selesai</th>
 				<th>Deadline</th>
+				<!-- <th>Tanggal Selesai</th> -->
 				<th>Budget</th>
 				<th>Status</th>
 			</thead>
@@ -27,13 +27,13 @@
 					<td>{{ $project->nama }}</td>
 					<!-- <td>{{ $project->deskripsi }}</td> -->
 					<td>{{ $project->tgl_mulai }}</td>
-					<td>{{ $project->tgl_selesai }}</td>
 					<td>{{ $project->deadline }}</td>
+					<!-- <td>{{ $project->tgl_selesai }}</td> -->
 					<td>@currency($project->budget)</td>
 					<td>{{ $project->status }}</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $project->nama }}" data-deskripsi="{{ $project->deskripsi }}" data-tgl_mulai="{{ $project->tgl_mulai }}" data-tgl_selesai="{{ $project->tgl_selesai }}" data-deadline="{{ $project->deadline }}" data-budget="@currency($project->budget)" data-status="{{ $project->status }}">
+						data-nama="{{ $project->nama }}" data-deskripsi="{{ $project->deskripsi }}" data-tgl_mulai="{{ $project->tgl_mulai }}" data-tgl_selesai="{{ $project->tgl_selesai }}" data-deadline="{{ $project->deadline }}" data-budget="@currency($project->budget)" data-status="{{ $project->status }}" data-klien="{{ $project->klien->nama }}" data-pm="{{ $project->user->name }}">
 							<i class="fas fa-eye"></i>
 						</button>
 						<a href="{{ route('admin.project.edit', $project->id_project) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
@@ -64,6 +64,18 @@
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
+				<b>Nama Klien</b>
+			</div>
+			<div class="col-6" id="klien-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Nama PM (Project Manager)</b>
+			</div>
+			<div class="col-6" id="pm-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
 				<b>Deskripsi</b>
 			</div>
 			<div class="col-6" id="deskripsi-modal"></div>
@@ -76,15 +88,15 @@
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
-				<b>Estimasi Tanggal Selesai</b>
-			</div>
-			<div class="col-6" id="tgl_selesai-modal"></div>
-		</div>
-		<div class="row mb-2">
-			<div class="col-6">
 				<b>Deadline</b>
 			</div>
 			<div class="col-6" id="deadline-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Tanggal Selesai</b>
+			</div>
+			<div class="col-6" id="tgl_selesai-modal"></div>
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
@@ -107,6 +119,8 @@
 				e.preventDefault()
 
 				$('#nama-modal').text($(this).data('nama'))
+				$('#klien-modal').text($(this).data('klien'))
+				$('#pm-modal').text($(this).data('pm'))
 				$('#deskripsi-modal').text($(this).data('deskripsi'))
 				$('#tgl_mulai-modal').text($(this).data('tgl_mulai'))
 				$('#tgl_selesai-modal').text($(this).data('tgl_selesai'))

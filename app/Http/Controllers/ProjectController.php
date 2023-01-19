@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Klien;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -17,7 +18,8 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $projects = Project::latest()->where('id_user', '=', $user->id)->get();
+        $projects = Project::with('klien', 'user')->latest()->where('id_user', '=', $user->id)->get();
+        // dd($projects);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -28,9 +30,19 @@ class ProjectController extends Controller
      */
     public function create()
     {   
+        // $pms = User::whereHas("roles", function($q){ $q->where("name", "anggota");  $q->where("name", "pm"); })->get();
+        // $user = User::where('id','=', 4)->firstOrFail();
+        // if ($user->hasRole('pm')) {
+        //     dd('ini pm');
+        // } else {
+        //     dd('ini bukan pm');
+        // }
+       
+        $pms = User::role(['anggota','pm'])->get();
+        // dd($pms);
         $kliens = Klien::latest()->get();
         $iduser = Auth::id();
-        return view('admin.projects.create', compact('kliens','iduser'));
+        return view('admin.projects.create', compact('kliens','iduser','pms'));
     }
 
     /**
@@ -46,27 +58,35 @@ class ProjectController extends Controller
         $this->validate($request, [
             'nama'  => 'required',
             'deskripsi'     => 'required',
-            'tgl_mulai' => 'required',
+            // 'tgl_mulai' => 'required',
             'deadline' => 'required',
-            'tgl_selesai' => 'required',
-            'id_klien' => 'required'
+            'budget' => 'required',
+            'id_klien' => 'required',
+            'pm' => 'required',
+            'status' => 'required'
         ]);
 
         $iduser = Auth::id();
-        $status = "Not Started";
+        // $status = "Not Started";
 
         //create post
         Project::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'tgl_mulai'   => $request->tgl_mulai,
-            'tgl_selesai'   => $request->tgl_selesai,
+            // 'tgl_selesai'   => $request->tgl_selesai,
             'deadline'   => $request->deadline,
             'budget'   => $request->budget,
-            'status'   => $status,
+            'status'   => $request->status,
+            'pm' => $request->pm,
             'id_klien'   => $request->id_klien,
             'id_user' => $iduser
         ]);
+
+        $user = User::where('id','=', $request->pm)->firstOrFail();
+        if (!$user->hasRole('pm')) {
+            $user->assignRole('pm');
+        }
 
         //redirect to index
         return redirect()->route('admin.project')->with(['success' => 'Data Berhasil Disimpan!']);

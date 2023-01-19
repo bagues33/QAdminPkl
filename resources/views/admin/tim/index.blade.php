@@ -5,46 +5,21 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<x-slot name="title">All Tim</x-slot>
-		<x-slot name="option">
-			<a href="{{ route('admin.tim.create') }}" class="btn btn-success">
-				<i class="fas fa-plus"></i>
-			</a>
-		</x-slot>
-		<table class="table table-bordered">
-			<thead>
-				<th>Nama</th>
-				<th>Deskripsi</th>
-				<th>Nama Project</th>
-				<!-- <th>Daftar Anggota</th> -->
-			</thead>
-			<tbody>
-				@forelse($tims as $tim)
-				<tr>
-					<td>{{ $tim->nama}}</td>
-					<td>{{ $tim->deskripsi }}</td>
-					<td>{{ $tim->project->nama }}</td>
-					<td class="text-center">
-						<!-- <button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $tim->nama }}" data-deskripsi="{{ $tim->deskripsi }}" data-id_project="{{ $tim->project->nama }}">
-							<i class="fas fa-eye"></i>
-						</button> -->
-						<a href="{{ route('admin.tim.show', $tim->id_tim) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a> 
-						<a href="{{ route('admin.tim.edit', $tim->id_tim) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						
-						<form action="{{ route('admin.tim.delete', $tim->id_tim) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
-					</td>
-				</tr>
-				@empty
-				<tr>
-					<td colspan="3" class="text-center">No Member</td>
-				</tr>
-				@endforelse
-			</tbody>
-		</table>
+		<x-slot name="title">Pilih Project</x-slot> 
+		
+		@forelse($projects as $project)
+		<a href="{{ route('pm.project.show', $project->id_project) }}">
+			<x-card-sum 
+				text="{{ $project->nama }} " 
+				value="" 
+				icon="archive" 
+				color="warning"
+			/>	
+		</a>
+		@empty
+			<h4>Project belum ada!</h4>
+		@endforelse
+		
 	</x-card>
 
 	<x-modal>

@@ -15,13 +15,13 @@ class CreateKliensTable extends Migration
     {
         Schema::create('kliens', function (Blueprint $table) {
             $table->bigIncrements('id_klien');
-            $table->string('nama');
-            $table->char('no_telpon', 12);
+            $table->string('nama', 100);
+            $table->char('no_telpon', 15);
             $table->string('alamat');
-            $table->string('email');
+            $table->string('email', 50);
             $table->string('photo')->nullable();
-            $table->string('website')->nullable();
-            $table->text('deskripsi')->nullable();
+            $table->string('website', 30)->nullable();
+            $table->string('deskripsi')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();

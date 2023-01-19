@@ -32,19 +32,30 @@
 			</div>
 
 			<div class="row">
+				<!-- <div class="col-md-6">
+			        <x-input text="Tanggal Selesai" name="tgl_selesai" type="date" />
+				</div> -->
 				<div class="col-md-6">
-			        <x-input text="Estimasi Tanggal Selesai" name="tgl_selesai" type="date" />
-				</div>
-				<div class="col-md-6">
-					<label for="budget">Budget</label>
-					<div class="input-group mb-3">
-  						<span class="input-group-text" id="budget">Rp</span>
-  						<input type="text" class="form-control" placeholder="Enter Budget" aria-label="Enter Budget" aria-describedby="budget">
-					</div>
+					<label for="klien">Klien</label>
+			        <select id="klien" class="form-control" text="Klien" name="id_klien">
+						@forelse($kliens as $klien)
+			        	<option value="{{ $klien->id_klien }}">{{ $klien->nama }}</option>
+						@endforeach
+			        </select>
+					
 					<!-- <x-input text="Budget" name="budget" type="text" /> -->
 				</div>
+				<div class="col-md-6">
+					<label for="pm">PM</label>
+			        <select id="pm" class="form-control" text="Klien" name="pm">
+						@forelse($pms as $pm)
+			        	<option value="{{ $pm->id }}">{{ $pm->name }}</option>
+						@endforeach
+			        </select>
+				</div>
+				
 			</div>
-
+			<br>
 			<div class="row">
 				<!-- <div class="col-md-6">
 			        <label for="status">Status</label>
@@ -55,13 +66,19 @@
 				</div> -->
 				<div class="col-md-6">
 					<!-- <x-input text="Klien" name="klien" type="text" /> -->
-					<label for="klien">Klien</label>
-			        <select id="klien" class="form-control" text="Klien" name="id_klien">
-						@forelse($kliens as $klien)
-			        	<option value="{{ $klien->id_klien }}">{{ $klien->nama }}</option>
-						@endforeach
-			        </select>
+					<label for="budget">Budget</label>
+					<div class="input-group mb-3">
+  						<span class="input-group-text" id="budget">Rp</span>
+  						<input type="text" class="form-control" name="budget" placeholder="Enter Budget" aria-label="Enter Budget" aria-describedby="budget">
+					</div>
 					<!-- <x-input text="Budget" name="budget" type="text" /> -->
+				</div>
+				<div class="col-md-6">
+					<label for="status">Status</label>
+			        <select id="status" class="form-control" text="Status" name="status">
+						<option value="Not Started">Not Started</option>
+			        	<option value="In Progress">In Progress</option>
+			        </select>
 				</div>
 			</div>
 			<!-- <x-input text="kosong" name="budget" type="hidden" /> -->

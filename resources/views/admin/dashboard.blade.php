@@ -4,7 +4,8 @@
     </x-slot>
 
     <section class="row">
-        @can('pm')
+        
+        
         <x-card-sum 
             text="Total Klien" 
             value="{{ $totalklien }}" 
@@ -29,15 +30,15 @@
             icon="user" 
             color="danger"
         />
-        @endcan
-        @can('anggota')
+
+        
         <x-card-sum 
             text="Total Task" 
             value="{{ $totaltaskanggota }}" 
             icon="tasks" 
             color="danger"
         />
-        @endcan
+        
     </section>
 
     <section class="row">

@@ -8,11 +8,11 @@ Route::get('/', function () {
 });
 
 Route::group([
-	'middleware' => ['auth','role:Admin|pm'],
+	'middleware' => ['auth','role:Admin'],
 	'prefix' => 'admin',
 	'as' => 'admin.'
 ], function(){
-	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	
 	
 	// Settings menu
 	Route::view('/settings', 'admin.settings')->name('settings');
@@ -45,7 +45,7 @@ Route::group([
 	Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
 	Route::post('/project/create', [ProjectController::class, 'store'])->name('project.create');
 	Route::get('/project/{id_project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
-	Route::get('/project/{id_project}/update', [ProjectController::class, 'update'])->name('project.update');
+	Route::put('/project/{id_project}/update', [ProjectController::class, 'update'])->name('project.update');
 	Route::post('/project/{id}/delete', [ProjectController::class, 'destroy'])->name('project.delete');
 
 	//for klien
@@ -59,22 +59,6 @@ Route::group([
 	Route::put('/klien/{id_klien}/update', [KlienController::class, 'update'])->name('klien.update');
 	Route::post('/klien/{id}/delete', [KlienController::class, 'destroy'])->name('klien.delete');
 
-	Route::get('/tim', [TimController::class, 'index'])->name('tim');
-	Route::get('/tim/create', [TimController::class, 'create'])->name('tim.create');
-	Route::post('/tim/create', [TimController::class, 'store'])->name('tim.create');
-	Route::get('/tim/{id_tim}/show', [TimController::class, 'show'])->name('tim.show');
-	Route::get('/tim/{id_tim}/edit', [TimController::class, 'edit'])->name('tim.edit');
-	Route::put('/tim/{id_tim}/update', [TimController::class, 'update'])->name('tim.update');
-	Route::post('/tim/{id}/delete', [TimController::class, 'destroy'])->name('tim.delete');
-
-	Route::get('/task', [TaskController::class, 'index'])->name('task');
-	Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
-	Route::post('/task/create', [TaskController::class, 'store'])->name('task.create');
-	Route::get('/task/{id_task}/show', [TaskController::class, 'show'])->name('task.show');
-	Route::get('/task/{id_task}/edit', [TaskController::class, 'edit'])->name('task.edit');
-	Route::put('/task/{id_task}/update', [TaskController::class, 'update'])->name('task.update');
-	Route::post('/task/{id}/delete', [TaskController::class, 'destroy'])->name('task.delete');
-
 	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
 	Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota.create');
@@ -86,23 +70,51 @@ Route::group([
 });
 
 Route::group([
-	'middleware' => ['auth','role:anggota'],
-	'prefix' => 'anggota',
-	'as' => 'anggota.'
+	'middleware' => ['auth','role:pm|Admin'],
+	'prefix' => 'pm',
+	'as' => 'pm.'
 ], function(){
-	Route::get('/task/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-	Route::get('/task/index', [TaskController::class, 'showTaskForAnggota'])->name('task.index');
-	Route::get('/task/{id_task}/edit', [TaskController::class, 'createSubmitTask'])->name('task.create');
-	Route::put('/task/{id_task}/update', [TaskController::class, 'storeSubmitTask'])->name('task.update');
+	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+	Route::get('/tim', [TimController::class, 'index'])->name('tim');
+	Route::get('/tim/{id_project}/create', [TimController::class, 'create'])->name('tim.create');
+	Route::post('/tim/{id_project}/create', [TimController::class, 'store'])->name('tim.create');
+	Route::get('/tim/{id_tim}/show', [TimController::class, 'show'])->name('tim.show');
+	Route::get('/tim/{id_tim}/edit', [TimController::class, 'edit'])->name('tim.edit');
+	Route::put('/tim/{id_tim}/update', [TimController::class, 'update'])->name('tim.update');
+	Route::post('/tim/{id}/project/{id_project}/delete', [TimController::class, 'destroy'])->name('tim.delete');
+
+	Route::get('/project/{id_project}/show', [TimController::class, 'showProject'])->name('project.show');
+
+	Route::get('/task', [TaskController::class, 'index'])->name('task');
+	Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
+	Route::post('/task/create', [TaskController::class, 'store'])->name('task.create');
+	Route::get('/task/{id_task}/show', [TaskController::class, 'show'])->name('task.show');
+	Route::get('/task/{id_task}/edit', [TaskController::class, 'edit'])->name('task.edit');
+	Route::put('/task/{id_task}/update', [TaskController::class, 'update'])->name('task.update');
+	Route::post('/task/{id}/delete', [TaskController::class, 'destroy'])->name('task.delete');
+	
 	// Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
 	// Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
 	// Route::post('/task/{id}/delete', [AnggotaController::class, 'destroy'])->name('delete');
 });
 
 Route::group([
+	'middleware' => ['auth','role:anggota|Admin'],
+	'prefix' => 'anggota',
+	'as' => 'anggota.'
+], function(){
+	Route::get('/task/index', [TaskController::class, 'showTaskForAnggota'])->name('task.index');
+	Route::get('/task/{id_task}/edit', [TaskController::class, 'createSubmitTask'])->name('task.create');
+	Route::put('/task/{id_task}/update', [TaskController::class, 'storeSubmitTask'])->name('task.update');
+	
+});
+
+Route::group([
 	'middleware' => 'auth'
 ], function(){
 	// Profile menu
+	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 	Route::view('/profile', 'admin/profile')->name('profile');
 	Route::post('/profile', [DashboardController::class, 'profile_update'])->name('profile');
 	Route::post('/profile/upload', [DashboardController::class, 'upload_avatar'])

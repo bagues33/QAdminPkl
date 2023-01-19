@@ -18,8 +18,11 @@ class TaskController extends Controller
     public function index()
     {
         //
-        $user = Auth::user();
-        $tasks = Task::with('anggota', 'anggota.user')->latest()->get();
+        $user = Auth::user()->id;
+        // $tasks = Task::with('anggota', 'anggota.user')->latest()->get();
+        $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user) {
+            $q->where('id_user', '=', $user);
+        })->get();
         // dd($tasks[0]->anggota->user);
         return view('admin.task.index', compact('tasks'));
     }
@@ -27,9 +30,11 @@ class TaskController extends Controller
     public function showTaskForAnggota() {
         $user = Auth::user()->id;
     
-        $tasks = Task::with(['anggota'])->whereHas('anggota', function($q) use($user) {
+        $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user) {
             $q->where('id_users', '=', $user);
         })->get();
+
+
 
         return view('anggota.index', compact('tasks'));
     }
@@ -73,6 +78,8 @@ class TaskController extends Controller
             'nama'  => 'required',
             'deskripsi'  => 'required',
             'type' => 'required',
+            'status' => 'required',
+            'deadline' => 'required',
             'prioritas' => 'required',
             'id_anggota' => 'required'
         ]);
@@ -84,12 +91,14 @@ class TaskController extends Controller
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'type'   => $request->type,
+            'status' => $request->status,
+            'deadline' => $request->deadline,
             'prioritas'     => $request->prioritas,
             'id_anggota' => $request->id_anggota
         ]);
 
         //redirect to index
-        return redirect()->route('admin.task')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('pm.task')->with(['success' => 'Data Berhasil Disimpan!']);
 
     }
 
@@ -171,6 +180,8 @@ class TaskController extends Controller
             'nama'  => 'required',
             'deskripsi'  => 'required',
             'type' => 'required',
+            'status' => 'required',
+            'deadline' => 'required',
             'prioritas' => 'required',
             'id_anggota' => 'required',
         ]);
@@ -183,13 +194,15 @@ class TaskController extends Controller
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'type'   => $request->type,
+            'status' => $request->status,
+            'deadline' => $request->deadline,
             'prioritas'   => $request->prioritas,
             'id_anggota'   => $request->id_anggota,
 
         ]);
 
         //redirect to index
-        return redirect()->route('admin.task')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('pm.task')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -208,6 +221,6 @@ class TaskController extends Controller
         $task->delete();
 
         //redirect to index
-        return redirect()->route('admin.task')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('pm.task')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

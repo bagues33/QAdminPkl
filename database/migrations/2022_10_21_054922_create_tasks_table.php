@@ -15,14 +15,16 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id_task');
-            $table->string('nama');
-            $table->text('deskripsi');
-            $table->string('type');
-            $table->string('prioritas');
+            $table->string('nama', 50);
+            $table->string('deskripsi');
+            $table->string('type', 10);
+            $table->string('prioritas', 10);
             $table->unsignedBigInteger('id_anggota');
             $table->foreign('id_anggota')->references('id_anggota')->on('anggotas');
+            $table->date('deadline');
+            $table->char('approved', 5)->nullable();
             $table->bigInteger('parent_id_task')->nullable();
-            $table->string('status', 15)->nullable();
+            $table->string('status', 20)->nullable();
             $table->string('submit_task')->nullable();
             $table->timestamps();
         });

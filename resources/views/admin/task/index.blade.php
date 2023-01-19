@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Task</x-slot>
+	<x-slot name="title">Task For Anggota</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
@@ -7,7 +7,7 @@
 	<x-card>
 		<x-slot name="title">All Task</x-slot>
 		<x-slot name="option">
-			<a href="{{ route('admin.task.create') }}" class="btn btn-success">
+			<a href="{{ route('pm.task.create') }}" class="btn btn-success">
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
@@ -16,6 +16,8 @@
 				<th>Nama</th>
 				<th>Type</th>
 				<th>Prioritas</th>
+				<th>Deadline</th>
+				<th>Nama Anggota</th>
 				<th>Status</th>
 			</thead>
 			<tbody>
@@ -24,22 +26,38 @@
 					<td>{{ $task->nama}}</td>
 					<td>{{ $task->type }}</td>
 					<td>{{ $task->prioritas }}</td>
+					<td>{{ $task->deadline }}</td>
+					<td>{{ $task->anggota->user->name }}</td>
 					<td>
-						@if ($task->status)
-    						{{ $task->status }}
-						@else
-							In Review
+						@if ($task->status == 'notstarted')
+							<span class="badge bg-primary text-white">Not Started</span>
+						@elseif($task->status == 'inprogress')
+							<span class="badge bg-warning text-white">In Progress</span>
+						@elseif($task->status == 'done')
+							<span class="badge bg-success text-white">Done</span>
+						@elseif($task->status == 'cancel')
+							<span class="badge bg-danger text-white">Cancel</span>
 						@endif
 					</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-anggota="{{ $task->anggota->user->name }}" data-status="{{ $task->status }}" data-submittask=" @if ($task->submit_task) {{ $task->submit_task }} @else Submit task belum ada! @endif">
+						data-nama="{{ $task->nama }}" data-deskripsi="{{ $task->deskripsi }}" data-type="{{ $task->type }}" data-prioritas="{{ $task->prioritas }}" data-anggota="{{ $task->anggota->user->name }}" data-deadline="{{ $task->deadline }}" data-status="
+						@if ($task->status == 'notstarted')
+							<span class='badge bg-primary text-white'>Not Started</span> 
+						@elseif($task->status == 'inprogress')
+							<span class='badge bg-warning text-white'>In Progress</span>
+						@elseif($task->status == 'done')
+							<span class='badge bg-success text-white'>Done</span>
+						@elseif($task->status == 'cancel')
+							<span class='badge bg-danger text-white'>Cancel</span>
+						@endif
+						" data-submittask=" @if ($task->submit_task) {{ $task->submit_task }} @else Submit task belum ada! @endif">
 							<i class="fas fa-eye"></i>
 						</button>
-						<!-- <a href="{{ route('admin.task.show', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a>  -->
-						<a href="{{ route('admin.task.edit', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
+						<!-- <a href="{{ route('pm.task.show', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a>  -->
+						<a href="{{ route('pm.task.edit', $task->id_task) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
 						
-						<form action="{{ route('admin.task.delete', $task->id_task) }}" style="display: inline-block;" method="POST">
+						<form action="{{ route('pm.task.delete', $task->id_task) }}" style="display: inline-block;" method="POST">
 							@csrf
 							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
 						</form>
@@ -47,7 +65,7 @@
 				</tr>
 				@empty
 				<tr>
-					<td colspan="3" class="text-center">No Member</td>
+					<td colspan="3" class="text-center">No Data</td>
 				</tr>
 				@endforelse
 			</tbody>
@@ -84,6 +102,12 @@
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
+				<b>Deadline</b>
+			</div>
+			<div class="col-6" id="deadline-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
 				<b>Nama Anggota</b>
 			</div>
 			<div class="col-6" id="anggota-modal"></div>
@@ -111,10 +135,12 @@
 				$('#deskripsi-modal').text($(this).data('deskripsi'))
 				$('#type-modal').text($(this).data('type'))
 				$('#prioritas-modal').text($(this).data('prioritas'))
+				$('#deadline-modal').text($(this).data('deadline'))
 				$('#anggota-modal').text($(this).data('anggota'))
-				$('#status-modal').text($(this).data('status'))
+				$('#status-modal').html($(this).data('status'))
 				$('#submittask-modal').text($(this).data('submittask'))
 				$('#infoModal').modal('show')
+				
 			})
 
 			$('.delete').click(function(e){
@@ -125,6 +151,7 @@
 					$(this).parent().submit()
 				}
 			})
+
 		</script>
 	</x-slot>
 </x-app-layout>

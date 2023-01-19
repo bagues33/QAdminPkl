@@ -8,7 +8,7 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<form action="{{ route('admin.task.create') }}" method="post" enctype="multipart/form-data">
+		<form action="{{ route('pm.task.create') }}" method="post" enctype="multipart/form-data">
 			@csrf
 
 			<div class="row">
@@ -18,8 +18,9 @@
                 <div class="col-md-6">
                     <label for="prioritas">Prioritas</label>
                     <select id="prioritas" class="form-control" text="prioritas" name="prioritas">
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
+                            <option value="low">Low</option>
+							<option value="normal">Normal</option>
+                            <option value="high">High</option>
                     </select>
                     
 				</div>
@@ -29,8 +30,9 @@
 				<div class="col-md-6">
                     <label for="type">Type</label>
                     <select id="type" class="form-control" text="type" name="type">
-                            <option value="hard">Hard</option>
                             <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+							<option value="hard">Hard</option>
                     </select>
 				</div>
                 <div class="col-md-6">
@@ -45,11 +47,27 @@
 
 			<div class="row">
                 <div class="col-md-6">
+					<br>
+                    <label for="type">Status</label>
+                    <select id="type" class="form-control" text="type" name="status">
+                            <option value="notstarted">Not Started</option>
+                            <option value="inprogress">In Progress</option>
+							<option value="done">Done</option>
+							<option value="cancel">Cancel</option>
+                    </select>
+				</div>
+				<div class="col-md-6">
                     <br>
+			        <x-input text="Deadline" name="deadline" type="date" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<br>
 			        <x-textarea text="Deskripsi" name="deskripsi"></x-textarea>
 				</div>
 			</div>
-		
 
 			<x-button type="primary" text="Submit" for="submit" />
 			

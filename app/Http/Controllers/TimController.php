@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tim;
 use App\Models\Project;
 use App\Models\Anggota;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class TimController extends Controller
@@ -19,9 +20,12 @@ class TimController extends Controller
     {
         //
         $user = Auth::user();
+        $projects = Project::where('pm','=',$user->id)->get();
+        // $anggotas = Anggota::with('user')->where('id_tim','=',$id)->get();
+        // dd($project);
         $tims = Tim::with('project', 'project.tim')->where('id_user', '=', $user->id)->latest()->get();
         // dd($tims[0]->project->tim);
-        return view('admin.tim.index', compact('tims'));
+        return view('admin.tim.index', compact('tims','projects'));
     }
 
     /**
@@ -29,11 +33,14 @@ class TimController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $id_project = $id;
+        $user = Auth::user();
         $projects = Project::latest()->get();
-        return view('admin.tim.create', compact('projects'));
+        $anggotas = User::role(['anggota','pm'])->where('id', '!=', $user->id)->get();
+        return view('admin.tim.create', compact('projects','anggotas', 'id_project'));
     }
 
     /**
@@ -42,15 +49,17 @@ class TimController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_project)
     {
         //
          //validate form
          $this->validate($request, [
             'nama'  => 'required',
             'deskripsi'  => 'required',
-            'id_project' => 'required'
+            // 'id_project' => 'required'
         ]);
+
+        // dd($id);
 
         $iduser = Auth::id();
 
@@ -58,12 +67,13 @@ class TimController extends Controller
         Tim::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
-            'id_project'   => $request->id_project,
+            'id_project'   => $id_project,
             'id_user'     => $iduser
         ]);
 
+
         //redirect to index
-        return redirect()->route('admin.tim')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('pm.project.show', $id_project)->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -80,6 +90,16 @@ class TimController extends Controller
         return view('admin.tim.detail', compact('anggotas','tims'));
     }
 
+    public function showProject($id)
+    {
+        //
+        $project = Project::with('klien')->where('id_project','=',$id)->firstOrFail();
+        // dd('sdsd');
+        $anggotas = Anggota::with('user')->where('id_tim','=',$id)->get();
+        $tims = Tim::where('id_project','=',$id)->get();
+        return view('admin.tim.detail-project', compact('project','tims','anggotas'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,9 +109,20 @@ class TimController extends Controller
     public function edit($id)
     {
         //
+        $user = Auth::user();
+        $anggotas = User::role(['anggota','pm'])->get();
+        // dd($anggotas);
+        $anggota_pilihs = Anggota::where('id_tim', '=', $id)->get();
+        // dd($anggota_pilihs);
+        $select_anggota = array();
+        foreach ($anggota_pilihs as $anggota_pilih) 
+            {
+                 $select_anggota[] = $anggota_pilih->id_users;  
+            }
+        // dd($select_anggota);
         $projects = Project::latest()->get();
         $tims = Tim::where('id_tim','=',$id)->firstOrFail();
-        return view('admin.tim.edit', compact('projects','tims'));
+        return view('admin.tim.edit', compact('projects','tims','anggotas','anggota_pilihs', 'select_anggota'));
     }
 
     /**
@@ -107,7 +138,7 @@ class TimController extends Controller
         $this->validate($request, [
             'nama'  => 'required',
             'deskripsi'  => 'required',
-            'id_project' => 'required'
+            'anggota' => 'required'
         ]);
 
         // $klien = Klien::findOrFail($id);
@@ -119,13 +150,29 @@ class TimController extends Controller
         $tims->update([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
-            'id_project'   => $request->id_project,
             'id_user'   => $iduser
 
         ]);
+        // dd($request->anggota);
+        // Anggota::create([
+        //     'id_tim'     => $id,
+        //     'id_users' => implode(',', $request->anggota),
+        //     'id_user'     => $iduser
+        // ]);
 
+        // dd($request);
+        for ($i = 1; $i < count($request->anggota); $i++) {
+            $data[] = [
+                'id_tim' => $id,
+                'id_users' => $request->anggota[$i],
+                'id_user' => $iduser
+            ];
+        }
+        // dd($data);
+        Anggota::insert($data);    
+       
         //redirect to index
-        return redirect()->route('admin.tim')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('pm.tim')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -134,7 +181,7 @@ class TimController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $id_project)
     {
         //
                 //delete image
@@ -144,6 +191,6 @@ class TimController extends Controller
                 $tim->delete();
         
                 //redirect to index
-                return redirect()->route('admin.tim')->with(['success' => 'Data Berhasil Dihapus!']);
+                return redirect()->route('pm.project.show', $id_project)->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

@@ -8,7 +8,7 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<form action="{{ route('anggota.create') }}" method="post" enctype="multipart/form-data">
+		<form action="{{ route('admin.anggota.create') }}" method="post" enctype="multipart/form-data">
 			@csrf
 
 			<div class="row">
@@ -24,7 +24,7 @@
 					<label for="tim">Nama Tim</label>
                     <select id="tim" class="form-control" text="Klien" name="id_tim">
 						@forelse($tims as $tim)
-			        	<option value="{{ $tim->id_tim }}">{{ $tim->nama }}</option>
+			        	<option value="{{ $tim->id_tim }}">{{ $tim->nama }} ({{ $tim->project->nama }})</option>
 						@endforeach
 			        </select>
 				</div>

@@ -20,7 +20,7 @@ class AnggotaController extends Controller
         //
         // $anggotas = Anggota::with('tim')->latest()->get();
         $user = Auth::user();
-        $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->get();
+        $anggotas = Anggota::with('user', 'tim.project')->where('id_user', '=', $user->id)->get();
         // dd($anggotas);
         return view('admin.anggota.index', compact('anggotas'));
 
@@ -35,7 +35,7 @@ class AnggotaController extends Controller
     {
         //
         $anggotas = User::role('anggota')->latest()->get();
-        $tims = Tim::latest()->get();
+        $tims = Tim::with('project')->latest()->get();
         return view('admin.anggota.create', compact('tims', 'anggotas'));
     }
 
@@ -69,7 +69,7 @@ class AnggotaController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('anggota.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('admin.anggota')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -129,7 +129,7 @@ class AnggotaController extends Controller
             ]);
 
         //redirect to index
-        return redirect()->route('anggota.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('admin.anggota')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -150,6 +150,6 @@ class AnggotaController extends Controller
         $anggota->delete();
 
         //redirect to index
-        return redirect()->route('anggota.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('admin.anggota')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

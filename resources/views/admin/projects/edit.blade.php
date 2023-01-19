@@ -8,7 +8,7 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<form action="{{ route('admin.project.create') }}" method="post">
+		<form action="{{ route('admin.project.update', $project->id_project) }}" method="post" enctype="multipart/form-data">
 			@csrf
 			@method('PUT')
 			<div class="row">
@@ -33,7 +33,7 @@
 
 			<div class="row">
 				<div class="col-md-6">
-			        <x-input text="Estimasi Tanggal Selesai" value="{{ $project->tgl_selesai }}" name="tgl_selesai" type="date" />
+			        <x-input text="Tanggal Selesai" value="{{ $project->tgl_selesai }}" name="tgl_selesai" type="date" />
 				</div>
 				<div class="col-md-6">
 					<x-input text="Budget" value="{{ $project->budget }}" name="budget" type="text" />

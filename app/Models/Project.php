@@ -10,7 +10,7 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_project','nama', 'deskripsi', 'tgl_mulai', 'tgl_selesai', 'deadline', 'budget', 'status', 'id_klien', 'id_user'
+        'id_project','nama', 'deskripsi', 'tgl_mulai', 'tgl_selesai', 'deadline', 'budget', 'status', 'pm', 'id_klien', 'id_user'
     ];
 
     protected $table = 'projects';
@@ -21,4 +21,15 @@ class Project extends Model
     {
         return $this->hasMany(Tim::class, 'id_project');
     }
+
+    public function klien()
+    {
+        return $this->belongsTo(Klien::class, 'id_klien');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'pm');
+    }
+
 }

@@ -15,8 +15,7 @@ class CreateKomentarsTable extends Migration
     {
         Schema::create('komentars', function (Blueprint $table) {
             $table->bigIncrements('id_komentar');
-            $table->text('isi');
-            $table->date('tanggal');
+            $table->string('isi');
             $table->unsignedBigInteger('id_task');
             $table->foreign('id_task')->references('id_task')->on('tasks');
             $table->timestamps();

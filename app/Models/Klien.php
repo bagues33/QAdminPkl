@@ -23,4 +23,9 @@ class Klien extends Model
     ];
 
     protected $primaryKey = 'id_klien';
+
+    public function project()
+    {
+        return $this->hasMany(Project::class, 'id_klien');
+    }
 }

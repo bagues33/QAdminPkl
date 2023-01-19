@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'pemkabbantul@gmail.com',
             'website' => 'pemkabbantul.com',
             'deskripsi' => 'lorem ipsum',
-            'id_user' => 3
+            'id_user' => 5
         ]);
 
         Project::create([
@@ -37,10 +37,11 @@ class DatabaseSeeder extends Seeder
             'tgl_mulai' => Carbon::create('2022', '12', '1'),
             'tgl_selesai' => Carbon::create('2022', '12', '25'),
             'deadline' => Carbon::create('2022', '12', '30'),
+            'pm' => 3,
             'budget' => 500000000,
             'status' => 'On Progress',
             'id_klien' => 1,
-            'id_user' => 3
+            'id_user' => 5
         ]);
 
         Tim::create([
@@ -61,6 +62,7 @@ class DatabaseSeeder extends Seeder
             'deskripsi' => 'lorem ipsum',
             'type' => 'hard',
             'prioritas' => 'yes',
+            'deadline' => Carbon::create('2022', '12', '30'),
             'id_anggota' => 1,
             'parent_id_task' => 1,
             'status' => 'done',

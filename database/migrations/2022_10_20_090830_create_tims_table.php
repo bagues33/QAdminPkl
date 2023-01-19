@@ -15,8 +15,8 @@ class CreateTimsTable extends Migration
     {
         Schema::create('tims', function (Blueprint $table) {
             $table->bigIncrements('id_tim');
-            $table->string('nama');
-            $table->text('deskripsi');
+            $table->string('nama', 50);
+            $table->string('deskripsi');
             $table->unsignedBigInteger('id_project');
             $table->foreign('id_project')->references('id_project')->on('projects');
             $table->unsignedBigInteger('id_user');

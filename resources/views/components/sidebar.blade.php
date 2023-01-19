@@ -3,25 +3,76 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset((setting('logo')) ? '/storage/'.setting('logo') : 'dist/img/logo/logo2.png') }}">
         </div>
-        <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+        <div class="sidebar-brand-text mx-3">PT. PICSI</div>
     </a>
     <hr class="sidebar-divider my-0">
 
-    @can('admin')
     <x-nav-link 
         text="Dashboard" 
         icon="tachometer-alt" 
-        url="{{ route('admin.dashboard') }}"
-        active="{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
+        url="{{ route('dashboard') }}"
+        active="{{ request()->routeIs('dashboard') ? ' active' : '' }}"
+    />
+    
+    <hr class="sidebar-divider mb-0">
+    @can('klien')
+    <x-nav-link 
+        text="Klien" 
+        icon="male" 
+        url="{{ route('admin.klien') }}" 
+        active="{{ request()->routeIs('admin.klien') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    @endcan    
+
+    @can('project')
+    <x-nav-link 
+        text="Projects" 
+        icon="archive" 
+        url="{{ route('admin.project') }}" 
+        active="{{ request()->routeIs('admin.project') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    @endcan
+
+    @can('tim')
+    <x-nav-link 
+        text="Tim" 
+        icon="users" 
+        url="{{ route('pm.tim') }}" 
+        active="{{ request()->routeIs('pm.tim') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0">
+    @endcan
+
+    <!-- <x-nav-link 
+        text="Anggota" 
+        icon="user" 
+        url="{{ route('admin.anggota') }}" 
+        active="{{ request()->routeIs('admin.anggota') ? ' active' : '' }}"
+    />
+
+    <hr class="sidebar-divider mb-0"> -->
+    
+    @can('task-pm')
+    <x-nav-link 
+        text="Task (PM)" 
+        icon="tasks" 
+        url="{{ route('pm.task') }}" 
+        active="{{ request()->routeIs('pm.task.index') ? ' active' : '' }}"
     />
     @endcan
 
-    @can('anggota')
+    @can('task-anggota')
+    
     <x-nav-link 
-        text="Dashboard" 
-        icon="tachometer-alt" 
-        url="{{ route('anggota.dashboard') }}"
-        active="{{ request()->routeIs('anggota.dashboard') ? ' active' : '' }}"
+        text="Task (Anggota)" 
+        icon="tasks" 
+        url="{{ route('anggota.task.index') }}" 
+        active="{{ request()->routeIs('anggota.task') ? ' active' : '' }}"
     />
     @endcan
 
@@ -53,71 +104,6 @@
         icon="cogs" 
         url="{{ route('admin.settings') }}"
         active="{{ request()->routeIs('admin.settings') ? ' active' : '' }}"
-    />
-    @endcan
-
-    @can('pm')
-    <x-nav-link 
-        text="Dashboard" 
-        icon="tachometer-alt" 
-        url="{{ route('admin.dashboard') }}"
-        active="{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
-    />
-    
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Klien" 
-        icon="male" 
-        url="{{ route('admin.klien') }}" 
-        active="{{ request()->routeIs('admin.klien') ? ' active' : '' }}"
-    />
-
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Projects" 
-        icon="archive" 
-        url="{{ route('admin.project') }}" 
-        active="{{ request()->routeIs('admin.project') ? ' active' : '' }}"
-    />
-
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Tim" 
-        icon="users" 
-        url="{{ route('admin.tim') }}" 
-        active="{{ request()->routeIs('admin.tim') ? ' active' : '' }}"
-    />
-
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Anggota" 
-        icon="user" 
-        url="{{ route('admin.anggota') }}" 
-        active="{{ request()->routeIs('admin.anggota') ? ' active' : '' }}"
-    />
-
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Task" 
-        icon="tasks" 
-        url="{{ route('admin.task') }}" 
-        active="{{ request()->routeIs('task.index') ? ' active' : '' }}"
-    />
-    @endcan
-
-    @can('anggota')
-    <hr class="sidebar-divider mb-0">
-    
-    <x-nav-link 
-        text="Task" 
-        icon="tasks" 
-        url="{{ route('anggota.task.index') }}" 
-        active="{{ request()->routeIs('anggota.task') ? ' active' : '' }}"
     />
     @endcan
     

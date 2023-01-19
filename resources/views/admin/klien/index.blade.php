@@ -26,7 +26,7 @@
 					<td>{{ $klien->no_telpon }}</td>
 					<td>{{ $klien->alamat }}</td>
 					<td>{{ $klien->email }}</td>
-					<td><img src="{{ url('storage/posts/'.$klien->photo) }}" class="rounded" style="width: 150px"></td>
+					<!-- <td><img src="{{ url('storage/posts/'.$klien->photo) }}" class="rounded" style="width: 150px"></td> -->
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
 						data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">

@@ -33,7 +33,7 @@
 
 			<div class="row">
 				<div class="col-md-6">
-			      <x-input text="Photo" type="file" name="photo" />
+			      <x-input text="" type="hidden" name="photo" />
 				</div>
 				<div class="col-md-6">
 					<x-input text="Website" name="website" type="text" />
@@ -45,17 +45,6 @@
 			        <x-textarea text="Deskripsi" name="deskripsi"></x-textarea>
 				</div>
 			</div>
-
-
-			<!-- <div class="row">
-				<div class="col-md-6">
-			        <x-input text="Status" name="status" type="text" />
-				</div>
-				<div class="col-md-6">
-					<x-input text="Klien" name="klien" type="text" />
-				</div>
-			</div> -->
-		
 
 			<x-button type="primary" text="Submit" for="submit" />
 			
