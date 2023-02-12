@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Anggota;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -48,7 +49,11 @@ class TaskController extends Controller
     {
         //
         $user = Auth::user();
+        // $anggotas = User::role(['anggota'])->get();
         $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->latest()->get();
+    
+        // dd($ids);
+    
         return view('admin.task.create', compact('anggotas'));
         
     }
@@ -186,8 +191,14 @@ class TaskController extends Controller
             'id_anggota' => 'required',
         ]);
 
+        // dd($request->approved);
+
         // $klien = Klien::findOrFail($id);
         $task = Task::where('id_task','=',$id)->firstOrFail();
+
+        // $approved[] = [
+        //     'approved' => $request->approved,
+        // ];
 
         //update post with new image
         $task->update([
@@ -198,7 +209,7 @@ class TaskController extends Controller
             'deadline' => $request->deadline,
             'prioritas'   => $request->prioritas,
             'id_anggota'   => $request->id_anggota,
-
+            'approved' => $request->has('approved'),
         ]);
 
         //redirect to index

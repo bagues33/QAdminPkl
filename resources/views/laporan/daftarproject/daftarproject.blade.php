@@ -1,43 +1,59 @@
 <x-app-layout>
-	<x-slot name="title">Klien</x-slot>
+	<x-slot name="title">Laporan Daftar Klien</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<x-slot name="title">All Klien</x-slot>
-		<x-slot name="option">
-			<a href="{{ route('admin.klien.create') }}" class="btn btn-success">
-				<i class="fas fa-plus"></i>
+		{{-- <x-slot name="title">All Klien</x-slot> --}}
+        <x-slot name="option">
+			<a href="{{ route('admin.laporan.klien.print') }}" class="btn btn-secondary">
+				<i class="fas fa-print"></i>
 			</a>
 		</x-slot>
+        <div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
-				<th>Nama</th>
-				<th>No Telpon</th>
-				<th>Alamat</th>
-				<th>Email</th>
-				<th>Photo</th>
+				<th>No</th>
+                <th>Nama</th>
+				<th>Deskripsi</th>
+				<th>Tgl Mulai</th>
+				<th>Tgl Selesai</th>
+				<th>Deadline</th>
+                <th>Budget</th>
+                <th>Status</th>
+                <th>Klien</th>
+                <th>Project Manager</th>
+                <th>Tim</th>
 			</thead>
 			<tbody>
-				@forelse($kliens as $klien)
+				@forelse($projects as $no => $project)
 				<tr>
-					<td>{{ $klien->nama}}</td>
-					<td>{{ $klien->no_telpon }}</td>
-					<td>{{ $klien->alamat }}</td>
-					<td>{{ $klien->email }}</td>
-					<td><img src="{{ url('storage/posts/'.$klien->photo) }}" class="rounded" style="width: 150px"></td>
+					<td>{{ ++$no }}</td>
+					<td>{{ $project->nama }}</td>
+					<td>{{ $project->deskripsi }}</td>
+					<td>{{ $project->tgl_mulai }}</td>
+                    <td>{{ $project->tgl_selesai }}</td>
+                    <td>{{ $project->deadline }}</td>
+                    <td>{{ $project->budget }}</td>
+                    <td>{{ $project->status }}</td>
+                    <td>{{ $project->klien->nama }}</td>
+                    <td>{{ $project->user->name }}</td>
+                    <td>@forelse($project->tim as $tim)
+                        {{ $tim->nama }}
+                            @forelse($tim->anggota as $anggota) 
+                            {{ $anggota->user->name }}
+                            @empty
+                            @endforelse
+                        @empty
+                        @endforelse
+                    </td>
+
 					<td class="text-center">
-						<button type="button" class="btn btn-info mr-1 info"
+						{{-- <button type="button" class="btn btn-info mr-1 info"
 						data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
 							<i class="fas fa-eye"></i>
-						</button>
-						<a href="{{ route('admin.klien.edit', $klien->id_klien) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						
-						<form action="{{ route('admin.klien.delete', $klien->id_klien) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
+						</button> --}}
 					</td>
 				</tr>
 				@empty
@@ -47,6 +63,7 @@
 				@endforelse
 			</tbody>
 		</table>
+        </div>
 	</x-card>
 
 	<x-modal>
@@ -81,7 +98,7 @@
 			<div class="col-6">
 				<b>Photo</b>
 			</div>
-			<div class="col-6"><img id="photo-modal" class="rounded" style="width: 150px" src="#"></div>
+			<div class="col-6"><img id="photo-modal" class="img-fluid" src="#"></div>
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">

@@ -32,6 +32,7 @@ class PermissionTableSeeder extends Seeder
            'tim',
            'task-pm',
            'task-anggota',
+           'komentar',
         ];
 
         foreach ($permissions as $permission) {
@@ -40,7 +41,7 @@ class PermissionTableSeeder extends Seeder
 
         // for anggota
         $anggotaRole = Role::create(['name' => 'anggota']);
-        $anggotaRole->givePermissionTo('task-anggota');
+        $anggotaRole->givePermissionTo(['task-anggota', 'komentar']);
 
         $user = User::factory()->create([
             'name' => 'tofan',
@@ -58,7 +59,7 @@ class PermissionTableSeeder extends Seeder
 
         // for pm
         $pmRole = Role::create(['name' => 'pm']);
-        $pmRole->givePermissionTo(['tim','task-pm']);
+        $pmRole->givePermissionTo(['tim','task-pm', 'komentar']);
 
         $pm = User::factory()->create([
             'name' => 'bagus',

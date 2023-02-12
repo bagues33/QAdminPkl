@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->string('type', 10);
             $table->string('prioritas', 10);
             $table->unsignedBigInteger('id_anggota');
-            $table->foreign('id_anggota')->references('id_anggota')->on('anggotas');
+            $table->foreign('id_anggota')->references('id_anggota')->on('anggotas')->onDelete('cascade');
             $table->date('deadline');
             $table->char('approved', 5)->nullable();
             $table->bigInteger('parent_id_task')->nullable();

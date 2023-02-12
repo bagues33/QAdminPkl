@@ -38,7 +38,7 @@ class ProjectController extends Controller
         //     dd('ini bukan pm');
         // }
        
-        $pms = User::role(['anggota','pm'])->get();
+        $pms = User::role(['pm'])->get();
         // dd($pms);
         $kliens = Klien::latest()->get();
         $iduser = Auth::id();
@@ -112,9 +112,10 @@ class ProjectController extends Controller
     public function edit($id)
     {
         //
+        $pms = User::role(['pm'])->get();
         $kliens = Klien::latest()->get();
         $project = Project::where('id_project','=',$id)->firstOrFail();
-        return view('admin.projects.edit', compact('project','kliens'));
+        return view('admin.projects.edit', compact('project','kliens','pms'));
     }
 
     /**

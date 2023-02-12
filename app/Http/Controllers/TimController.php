@@ -161,7 +161,7 @@ class TimController extends Controller
         // ]);
 
         // dd($request);
-        for ($i = 1; $i < count($request->anggota); $i++) {
+        for ($i = 0; $i < count($request->anggota); $i++) {
             $data[] = [
                 'id_tim' => $id,
                 'id_users' => $request->anggota[$i],
@@ -169,10 +169,13 @@ class TimController extends Controller
             ];
         }
         // dd($data);
+        $anggota = Anggota::where('id_tim','=',$id);
+        $anggota->delete();
+
         Anggota::insert($data);    
        
         //redirect to index
-        return redirect()->route('pm.tim')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('pm.tim.show', $id)->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -184,10 +187,10 @@ class TimController extends Controller
     public function destroy($id, $id_project)
     {
         //
-                //delete image
+                
                 $tim = Tim::where('id_tim','=',$id)->firstOrFail();
         
-                //delete post
+                // delete tim
                 $tim->delete();
         
                 //redirect to index

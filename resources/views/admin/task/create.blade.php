@@ -38,8 +38,8 @@
                 <div class="col-md-6">
                     <label for="id_anggota">Nama Anggota</label>
                     <select id="id_anggota" class="form-control" text="Nama Anggota" name="id_anggota">
-                            @forelse($anggotas as $anggota)
-                            <option value="{{ $anggota->id_anggota }}">{{ $anggota->user->name }}</option>
+                            @forelse($anggotas->unique('id_users') as $anggota)
+                            	<option value="{{ $anggota->id_anggota }}">{{ $anggota->user->name }}</option>
                             @endforeach
                     </select>
 				</div>

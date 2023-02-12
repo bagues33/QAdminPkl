@@ -1,16 +1,17 @@
 <x-app-layout>
-	<x-slot name="title">Klien</x-slot>
+	<x-slot name="title">Laporan Daftar Klien</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 	<x-card>
-		<x-slot name="title">All Klien</x-slot>
-		<x-slot name="option">
-			<a href="{{ route('admin.klien.create') }}" class="btn btn-success">
-				<i class="fas fa-plus"></i>
+		{{-- <x-slot name="title">All Klien</x-slot> --}}
+        <x-slot name="option">
+			<a href="{{ route('admin.laporan.klien.print') }}" class="btn btn-secondary">
+				<i class="fas fa-print"></i>
 			</a>
 		</x-slot>
+        <div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
 				<th>Nama</th>
@@ -18,26 +19,24 @@
 				<th>Alamat</th>
 				<th>Email</th>
 				<th>Photo</th>
+                <th>Website</th>
+                <th>Deskripsi</th>
 			</thead>
 			<tbody>
-				@forelse($kliens as $klien)
+				@forelse($daftar_kliens as $klien)
 				<tr>
 					<td>{{ $klien->nama}}</td>
 					<td>{{ $klien->no_telpon }}</td>
 					<td>{{ $klien->alamat }}</td>
 					<td>{{ $klien->email }}</td>
 					<td><img src="{{ url('storage/posts/'.$klien->photo) }}" class="rounded" style="width: 150px"></td>
+                    <td>{{ $klien->website }}</td>
+                    <td>{{ $klien->deskripsi }}</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
 						data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
 							<i class="fas fa-eye"></i>
 						</button>
-						<a href="{{ route('admin.klien.edit', $klien->id_klien) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						
-						<form action="{{ route('admin.klien.delete', $klien->id_klien) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
 					</td>
 				</tr>
 				@empty
@@ -47,6 +46,7 @@
 				@endforelse
 			</tbody>
 		</table>
+        </div>
 	</x-card>
 
 	<x-modal>
@@ -81,7 +81,7 @@
 			<div class="col-6">
 				<b>Photo</b>
 			</div>
-			<div class="col-6"><img id="photo-modal" class="rounded" style="width: 150px" src="#"></div>
+			<div class="col-6"><img id="photo-modal" class="img-fluid" src="#"></div>
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">

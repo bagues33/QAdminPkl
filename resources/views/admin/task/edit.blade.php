@@ -66,6 +66,19 @@
                     <br>
 			        <x-textarea text="Deskripsi" name="deskripsi" value="{{ $task->deskripsi }}">{{ $task->deskripsi }}</x-textarea>
 				</div>
+				<div class="col-6">
+					<br>
+					<div class="form-check">
+						@if ($task->approved)
+							<input class="form-check-input" name="approved[]" type="checkbox" value="1" id="flexCheckDefault" checked>
+						@else
+							<input class="form-check-input" name="approved[]" type="checkbox" value="1" id="flexCheckDefault">
+						@endif
+						<label class="form-check-label" for="flexCheckDefault">
+						  Approved
+						</label>
+					 </div>
+				</div>
 			</div>
 		
 

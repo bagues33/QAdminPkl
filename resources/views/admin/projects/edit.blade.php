@@ -63,6 +63,16 @@
 					<!-- <x-input text="Budget" name="budget" type="text" /> -->
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<label class="mt-2" for="pm">PM</label>
+			        <select id="pm" class="form-control" text="Klien" name="pm">
+						@forelse($pms as $pm)
+							<option value="{{ $pm->id }}">{{ $pm->name }}</option>
+						@endforeach
+			        </select>
+				</div>
+			</div>
 			<!-- <x-input text="kosong" name="budget" type="hidden" /> -->
 			<!-- <div class="row">
 				<div class="col-md-6">

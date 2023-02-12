@@ -18,6 +18,8 @@ class CreateKomentarsTable extends Migration
             $table->string('isi');
             $table->unsignedBigInteger('id_task');
             $table->foreign('id_task')->references('id_task')->on('tasks');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

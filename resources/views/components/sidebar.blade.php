@@ -76,6 +76,60 @@
     />
     @endcan
 
+    {{-- @can('komentar')
+
+    @role('pm')
+        <x-nav-link 
+            text="Komentar" 
+            icon="comments" 
+            url="{{ route('pm.komentar') }}" 
+            active="{{ request()->routeIs('pm.komentar') ? ' active' : '' }}"
+        />
+    @else
+        <x-nav-link 
+            text="Komentar" 
+            icon="comments" 
+            url="{{ route('anggota.komentar') }}" 
+            active="{{ request()->routeIs('anggota.komentar') ? ' active' : '' }}"
+        />
+    @endrole
+
+    @endcan --}}
+
+    @role('Admin')
+        {{-- <hr class="sidebar-divider mb-0"> --}}
+
+        <x-nav-link 
+            text="Laporan Daftar Klien" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.klien') }}"
+            active="{{ request()->routeIs('admin.laporan.klien') ? ' active' : '' }}"
+        />
+
+        <x-nav-link 
+             text="Laporan Daftar Tim Per Project" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.timperproject') }}"
+            active="{{ request()->routeIs('admin.laporan.timperproject') ? ' active' : '' }}"
+        />
+
+        <x-nav-link 
+            text="Laporan Daftar Task Per Project" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.taskperproject') }}"
+            active="{{ request()->routeIs('admin.laporan.taskperproject') ? ' active' : '' }}"
+        />
+
+        <x-nav-link 
+            text="Laporan Rekap Pekerjaan" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.rekappekerjaan') }}"
+            active="{{ request()->routeIs('admin.laporan.rekappekerjaan') ? ' active' : '' }}"
+        />
+    @else
+       
+    @endrole
+
     @can('member-list')
     <hr class="sidebar-divider mb-0">
 

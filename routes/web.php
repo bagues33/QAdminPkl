@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController, AnggotaController, TaskController};
+use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController, AnggotaController, TaskController, KomentarController, LaporanController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,13 +59,30 @@ Route::group([
 	Route::put('/klien/{id_klien}/update', [KlienController::class, 'update'])->name('klien.update');
 	Route::post('/klien/{id}/delete', [KlienController::class, 'destroy'])->name('klien.delete');
 
-	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 	Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota');
 	Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota.create');
 	Route::post('/anggota/create', [AnggotaController::class, 'store'])->name('anggota.create');
 	Route::get('anggota/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('anggota.edit');
 	Route::put('anggota/{id_anggota}/update', [AnggotaController::class, 'update'])->name('anggota.update');
 	Route::post('anggota/{id}/delete', [AnggotaController::class, 'destroy'])->name('anggota.delete');
+
+	// laporan daftar klien
+	Route::get('laporan/klien', [LaporanController::class, 'daftarKlien'])->name('laporan.klien');
+	Route::get('laporan/klien/print', [LaporanController::class, 'daftarKlienPrint'])->name('laporan.klien.print');
+
+	// laporan tim per project
+	Route::get('laporan/timperproject', [LaporanController::class, 'daftarTimPerProject'])->name('laporan.timperproject');
+	Route::get('laporan/datatimperproject/{id}', [LaporanController::class, 'daftarDataTimPerProject'])->name('laporan.datatimperproject');
+	Route::get('laporan/timperprojectprint/{id}', [LaporanController::class, 'daftarTimPerProjectPrint'])->name('laporan.timperprojectprint');
+	
+	// laporan daftar task
+	Route::get('laporan/taskperproject', [LaporanController::class, 'taskPerProject'])->name('laporan.taskperproject');
+	Route::get('laporan/datataskperproject/{id}', [LaporanController::class, 'dataTaskPerProject'])->name('laporan.datataskperproject');
+	Route::get('laporan/taskperprojectprint/{id}', [LaporanController::class, 'taskPerProjectPrint'])->name('laporan.taskperprojectprint');
+
+	// laporan daftar project
+	Route::get('laporan/rekappekerjaan', [LaporanController::class, 'rekapPekerjaan'])->name('laporan.rekappekerjaan');
 
 });
 
@@ -93,6 +110,13 @@ Route::group([
 	Route::get('/task/{id_task}/edit', [TaskController::class, 'edit'])->name('task.edit');
 	Route::put('/task/{id_task}/update', [TaskController::class, 'update'])->name('task.update');
 	Route::post('/task/{id}/delete', [TaskController::class, 'destroy'])->name('task.delete');
+
+	Route::get('/task/{id_tak}/komentar', [KomentarController::class, 'index'])->name('komentar');
+	Route::get('/task/{id_task}/komentar/create', [KomentarController::class, 'create'])->name('komentar.create');
+	Route::post('/task/{id_task}/komentar/create', [KomentarController::class, 'store'])->name('komentar.create');
+	Route::get('/task/{id_task}/komentar/{id_komentar}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
+	Route::put('/task/{id_task}/komentar/{id_komentar}/update', [KomentarController::class, 'update'])->name('komentar.update');
+	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'delete'])->name('komentar.delete');
 	
 	// Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
 	// Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
@@ -107,6 +131,13 @@ Route::group([
 	Route::get('/task/index', [TaskController::class, 'showTaskForAnggota'])->name('task.index');
 	Route::get('/task/{id_task}/edit', [TaskController::class, 'createSubmitTask'])->name('task.create');
 	Route::put('/task/{id_task}/update', [TaskController::class, 'storeSubmitTask'])->name('task.update');
+
+	Route::get('/task/{id_task}/komentar', [KomentarController::class, 'index'])->name('komentar');
+	Route::get('/task/{id_task}/komentar/create', [KomentarController::class, 'create'])->name('komentar.create');
+	Route::post('/task/{id_task}/komentar/create', [KomentarController::class, 'store'])->name('komentar.create');
+	Route::get('/task/{id_task}/komentar/{id_komentar}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
+	Route::put('/task/{id_task}/komentar/{id_komentar}/update', [KomentarController::class, 'update'])->name('komentar.update');
+	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'delete'])->name('komentar.delete');
 	
 });
 

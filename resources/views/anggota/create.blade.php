@@ -37,18 +37,19 @@
 
 			<input type="hidden" name="id_anggota" value="{{ $task->id_anggota }}">
 			<input type="hidden" name="parent_id_task" value="{{ $task->id_task }}">
+			<input type="hidden" name="status" value="{{ $task->status }}">
 
 			<div class="row">
-				<div class="col-6">
-					<label for="status">Status</label>
+				{{-- <div class="col-6"> --}}
+					{{-- <label for="status">Status</label>
                     <select class="form-control" name="status" id="status">
                         <option value="notstarted">Not Started</option>
 						<option value="inprogress">In Progress</option>
                         <option value="done">Done</option>
 						<option value="cancel">Cancel</option>
                         <!-- <option value="done">Done</option> -->
-                    </select>
-				</div>
+                    </select> --}}
+				{{-- </div> --}}
 				<div class="col-6">
 					<br>
 					<x-textarea text="Submit Task" name="submit_task" value="{{ $task->submit_task }}"></x-textarea>

@@ -14,17 +14,16 @@
 		<table class="table table-bordered">
 			<thead>
 				<th>Nama</th>
-				<th>Type</th>
 				<th>Prioritas</th>
 				<th>Deadline</th>
 				<th>Nama Anggota</th>
 				<th>Status</th>
+				<th>Approved</th>
 			</thead>
 			<tbody>
 				@forelse($tasks as $task)
 				<tr>
 					<td>{{ $task->nama}}</td>
-					<td>{{ $task->type }}</td>
 					<td>{{ $task->prioritas }}</td>
 					<td>{{ $task->deadline }}</td>
 					<td>{{ $task->anggota->user->name }}</td>
@@ -37,6 +36,13 @@
 							<span class="badge bg-success text-white">Done</span>
 						@elseif($task->status == 'cancel')
 							<span class="badge bg-danger text-white">Cancel</span>
+						@endif
+					</td>
+					<td class="text-center">
+						@if ($task->approved)
+							<span class="badge bg-success text-white"><i class="fas fa-check"></i></span>
+						@else
+							<span class="badge bg-danger text-white"><i class="fa fa-times" aria-hidden="true"></i></span>
 						@endif
 					</td>
 					<td class="text-center">
@@ -61,11 +67,14 @@
 							@csrf
 							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
 						</form>
+						<a href="{{ route('pm.komentar', $task->id_task) }}" class="btn btn-warning">
+							<i class="fas fa-comments"></i>
+						</a>
 					</td>
 				</tr>
 				@empty
 				<tr>
-					<td colspan="3" class="text-center">No Data</td>
+					<td colspan="6" class="text-center">No Data</td>
 				</tr>
 				@endforelse
 			</tbody>
