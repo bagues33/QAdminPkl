@@ -98,21 +98,68 @@ class LaporanController extends Controller
 
     public function rekapPekerjaan() 
     {
-        $rekap = Klien::selectRaw('count(id) as number_of_orders, YEAR(created_at) as Tahun')
-                // ->count('id_klien')
-                ->with('project')
-                ->get()
-                ->groupBy('Tahun');
+        $user = Auth::user();
+        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.created_at) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
 
-        // $rekap = DB::table('projects')
-        // ->select('nama','created_at')
-        // ->orderBy('created_at')
-        // ->groupBy(DB::raw('MONTH(created_at)'))
-        // ->get();
+        // dd($rekap);
 
-        // dd(count($rekap));
-        dd($rekap);
+        return view('laporan.rekap.rekappekerjaan', compact('rekaps', 'user'));
+
     }
+
+    public function rekapPekerjaanPrint() 
+    {
+        $user = Auth::user();
+        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.created_at) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
+
+        // dd($rekap);
+
+        return view('laporan.rekap.print', compact('rekaps', 'user'));
+
+    }
+
+    public function laporanPerProject() 
+    {
+        $user = Auth::user();
+        $id_project = Project::first()->id_project;
+        $project = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->firstOrFail();
+        $list_project = Project::get();
+
+        return view('laporan.daftarproject.laporanperproject', compact('project', 'user', 'list_project'));
+
+    }
+
+    public function laporanPerProjectPrint($id_project) 
+    {
+        $user = Auth::user();
+        // $id_project = Project::first()->id_project;
+        $project = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->firstOrFail();
+        $list_project = Project::get();
+
+        return view('laporan.daftarproject.laporanperprojectprint', compact('project', 'user', 'list_project'));
+
+    }
+
+    public function daftarSeluruhProject() 
+    {
+        $user = Auth::user();
+        // $id_project = Project::first()->id_project;
+        $projects = Project::with('tim.anggota.user','tim','klien','user')->get();
+
+        return view('laporan.daftarproject.daftarproject', compact('projects', 'user'));
+
+    }
+
+    public function daftarSeluruhProjectPrint() 
+    {
+        $user = Auth::user();
+        // $id_project = Project::first()->id_project;
+        $projects = Project::with('tim.anggota.user','tim','klien','user')->get();
+
+        return view('laporan.daftarproject.daftarprojectprint', compact('projects', 'user'));
+
+    }
+
 
 
 }

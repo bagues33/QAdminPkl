@@ -107,27 +107,37 @@
         />
 
         <x-nav-link 
-             text="Laporan Daftar Tim Per Project" 
+            text="Laporan Rekap Pekerjaan" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.rekappekerjaan') }}"
+            active="{{ request()->routeIs('admin.laporan.rekappekerjaan') ? ' active' : '' }}"
+        />
+        <x-nav-link 
+            text="Laporan Per Project" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.laporanperproject') }}"
+            active="{{ request()->routeIs('admin.laporan.laporanperproject') ? ' active' : '' }}"
+        />
+        <x-nav-link 
+            text="Laporan Semua Project" 
+            icon="file-pdf" 
+            url="{{ route('admin.laporan.daftarproject') }}"
+            active="{{ request()->routeIs('admin.laporan.daftarproject') ? ' active' : '' }}"
+        />
+    @elseif('pm')
+        <hr class="sidebar-divider mb-0">
+        <x-nav-link 
+            text="Laporan Daftar Tim Per Project" 
             icon="file-pdf" 
             url="{{ route('admin.laporan.timperproject') }}"
             active="{{ request()->routeIs('admin.laporan.timperproject') ? ' active' : '' }}"
         />
-
         <x-nav-link 
             text="Laporan Daftar Task Per Project" 
             icon="file-pdf" 
             url="{{ route('admin.laporan.taskperproject') }}"
             active="{{ request()->routeIs('admin.laporan.taskperproject') ? ' active' : '' }}"
         />
-
-        <x-nav-link 
-            text="Laporan Rekap Pekerjaan" 
-            icon="file-pdf" 
-            url="{{ route('admin.laporan.rekappekerjaan') }}"
-            active="{{ request()->routeIs('admin.laporan.rekappekerjaan') ? ' active' : '' }}"
-        />
-    @else
-       
     @endrole
 
     @can('member-list')

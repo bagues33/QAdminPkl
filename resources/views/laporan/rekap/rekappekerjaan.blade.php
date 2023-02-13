@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Laporan Semua Project</x-slot>
+	<x-slot name="title">Laporan Rekap Pekerjaan</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
@@ -7,7 +7,7 @@
 	<x-card>
 		{{-- <x-slot name="title">All Klien</x-slot> --}}
         <x-slot name="option">
-			<a href="{{ route('admin.laporan.daftarprojectprint') }}" class="btn btn-secondary">
+			<a href="{{ route('admin.laporan.rekappekerjaanprint') }}" class="btn btn-secondary">
 				<i class="fas fa-print"></i>
 			</a>
 		</x-slot>
@@ -15,37 +15,17 @@
 		<table class="table table-bordered">
 			<thead>
 				<th>No</th>
-                <th>Nama</th>
-				<th>Deskripsi</th>
-				<th>Tgl Mulai</th>
-				<th>Deadline</th>
-				<th>Tgl Selesai</th>
-                <th>Budget</th>
-                <th>Status</th>
-                <th>Klien</th>
-                <th>Project Manager</th>
-                <th>Jumlah Tenaga Ahli</th>
+                <th>Tahun</th>
+                <th>Jumlah Klien</th>
+                <th>Jumlah Project</th>
 			</thead>
 			<tbody>
-				@forelse($projects as $no => $project)
+				@forelse($rekaps as $no => $rekap)
 				<tr>
 					<td>{{ ++$no }}</td>
-					<td>{{ $project->nama }}</td>
-					<td>{{ $project->deskripsi }}</td>
-					<td>{{ $project->tgl_mulai }}</td>
-                    <td>{{ $project->deadline }}</td>
-					<td>{{ $project->tgl_selesai ? $project->tgl_selesai : "Belum selesai" }}</td>
-                    <td>{{ $project->budget }}</td>
-                    <td>{{ $project->status }}</td>
-                    <td>{{ $project->klien->nama }}</td>
-                    <td>{{ $project->user->name }}</td>
-                    <td>@forelse($project->tim as $tim)
-                           {{ count($tim->anggota) }}
-                        @empty
-							{{ 0 }}
-                        @endforelse
-                    </td>
-
+					<td>{{ $rekap->tahun }}</td>
+					<td>{{ $rekap->jumlah_klien }}</td>
+					<td>{{ $rekap->jumlah_project }}</td>
 					<td class="text-center">
 						{{-- <button type="button" class="btn btn-info mr-1 info"
 						data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
@@ -55,7 +35,7 @@
 				</tr>
 				@empty
 				<tr>
-					<td colspan="11" class="text-center">No data</td>
+					<td colspan="3" class="text-center">No Member</td>
 				</tr>
 				@endforelse
 			</tbody>
@@ -73,7 +53,42 @@
 			</div>
 			<div class="col-6" id="nama-modal"></div>
 		</div>
-
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>No Telpon</b>
+			</div>
+			<div class="col-6" id="notelpon-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Alamat</b>
+			</div>
+			<div class="col-6" id="alamat-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Email</b>
+			</div>
+			<div class="col-6" id="email-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Photo</b>
+			</div>
+			<div class="col-6"><img id="photo-modal" class="img-fluid" src="#"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Website</b>
+			</div>
+			<div class="col-6" id="website-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
+				<b>Deskripsi</b>
+			</div>
+			<div class="col-6" id="deskripsi-modal"></div>
+		</div>
 	</x-modal>
 
 	<x-slot name="script">

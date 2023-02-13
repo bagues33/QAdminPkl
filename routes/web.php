@@ -81,8 +81,17 @@ Route::group([
 	Route::get('laporan/datataskperproject/{id}', [LaporanController::class, 'dataTaskPerProject'])->name('laporan.datataskperproject');
 	Route::get('laporan/taskperprojectprint/{id}', [LaporanController::class, 'taskPerProjectPrint'])->name('laporan.taskperprojectprint');
 
-	// laporan daftar project
+	// laporan rekap pekerjaan
 	Route::get('laporan/rekappekerjaan', [LaporanController::class, 'rekapPekerjaan'])->name('laporan.rekappekerjaan');
+	Route::get('laporan/rekappekerjaanprint', [LaporanController::class, 'rekapPekerjaanPrint'])->name('laporan.rekappekerjaanprint');
+
+	// laporan per project
+	Route::get('laporan/laporanperproject', [LaporanController::class, 'laporanPerProject'])->name('laporan.laporanperproject');
+	Route::get('laporan/laporanperprojectprint/{id}', [LaporanController::class, 'laporanPerProjectPrint'])->name('laporan.laporanperprojectprint');
+
+	// Laporan seluruh project
+	Route::get('laporan/daftarproject', [LaporanController::class, 'daftarSeluruhProject'])->name('laporan.daftarproject');
+	Route::get('laporan/daftarprojectprint', [LaporanController::class, 'daftarSeluruhProjectPrint'])->name('laporan.daftarprojectprint');
 
 });
 

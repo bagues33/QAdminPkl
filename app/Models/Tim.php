@@ -10,7 +10,7 @@ class Tim extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'deskripsi', 'id_project', 'id_user'
+        'id_tim','nama', 'deskripsi', 'id_project', 'id_user'
     ];
 
     protected $table = 'tims';
@@ -24,7 +24,9 @@ class Tim extends Model
 
     public function anggota()
     {
-        return $this->hasMany(Anggota::class, 'id_users');
+        // return $this->hasMany(Anggota::class, 'id_users');
+        return $this->hasMany(Anggota::class, 'id_tim');
+
     }
 
 
