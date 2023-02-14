@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController, AnggotaController, TaskController, KomentarController, LaporanController};
+use App\Http\Controllers\{DashboardController, UserController, RoleController, ProjectController, KlienController, TimController, AnggotaController, TaskController, KomentarController, LaporanController, KirimEmailController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -162,6 +162,8 @@ Route::group([
 	Route::get('/logs', [DashboardController::class, 'activity_logs'])->name('logs');
 	Route::post('/logs/delete', [DashboardController::class, 'delete_logs'])->name('logs.delete');
 });
+
+Route::get('/kirimemail', [KirimEmailController::class, 'index']);
 
 
 require __DIR__.'/auth.php';
