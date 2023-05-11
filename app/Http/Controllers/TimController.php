@@ -187,10 +187,12 @@ class TimController extends Controller
     public function destroy($id, $id_project)
     {
         //
-                
+                // dd("anjing");
+                $anggota = Anggota::where('id_tim','=',$id);
                 $tim = Tim::where('id_tim','=',$id)->firstOrFail();
         
                 // delete tim
+                $anggota->delete();
                 $tim->delete();
         
                 //redirect to index

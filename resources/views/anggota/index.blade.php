@@ -69,11 +69,14 @@
 						data-submittask="@if($task->submit_task) {{ $task->submit_task }} @else Belum submit task! @endif">
 							<i class="fas fa-eye"></i>
 						</button>
-						<a href="{{ route('anggota.task.create', $task->id_task) }}" class="btn btn-success">
+						<a href="{{ route('anggota.task.create', $task->id_task) }}" class="btn btn-primary">
 							<i class="fas fa-plus"></i>
 						</a>
 						<a href="{{ route('anggota.komentar', $task->id_task) }}" class="btn btn-warning">
 							<i class="fas fa-comments"></i>
+						</a>
+						<a target="_blank" href="https://wa.me/6281225027507/?text=*PEMBERITAHUAN!!!*%0aNama Task : {{ $task->nama }}%0aDeskripsi : {{ $task->deskripsi }}%0aType : {{ $task->type }}%0aPrioritas : {{ $task->prioritas }}%0aDeadline : {{ $task->deadline }}%0aNama Anggota : {{ $task->anggota->user->name }}%0aStatus Task : {{ $task->status }}%0aSubmit Task : {{ $task->submit_task }}" class="btn btn-success">
+							<i class="fab fa-whatsapp"></i>
 						</a>
 					</td>
 				</tr>
