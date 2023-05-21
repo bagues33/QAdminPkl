@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\Anggota;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Notification;
 
 class TimController extends Controller
 {
@@ -64,13 +66,14 @@ class TimController extends Controller
         $iduser = Auth::id();
 
         //create post
-        Tim::create([
+        $tim = Tim::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'id_project'   => $id_project,
             'id_user'     => $iduser
         ]);
 
+        User::find(Auth::user()->id)->notify(new WelcomeNotification("Tim dengan nama " .$tim->nama. " telah ditambahkan!"));
 
         //redirect to index
         return redirect()->route('pm.project.show', $id_project)->with(['success' => 'Data Berhasil Disimpan!']);
@@ -172,8 +175,16 @@ class TimController extends Controller
         $anggota = Anggota::where('id_tim','=',$id);
         $anggota->delete();
 
-        Anggota::insert($data);    
-       
+        Anggota::insert($data);
+        
+        foreach ($data as $item) {
+            $id_users = $item['id_users'];
+            $id_users_array[] = $id_users;
+        }
+
+        $users = User::whereIn('id', $id_users_array)->get();
+        Notification::send($users, new WelcomeNotification("Anda ditambahkan pada tim " .$tims->nama. "!"));
+
         //redirect to index
         return redirect()->route('pm.tim.show', $id)->with(['success' => 'Data Berhasil Diubah!']);
     }

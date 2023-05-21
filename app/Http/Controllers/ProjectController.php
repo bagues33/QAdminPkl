@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Klien;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\WelcomeNotification;
 
 class ProjectController extends Controller
 {
@@ -70,7 +71,7 @@ class ProjectController extends Controller
         // $status = "Not Started";
 
         //create post
-        Project::create([
+        $project = Project::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'tgl_mulai'   => $request->tgl_mulai,
@@ -87,6 +88,7 @@ class ProjectController extends Controller
         if (!$user->hasRole('pm')) {
             $user->assignRole('pm');
         }
+        User::find(Auth::user()->id)->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah ditambahkan!"));
 
         //redirect to index
         return redirect()->route('admin.project')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -132,7 +134,7 @@ class ProjectController extends Controller
             'nama'  => 'required',
             'deskripsi'  => 'required',
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
+            // 'tgl_selesai' => 'required',
             'deadline' => 'required',
             'budget' => 'required',
             'status' => 'required'
@@ -176,4 +178,6 @@ class ProjectController extends Controller
         //redirect to index
         return redirect()->route('admin.project')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
+    
 }

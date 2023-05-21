@@ -7,6 +7,8 @@ use App\Models\Task;
 use App\Models\Anggota;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Notification;
 
 
 class TaskController extends Controller
@@ -92,7 +94,7 @@ class TaskController extends Controller
         // $iduser = Auth::id();
 
         //create post
-        Task::create([
+        $task = Task::create([
             'nama'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'type'   => $request->type,
@@ -101,6 +103,11 @@ class TaskController extends Controller
             'prioritas'     => $request->prioritas,
             'id_anggota' => $request->id_anggota
         ]);
+        $anggota = Anggota::where('id_anggota', $task->id_anggota)->get();
+        // dd($anggota);
+        $users = User::whereIn('id', [Auth::id(), $anggota[0]->id_users])->get();
+        // dd($users);
+        Notification::send($users, new WelcomeNotification("Task dengan nama " .$task->nama. " telah ditambahkan!"));
 
         //redirect to index
         return redirect()->route('pm.task')->with(['success' => 'Data Berhasil Disimpan!']);

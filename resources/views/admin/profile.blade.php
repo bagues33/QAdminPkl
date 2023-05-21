@@ -27,6 +27,8 @@
 
                         <input type="file" name="avatar">
                 		<x-input type="text" text="Full Name" name="name" value="{{ auth()->user()->name }}" />
+                        <x-input type="text" text="Email" name="email" value="{{ auth()->user()->email }}" />
+                        <x-input type="text" text="No HP" name="no_hp" value="{{ auth()->user()->no_hp }}" />
 
 	                	<x-input type="password" text="Old Password" name="old_password" />
 	                	<x-input type="password" text="New Password" name="new_password" />

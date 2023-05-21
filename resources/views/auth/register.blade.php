@@ -19,6 +19,8 @@
             <!-- Email field -->
             <x-input type="text" text="Email" name="email" />
 
+            <x-input type="text" text="No HP" name="no_hp" />
+
             <!-- Password field -->
             <x-input type="password" text="Password" name="password" />
 

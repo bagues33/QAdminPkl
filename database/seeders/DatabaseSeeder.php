@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
         //
         Klien::create([
             'nama' => 'Pemkab Bantul', 
-            'no_telpon' => '081225027507',
-            'alamat' => 'Bantul, Yogyakarta',
-            'email' => 'pemkabbantul@gmail.com',
-            'website' => 'pemkabbantul.com',
-            'deskripsi' => 'lorem ipsum',
+            'no_telpon' => '(0274) 367509',
+            'alamat' => 'Jl. Robert Wolter Monginsidi No.1 Bantul, Yogyakarta, Indonesia 55711',
+            'email' => 'diskominfo@bantulkab.go.id',
+            'website' => 'https://bantulkab.go.id/',
+            'deskripsi' => 'Bantul adalah sebuah wilayah kabupaten yang terletak di Daerah Istimewa Yogyakarta, Indonesia. Ibu kotanya adalah Kapanewon Bantul. Semboyan pembangunan kabupaten ini adalah Projotamansari, yang merupakan singkatan dari Produktif-Profesional, Ijo royo royo, Tertib, Aman, Sehat, dan Asri.',
             'id_user' => 5
         ]);
 

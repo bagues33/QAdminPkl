@@ -16,16 +16,16 @@
 			<thead>
 				<th>No</th>
                 <th>Tahun</th>
+				<th>Jumlah Project</th>
                 <th>Jumlah Klien</th>
-                <th>Jumlah Project</th>
 			</thead>
 			<tbody>
 				@forelse($rekaps as $no => $rekap)
 				<tr>
 					<td>{{ ++$no }}</td>
 					<td>{{ $rekap->tahun }}</td>
-					<td>{{ $rekap->jumlah_klien }}</td>
 					<td>{{ $rekap->jumlah_project }}</td>
+					<td>{{ $rekap->jumlah_klien }}</td>
 					<td class="text-center">
 						{{-- <button type="button" class="btn btn-info mr-1 info"
 						data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">

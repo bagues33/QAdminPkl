@@ -37,6 +37,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact('logs', 'totalklien', 'totalproject', 'totaltim', 'totalanggota', 'totaltaskanggota'));
     }
+    
 
     /**
     * Show activity logs
@@ -83,7 +84,12 @@ class DashboardController extends Controller
     */
     public function profile_update(Request $request)
     {
-        $data = ['name' => $request->name];
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp
+        ];
+    
 
         // if password want to change
         if($request->old_password && $request->new_password) {
@@ -145,5 +151,10 @@ class DashboardController extends Controller
 
     public function tampilKlien() {
 
+    }
+
+    public function markAsRead(){
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
     }
 }

@@ -71,15 +71,6 @@ Route::group([
 	Route::get('laporan/klien', [LaporanController::class, 'daftarKlien'])->name('laporan.klien');
 	Route::get('laporan/klien/print', [LaporanController::class, 'daftarKlienPrint'])->name('laporan.klien.print');
 
-	// laporan tim per project
-	Route::get('laporan/timperproject', [LaporanController::class, 'daftarTimPerProject'])->name('laporan.timperproject');
-	Route::get('laporan/datatimperproject/{id}', [LaporanController::class, 'daftarDataTimPerProject'])->name('laporan.datatimperproject');
-	Route::get('laporan/timperprojectprint/{id}', [LaporanController::class, 'daftarTimPerProjectPrint'])->name('laporan.timperprojectprint');
-	
-	// laporan daftar task
-	Route::get('laporan/taskperproject', [LaporanController::class, 'taskPerProject'])->name('laporan.taskperproject');
-	Route::get('laporan/datataskperproject/{id}', [LaporanController::class, 'dataTaskPerProject'])->name('laporan.datataskperproject');
-	Route::get('laporan/taskperprojectprint/{id}', [LaporanController::class, 'taskPerProjectPrint'])->name('laporan.taskperprojectprint');
 
 	// laporan rekap pekerjaan
 	Route::get('laporan/rekappekerjaan', [LaporanController::class, 'rekapPekerjaan'])->name('laporan.rekappekerjaan');
@@ -92,6 +83,13 @@ Route::group([
 	// Laporan seluruh project
 	Route::get('laporan/daftarproject', [LaporanController::class, 'daftarSeluruhProject'])->name('laporan.daftarproject');
 	Route::get('laporan/daftarprojectprint', [LaporanController::class, 'daftarSeluruhProjectPrint'])->name('laporan.daftarprojectprint');
+
+	// laporan tim per project
+	Route::get('laporan/timperproject', [LaporanController::class, 'daftarTimPerProject'])->name('laporan.timperproject');
+	Route::get('laporan/datatimperproject/{id}', [LaporanController::class, 'daftarDataTimPerProject'])->name('laporan.datatimperproject');
+	Route::get('laporan/timperprojectprint/{id}', [LaporanController::class, 'daftarTimPerProjectPrint'])->name('laporan.timperprojectprint');
+
+	Route::get('laporan/getlistproject/{id}', [LaporanController::class, 'getListProject'])->name('laporan.getlistproject');
 
 });
 
@@ -125,7 +123,19 @@ Route::group([
 	Route::post('/task/{id_task}/komentar/create', [KomentarController::class, 'store'])->name('komentar.create');
 	Route::get('/task/{id_task}/komentar/{id_komentar}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
 	Route::put('/task/{id_task}/komentar/{id_komentar}/update', [KomentarController::class, 'update'])->name('komentar.update');
-	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'delete'])->name('komentar.delete');
+	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'destroy'])->name('komentar.delete');
+
+	// laporan tim per project
+	Route::get('laporan/timperproject', [LaporanController::class, 'daftarTimPerProject'])->name('laporan.timperproject');
+	Route::get('laporan/datatimperproject/{id}', [LaporanController::class, 'daftarDataTimPerProject'])->name('laporan.datatimperproject');
+	Route::get('laporan/timperprojectprint/{id}', [LaporanController::class, 'daftarTimPerProjectPrint'])->name('laporan.timperprojectprint');
+
+	Route::get('laporan/getlistproject/{id}', [LaporanController::class, 'getListProject'])->name('laporan.getlistproject');
+
+	// laporan daftar task
+	Route::get('laporan/taskperproject', [LaporanController::class, 'taskPerProject'])->name('laporan.taskperproject');
+	Route::get('laporan/datataskperproject/{id}', [LaporanController::class, 'dataTaskPerProject'])->name('laporan.datataskperproject');
+	Route::get('laporan/taskperprojectprint/{id}', [LaporanController::class, 'taskPerProjectPrint'])->name('laporan.taskperprojectprint');
 	
 	// Route::get('/task/{id_anggota}/edit', [AnggotaController::class, 'edit'])->name('edit');
 	// Route::put('/task/{id_anggota}/update', [AnggotaController::class, 'update'])->name('update');
@@ -146,7 +156,17 @@ Route::group([
 	Route::post('/task/{id_task}/komentar/create', [KomentarController::class, 'store'])->name('komentar.create');
 	Route::get('/task/{id_task}/komentar/{id_komentar}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
 	Route::put('/task/{id_task}/komentar/{id_komentar}/update', [KomentarController::class, 'update'])->name('komentar.update');
-	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'delete'])->name('komentar.delete');
+	Route::post('/task/{id_task}/komentar/{id_komentar}/delete', [KomentarController::class, 'destroy'])->name('komentar.delete');
+
+	// laporan tim per project
+	Route::get('laporan/timperproject', [LaporanController::class, 'daftarTimPerProject'])->name('laporan.timperproject');
+	Route::get('laporan/datatimperproject/{id}', [LaporanController::class, 'daftarDataTimPerProject'])->name('laporan.datatimperproject');
+	Route::get('laporan/timperprojectprint/{id}', [LaporanController::class, 'daftarTimPerProjectPrint'])->name('laporan.timperprojectprint');
+
+	// laporan daftar task
+	Route::get('laporan/taskperproject', [LaporanController::class, 'taskPerProject'])->name('laporan.taskperproject');
+	Route::get('laporan/datataskperproject/{id}', [LaporanController::class, 'dataTaskPerProject'])->name('laporan.datataskperproject');
+	Route::get('laporan/taskperprojectprint/{id}', [LaporanController::class, 'taskPerProjectPrint'])->name('laporan.taskperprojectprint');
 	
 });
 
@@ -161,6 +181,7 @@ Route::group([
 		->name('profile.upload');
 	Route::get('/logs', [DashboardController::class, 'activity_logs'])->name('logs');
 	Route::post('/logs/delete', [DashboardController::class, 'delete_logs'])->name('logs.delete');
+	Route::get('/mark-as-read', [DashboardController::class,'markAsRead'])->name('mark-as-read');
 });
 
 Route::get('/kirimemail', [KirimEmailController::class, 'index']);

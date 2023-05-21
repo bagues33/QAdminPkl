@@ -92,7 +92,25 @@ class KomentarController extends Controller
         }
     }
 
+    public function destroy($id_task, $id_komentar)
+    {
+        //
+        //delete image
+        $komentar = Komentar::where('id_komentar','=',$id_komentar)->firstOrFail();
+        
+        //delete post
+        $komentar->delete();
 
+        //redirect to index
+        $user = Auth::user();
+
+        //redirect to index
+        if($user->hasRole('anggota')) {
+            return redirect()->route('anggota.komentar', $id_task)->with(['success' => 'Data Berhasil Dihapus!']);
+        } elseif ($user->hasRole('pm')) {
+            return redirect()->route('pm.komentar', $id_task)->with(['success' => 'Data Berhasil Dihapus!']);
+        }
+    }
 
 
 

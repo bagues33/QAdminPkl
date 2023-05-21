@@ -7,6 +7,9 @@ use App\Models\Klien;
 use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\WelcomeNotification;
 
 
 class KlienController extends Controller
@@ -19,8 +22,24 @@ class KlienController extends Controller
     public function index()
     {
         //
+        // $post = [
+        //     'title' => 'post title',
+        //     'slug' => 'post slug'
+        // ];
+
         $user = Auth::user();
         $kliens = Klien::latest()->where('id_user', '=', $user->id)->get();
+        // Notification::notify(new WelcomeNotification($post));
+        // Notification::send($user, new WelcomeNotification($post));
+        // auth()->user()->notify(new WelcomeNotification($post));
+        // if(auth()->user()){
+        //      auth()->user()->notify(new WelcomeNotification($post));
+        // }
+        $users = User::all();
+        // Notification::send($users, new WelcomeNotification($post));
+        
+        // dd('sdsd');
+
         return view('admin.klien.index', compact('kliens'));
     }
 
@@ -64,7 +83,7 @@ class KlienController extends Controller
             $photo = $request->file('photo');
             $photo->storeAs('posts', $photo->hashName());
 
-            Klien::create([
+            $klien = Klien::create([
                 'photo'     => $photo->hashName(),
                 'nama'     => $request->nama,
                 'no_telpon'   => $request->no_telpon,
@@ -75,7 +94,7 @@ class KlienController extends Controller
                 'id_user'   => $user
             ]);
         } else {
-            Klien::create([
+            $klien = Klien::create([
                 'nama'     => $request->nama,
                 'no_telpon'   => $request->no_telpon,
                 'alamat'   => $request->alamat,
@@ -85,7 +104,7 @@ class KlienController extends Controller
                 'id_user'   => $user
             ]);
         }
-
+        User::find(Auth::user()->id)->notify(new WelcomeNotification("Klien dengan nama " .$klien->nama. " telah ditambahkan!"));
         //create post
         
 
@@ -202,4 +221,5 @@ class KlienController extends Controller
         //redirect to index
         return redirect()->route('admin.klien')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
 }

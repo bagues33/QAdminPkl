@@ -32,7 +32,7 @@
 					</td>
 					<td class="text-center">
 						<button type="button" class="btn btn-info mr-1 info"
-						data-name="{{ $user->name }}" data-email="{{ $user->email }}" data-roles="{{ $user->getRoleNames() }}" data-created="{{ $user->created_at->format('d-M-Y H:m:s') }}">
+						data-name="{{ $user->name }}" data-no_hp="{{ $user->no_hp }}" data-email="{{ $user->email }}" data-roles="{{ $user->getRoleNames() }}" data-created="{{ $user->created_at->format('d-M-Y H:m:s') }}">
 							<i class="fas fa-eye"></i>
 						</button>
 						<a href="{{ route('admin.member.edit', $user->id) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
@@ -69,6 +69,12 @@
 		</div>
 		<div class="row mb-2">
 			<div class="col-6">
+				<b>No HP</b>
+			</div>
+			<div class="col-6" id="no-modal"></div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-6">
 				<b>Roles</b>
 			</div>
 			<div class="col-6" id="roles-modal"></div>
@@ -88,6 +94,7 @@
 
 				$('#name-modal').text($(this).data('name'))
 				$('#email-modal').text($(this).data('email'))
+				$('#no-modal').text($(this).data('no_hp'))
 				$('#roles-modal').text($(this).data('roles'))
 				$('#created-modal').text($(this).data('created'))
 

@@ -61,12 +61,24 @@
             </table>
         </div>
         <div class="row">
-            <div class="d-flex justify-content-end mt-5">
-                <div class="text-center" style="width: 200px;">
-                    <p>Yogyakarta, {{ date('d-m-Y') }}</p>
-                    <p>Mengetahui</p>
-                    <br><br><br>
-                    <p>( {{ $user->name }} )</p>
+            <div class="col-6">
+                <div class="d-flex justify-content-end mt-5">
+                    <div class="text-center" style="width: 200px;">
+                        <p>Yogyakarta, {{ date('d-m-Y') }}</p>
+                        <p>Mengetahui</p>
+                        <br><br><br>
+                        <p>( {{ $user->name }} )</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-end mt-5">
+                    <div class="text-center" style="width: 200px;">
+                        <p>Yogyakarta, {{ date('d-m-Y') }}</p>
+                        <p>Mengetahui</p>
+                        <br><br><br>
+                        <p>( {{ $user->name }} )</p>
+                    </div>
                 </div>
             </div>
         </div>

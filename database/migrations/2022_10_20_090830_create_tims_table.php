@@ -18,9 +18,9 @@ class CreateTimsTable extends Migration
             $table->string('nama', 50);
             $table->string('deskripsi');
             $table->unsignedBigInteger('id_project');
-            $table->foreign('id_project')->references('id_project')->on('projects');
+            $table->foreign('id_project')->references('id_project')->on('projects')->onDelete('cascade');
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -124,20 +124,37 @@
             url="{{ route('admin.laporan.daftarproject') }}"
             active="{{ request()->routeIs('admin.laporan.daftarproject') ? ' active' : '' }}"
         />
-    @elseif('pm')
+    
+    @endrole
+
+    @role('pm')
         <hr class="sidebar-divider mb-0">
         <x-nav-link 
             text="Laporan Daftar Tim Per Project" 
             icon="file-pdf" 
-            url="{{ route('admin.laporan.timperproject') }}"
-            active="{{ request()->routeIs('admin.laporan.timperproject') ? ' active' : '' }}"
+            url="{{ route('pm.laporan.timperproject') }}"
+            active="{{ request()->routeIs('pm.laporan.timperproject') ? ' active' : '' }}"
         />
         <x-nav-link 
             text="Laporan Daftar Task Per Project" 
             icon="file-pdf" 
-            url="{{ route('admin.laporan.taskperproject') }}"
-            active="{{ request()->routeIs('admin.laporan.taskperproject') ? ' active' : '' }}"
+            url="{{ route('pm.laporan.taskperproject') }}"
+            active="{{ request()->routeIs('pm.laporan.taskperproject') ? ' active' : '' }}"
         />
+   
+        {{-- <hr class="sidebar-divider mb-0">
+        <x-nav-link 
+            text="Laporan Daftar Tim Per Project" 
+            icon="file-pdf" 
+            url="{{ route('anggota.laporan.timperproject') }}"
+            active="{{ request()->routeIs('anggota.laporan.timperproject') ? ' active' : '' }}"
+        />
+        <x-nav-link 
+            text="Laporan Daftar Task Per Project" 
+            icon="file-pdf" 
+            url="{{ route('anggota.laporan.taskperproject') }}"
+            active="{{ request()->routeIs('anggota.laporan.taskperproject') ? ' active' : '' }}"
+        /> --}}
     @endrole
 
     @can('member-list')

@@ -31,6 +31,9 @@
 				<div class="col-md-6">
 					<x-select name="roles" text="Roles" :values="$roles" />
 				</div>
+				<div class="col-md-6">
+					<x-input text="No HP" name="no_hp" type="text" value="{{ $user->no_hp }}" />
+				</div>
 			</div>
 
 			<x-button type="primary" text="Submit" for="submit" />

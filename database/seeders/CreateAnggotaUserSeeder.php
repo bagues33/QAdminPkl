@@ -19,6 +19,7 @@ class CreateAnggotaUserSeeder extends Seeder
             'name' => 'TofanBagusA', 
             'email' => 'bagustofan@yahoo.com',
             'password' => bcrypt('tofan123'),
+            'no_hp' => '081225027507',
             'role' => 'anggota'
         ]);
     }

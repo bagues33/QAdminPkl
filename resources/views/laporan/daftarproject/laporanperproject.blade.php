@@ -11,6 +11,13 @@
 				<i class="fas fa-print"></i>
 			</a>
 		</x-slot>
+		<Label for="">Pilih Tahun</Label>
+        <select id="select_tahun" class="form-control" aria-label="Default select example">
+            <option value="0">Pilih Tahun</option>
+            @foreach ($list_tahun as $list)
+             <option value="{{ $list->year }}">{{ $list->year }}</option>
+            @endforeach
+        </select>
 		<Label for="">Pilih Project</Label>
         <select id="select_project" class="form-control" aria-label="Default select example">
             <option value="0">Pilih Project</option>
@@ -144,6 +151,32 @@
 					}
 				});
 			});
+
+			$('#select_tahun').change(function(){
+
+				// Department id
+				var id = $(this).val();
+				// console.log(id);
+				$('#select_project').find('option').not(':first').remove();
+				// AJAX request 
+				$.ajax({
+				url: 'getlistproject/' + id,
+				type: 'get',
+				dataType: 'json',
+				success: function(response){
+					// console.log(response);
+					var trHTML = '';
+					var no = 0;
+					$.each(response, function (key,value) {
+						// console.log(value.nama);
+						var option = "<option value='"+value.id_project+"'>"+value.nama+"</option>"; 
+
+                		 $("#select_project").append(option); 
+					});
+				}
+				});
+			});
+
 			});
 
 			$('#print').click(function(e){

@@ -16,11 +16,11 @@ class CreateAnggotasTable extends Migration
         Schema::create('anggotas', function (Blueprint $table) {
             $table->bigIncrements('id_anggota');
             $table->unsignedBigInteger('id_tim');
-            $table->foreign('id_tim')->references('id_tim')->on('tims');
+            $table->foreign('id_tim')->references('id_tim')->on('tims')->onDelete('cascade');
             $table->unsignedBigInteger('id_users');
-            $table->foreign('id_users')->references('id')->on('users');
+            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

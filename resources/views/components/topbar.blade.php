@@ -27,25 +27,33 @@
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter">{{auth()->user()->unreadNotifications->count()}}</span>
             </a>
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Alerts Center
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                            <i class="fas fa-file-alt text-white"></i>
+                @if (auth()->user()->unreadNotifications)
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-sm btn-success d-inline-block text-end m-2" href="{{route('mark-as-read')}}">Mark All as Read</a>
+                    </div>
+                
+                @endif
+                @foreach (auth()->user()->unreadNotifications as $notification)
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-file-alt text-white"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div>
+                            <div class="small text-gray-500">{{ date('Y-m-d H:i:s') }}</div>
+                            <span class="font-weight-bold">{{$notification->data['data']}}</span>
+                        </div>
+                    </a>
+                @endforeach
+                {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa-donate text-white"></i>
@@ -55,8 +63,8 @@
                         <div class="small text-gray-500">December 7, 2019</div>
                         $290.29 has been deposited into your account!
                     </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                </a> --}}
+                {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-warning">
                             <i class="fas fa-exclamation-triangle text-white"></i>
@@ -66,7 +74,7 @@
                         <div class="small text-gray-500">December 2, 2019</div>
                         Spending Alert: We've noticed unusually high spending for your account.
                     </div>
-                </a>
+                </a> --}}
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
             </div>
         </li>
@@ -119,7 +127,7 @@
                 </h6>
                 <a class="dropdown-item align-items-center" href="#">
                     <div class="mb-3">
-                        <div class="small text-gray-500">Design Button
+                        <div class="small text-gray-500">lorem
                             <div class="small float-right"><b>50%</b></div>
                         </div>
                         <div class="progress" style="height: 12px;">
@@ -128,7 +136,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="dropdown-item align-items-center" href="#">
+                {{-- <a class="dropdown-item align-items-center" href="#">
                     <div class="mb-3">
                         <div class="small text-gray-500">Make Beautiful Transitions
                             <div class="small float-right"><b>30%</b></div>
@@ -138,8 +146,8 @@
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                </a>
-                <a class="dropdown-item align-items-center" href="#">
+                </a> --}}
+                {{-- <a class="dropdown-item align-items-center" href="#">
                     <div class="mb-3">
                         <div class="small text-gray-500">Create Pie Chart
                             <div class="small float-right"><b>75%</b></div>
@@ -149,7 +157,7 @@
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                </a>
+                </a> --}}
                 <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
             </div>
         </li>

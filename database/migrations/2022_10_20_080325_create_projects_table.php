@@ -23,12 +23,17 @@ class CreateProjectsTable extends Migration
             $table->string('budget', 50);
             $table->string('status', 25)->nullable();
             $table->unsignedBigInteger('id_klien');
+            $table->foreign('id_klien')->references('id_klien')->on('kliens')->onDelete('cascade');
             $table->unsignedBigInteger('pm');
-            // $table->foreign('id_klien')->references('id_klien')->on('kliens');
+            $table->foreign('pm')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
+
+        // Schema::table('projects', function($table) {
+        //     $table->foreign('id_klien')->references('id_klien')->on('kliens')->onDelete('cascade');
+        // });
     }
 
     /**

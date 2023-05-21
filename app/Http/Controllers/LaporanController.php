@@ -118,15 +118,35 @@ class LaporanController extends Controller
 
     }
 
+
     public function laporanPerProject() 
     {
         $user = Auth::user();
         $id_project = Project::first()->id_project;
         $project = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->firstOrFail();
         $list_project = Project::get();
+        $list_tahun =  Project::selectRaw('extract(year FROM created_at) AS year')
+        ->distinct()
+        ->orderBy('year', 'desc')
+        ->get();
+    
+            // ->orderBy('created_at')
+    
+            // ->groupBy(DB::raw("YEAR(created_at)"))
+    
+            // ->get();
 
-        return view('laporan.daftarproject.laporanperproject', compact('project', 'user', 'list_project'));
+        return view('laporan.daftarproject.laporanperproject', compact('project', 'user', 'list_project', 'list_tahun'));
 
+    }
+
+    public function getListProject($tahun) 
+    {
+        
+        $list_project = Project::whereYear('created_at', $tahun)->get();
+        // $projects = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->get();
+        // dd($projects);
+        return response()->json($list_project);
     }
 
     public function laporanPerProjectPrint($id_project) 

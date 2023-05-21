@@ -70,7 +70,7 @@
 						<a href="{{ route('pm.komentar', $task->id_task) }}" class="btn btn-warning">
 							<i class="fas fa-comments"></i>
 						</a>
-						<a target="_blank" href="https://wa.me/6281225027507/?text=*PEMBERITAHUAN!!!*%0aNama Task : {{ $task->nama }}%0aDeskripsi : {{ $task->deskripsi }}%0aType : {{ $task->type }}%0aPrioritas : {{ $task->prioritas }}%0aDeadline : {{ $task->deadline }}%0aNama Anggota : {{ $task->anggota->user->name }}%0aStatus Task : {{ $task->status }}" class="btn btn-success">
+						<a target="_blank" href="https://wa.me/62{{ ltrim($task->anggota->user->no_hp, '0') }}/?text=*PEMBERITAHUAN!!!*%0aNama Task : {{ $task->nama }}%0aDeskripsi : {{ $task->deskripsi }}%0aType : {{ $task->type }}%0aPrioritas : {{ $task->prioritas }}%0aDeadline : {{ $task->deadline }}%0aNama Anggota : {{ $task->anggota->user->name }}%0aStatus Task : {{ $task->status }}" class="btn btn-success">
 							<i class="fab fa-whatsapp"></i>
 						</a>
 					</td>

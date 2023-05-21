@@ -46,12 +46,14 @@ class PermissionTableSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'tofan',
             'email' => 'tofan@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'no_hp' => '081225027507'
         ]);
         $user2 = User::factory()->create([
             'name' => 'tofan2',
             'email' => 'tofan2@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'no_hp' => '081225027507'
         ]);
         
         $user->assignRole($anggotaRole);
@@ -64,12 +66,14 @@ class PermissionTableSeeder extends Seeder
         $pm = User::factory()->create([
             'name' => 'bagus',
             'email' => 'bagus@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'no_hp' => '081225027507'
         ]);
         $pm2 = User::factory()->create([
             'name' => 'bagus2',
             'email' => 'bagus2@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'no_hp' => '081225027507'
         ]);
 
         $pm->assignRole($pmRole);

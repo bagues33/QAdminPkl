@@ -41,7 +41,7 @@
 							@csrf
 							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
 						</form>
-						<a target="_blank" href="https://wa.me/6281225027507/?text=*PEMBERITAHUAN!!!*%0aNama Proyek : {{ $project->nama }}%0aNama Klien : {{ $project->klien->nama }}%0aNama PM (Project Manager) : {{ $project->user->name }}%0aDeskripsi : {{ $project->deskripsi }}%0aTanggal Mulai : {{ $project->tgl_mulai }}%0aDeadline : {{ $project->deadline }}%0aTanggal Selesai : {{ $project->tgl_selesai }}%0aBudget : {{ $project->budget }}%0aStatus : {{ $project->status }}" class="btn btn-success"><i class="fab fa-whatsapp"></i></a>
+						<a target="_blank" href="https://wa.me/62{{ ltrim($project->user->no_hp, '0') }}/?text=*PEMBERITAHUAN!!!*%0aNama Proyek : {{ $project->nama }}%0aNama Klien : {{ $project->klien->nama }}%0aNama PM (Project Manager) : {{ $project->user->name }}%0aDeskripsi : {{ $project->deskripsi }}%0aTanggal Mulai : {{ $project->tgl_mulai }}%0aDeadline : {{ $project->deadline }}%0aTanggal Selesai : {{ $project->tgl_selesai }}%0aBudget : {{ $project->budget }}%0aStatus : {{ $project->status }}" class="btn btn-success"><i class="fab fa-whatsapp"></i></a>
 					</td>
 				</tr>
 				@empty
