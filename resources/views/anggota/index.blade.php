@@ -10,7 +10,23 @@
 
 		</x-slot>
 		</x-slot>
-		<table class="table table-bordered">
+		<form class="navbar-search d-flex" action="{{ route('anggota.task.search') }}" method="GET">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control bg-light border-1 small" placeholder="Silahkan ketik kata pencarian..."
+					aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="submit">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+				</div>
+			</div>
+			<a href="{{ route('anggota.task.index') }}">
+				<button class="btn btn-success ml-3" type="button">
+					<i class="fas fa-sync"></i>
+				</button>
+			</a>
+		</form>
+		<table class="table table-bordered mt-4">
 			<thead>
 				<th>Nama Project Manager</th>
 				<th>Nama Task</th>
@@ -87,6 +103,12 @@
 				@endforelse
 			</tbody>
 		</table>
+		<p class="mt-3"> 
+			Halaman : {{ $tasks->currentPage() }} /
+			Jumlah Data : {{ $tasks->total() }} /
+			Data Per Halaman : {{ $tasks->perPage() }} 
+		</p>
+        {{ $tasks->links() }}
 	</x-card>
 
 	<x-modal>

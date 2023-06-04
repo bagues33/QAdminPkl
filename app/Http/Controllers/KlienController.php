@@ -28,7 +28,7 @@ class KlienController extends Controller
         // ];
 
         $user = Auth::user();
-        $kliens = Klien::latest()->where('id_user', '=', $user->id)->get();
+        $kliens = Klien::latest()->where('id_user', '=', $user->id)->paginate(5);
         // Notification::notify(new WelcomeNotification($post));
         // Notification::send($user, new WelcomeNotification($post));
         // auth()->user()->notify(new WelcomeNotification($post));
@@ -42,6 +42,19 @@ class KlienController extends Controller
 
         return view('admin.klien.index', compact('kliens'));
     }
+
+    public function search(Request $request)
+	{
+		// menangkap data pencarian
+		$search = $request->search;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$kliens = Klien::where('nama','like',"%".$search."%")->paginate();
+ 
+    		// mengirim data pegawai ke view index
+            return view('admin.klien.index', compact('kliens'));
+ 
+	}
 
     /**
      * Show the form for creating a new resource.

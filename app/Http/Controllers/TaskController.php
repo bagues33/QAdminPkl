@@ -25,17 +25,63 @@ class TaskController extends Controller
         // $tasks = Task::with('anggota', 'anggota.user')->latest()->get();
         $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user) {
             $q->where('id_user', '=', $user);
-        })->get();
+        })->paginate(10);
         // dd($tasks[0]->anggota->user);
         return view('admin.task.index', compact('tasks'));
     }
+
+    public function search(Request $request)
+	{
+		// menangkap data pencarian
+		$search = $request->search;
+        $user = Auth::user()->id;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user, $search) {
+            $q
+            ->where('id_user', '=', $user);
+            // ->where([
+            //     ['id_user', '=', $user]
+                
+            // ])->paginate();
+        })->where('nama','like',"%".$search."%")->paginate();
+
+        // where('id_user', '=', $user)
+        // where('nama','like',"%".$search."%")->paginate();
+
+        // mengirim data pegawai ke view index
+        return view('admin.task.index', compact('tasks'));
+ 
+	}
+
+    public function searchForAnggota(Request $request)
+	{
+		// menangkap data pencarian
+		$search = $request->search;
+        $user = Auth::user()->id;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user, $search) {
+            $q
+            ->where('id_users', '=', $user);
+            // ->where([
+            //     ['id_user', '=', $user]
+                
+            // ])->paginate();
+        })->where('nama','like',"%".$search."%")->paginate();
+
+        // where('id_user', '=', $user)
+        // where('nama','like',"%".$search."%")->paginate();
+
+        // mengirim data pegawai ke view index
+        return view('anggota.index', compact('tasks'));
+ 
+	}
 
     public function showTaskForAnggota() {
         $user = Auth::user()->id;
     
         $tasks = Task::with(['anggota', 'anggota.getPm'])->whereHas('anggota', function($q) use($user) {
             $q->where('id_users', '=', $user);
-        })->get();
+        })->paginate(10);
 
 
 

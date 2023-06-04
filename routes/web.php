@@ -42,6 +42,7 @@ Route::group([
 
 	// for project
 	Route::get('/project', [ProjectController::class, 'index'])->name('project');
+	Route::get('/project/search', [ProjectController::class, 'search'])->name('project.search');
 	Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
 	Route::post('/project/create', [ProjectController::class, 'store'])->name('project.create');
 	Route::get('/project/{id_project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
@@ -53,6 +54,7 @@ Route::group([
 	// 	return 'hello klien';
 	// });
 	Route::get('/klien', [KlienController::class, 'index'])->name('klien');
+	Route::get('/klien/search', [KlienController::class, 'search'])->name('klien.search');
 	Route::get('/klien/create', [KlienController::class, 'create'])->name('klien.create');
 	Route::post('/klien/create', [KlienController::class, 'store'])->name('klien.create');
 	Route::get('/klien/{id_klien}/edit', [KlienController::class, 'edit'])->name('klien.edit');
@@ -111,6 +113,7 @@ Route::group([
 	Route::get('/project/{id_project}/show', [TimController::class, 'showProject'])->name('project.show');
 
 	Route::get('/task', [TaskController::class, 'index'])->name('task');
+	Route::get('/task/search', [TaskController::class, 'search'])->name('task.search');
 	Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
 	Route::post('/task/create', [TaskController::class, 'store'])->name('task.create');
 	Route::get('/task/{id_task}/show', [TaskController::class, 'show'])->name('task.show');
@@ -148,6 +151,7 @@ Route::group([
 	'as' => 'anggota.'
 ], function(){
 	Route::get('/task/index', [TaskController::class, 'showTaskForAnggota'])->name('task.index');
+	Route::get('/task/search', [TaskController::class, 'searchForAnggota'])->name('task.search');
 	Route::get('/task/{id_task}/edit', [TaskController::class, 'createSubmitTask'])->name('task.create');
 	Route::put('/task/{id_task}/update', [TaskController::class, 'storeSubmitTask'])->name('task.update');
 

@@ -11,7 +11,23 @@
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
-		<table class="table table-bordered">
+		<form class="navbar-search d-flex" action="{{ route('pm.task.search') }}" method="GET">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control bg-light border-1 small" placeholder="Silahkan ketik kata pencarian..."
+					aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="submit">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+				</div>
+			</div>
+			<a href="{{ route('pm.task') }}">
+				<button class="btn btn-success ml-3" type="button">
+					<i class="fas fa-sync"></i>
+				</button>
+			</a>
+		</form>
+		<table class="table table-bordered mt-4">
 			<thead>
 				<th>Nama Anggota</th>
 				<th>Nama Tim</th>

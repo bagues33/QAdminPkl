@@ -19,10 +19,23 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $projects = Project::with('klien', 'user')->latest()->where('id_user', '=', $user->id)->get();
+        $projects = Project::with('klien', 'user')->latest()->where('id_user', '=', $user->id)->paginate(10);
         // dd($projects);
         return view('admin.projects.index', compact('projects'));
     }
+
+    public function search(Request $request)
+	{
+		// menangkap data pencarian
+		$search = $request->search;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$projects = Project::where('nama','like',"%".$search."%")->paginate();
+ 
+    		// mengirim data pegawai ke view index
+            return view('admin.projects.index', compact('projects'));
+ 
+	}
 
     /**
      * Show the form for creating a new resource.

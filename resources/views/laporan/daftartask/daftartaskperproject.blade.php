@@ -61,7 +61,7 @@
                     </tr>
                     @empty 
                     <tr>
-                        <td colspan="7" class="text-center">No data</td>
+                        <td id="no-data" colspan="7" class="text-center">No data</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -163,6 +163,7 @@
                             }
                             
                             $('.data-row').remove();
+                            $('#no-data').remove();
                             $('#data_tim').append(trHTML);
                         }
                     });

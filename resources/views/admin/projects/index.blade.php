@@ -11,7 +11,23 @@
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
-		<table class="table table-bordered">
+		<form class="navbar-search d-flex" action="{{ route('admin.project.search') }}" method="GET">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control bg-light border-1 small" placeholder="Silahkan ketik kata pencarian..."
+					aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="submit">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+				</div>
+			</div>
+			<a href="{{ route('admin.project') }}">
+				<button class="btn btn-success ml-3" type="button">
+					<i class="fas fa-sync"></i>
+				</button>
+			</a>
+		</form>
+		<table class="table table-bordered mt-4">
 			<thead>
 				<th>Nama Project</th>
 				<!-- <th>Deskripsi</th> -->
@@ -46,11 +62,17 @@
 				</tr>
 				@empty
 				<tr>
-					<td colspan="3" class="text-center">No Member</td>
+					<td colspan="5" class="text-center">No Data</td>
 				</tr>
 				@endforelse
 			</tbody>
 		</table>
+		<p class="mt-3"> 
+			Halaman : {{ $projects->currentPage() }} /
+			Jumlah Data : {{ $projects->total() }} /
+			Data Per Halaman : {{ $projects->perPage() }} 
+		</p>
+        {{ $projects->links() }}
 	</x-card>
 
 	<x-modal>
