@@ -102,6 +102,8 @@ class ProjectController extends Controller
             $user->assignRole('pm');
         }
         User::find(Auth::user()->id)->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah ditambahkan!"));
+        $user->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah ditambahkan!"));
+
 
         //redirect to index
         return redirect()->route('admin.project')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -168,6 +170,13 @@ class ProjectController extends Controller
             'status'   => $request->status,
 
         ]);
+
+        $user = User::where('id','=', $request->pm)->firstOrFail();
+        if (!$user->hasRole('pm')) {
+            $user->assignRole('pm');
+        }
+        User::find(Auth::user()->id)->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah diupdate!"));
+        $user->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah diupdate!"));
 
         //redirect to index
         return redirect()->route('admin.project')->with(['success' => 'Data Berhasil Diubah!']);

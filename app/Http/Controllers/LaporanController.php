@@ -32,10 +32,19 @@ class LaporanController extends Controller
     public function daftarTimPerProject() 
     {
         // $id_project = 1;
-        $id_project = Project::first()->id_project;
+        // $id_project = Project::first()->id_project;
+        $project = Project::first();
+        if ($project !== null) {
+            $id_project = $project->id_project;
+            $projects = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->get();
+        } else {
+            $projects = ['null'];
+        }
+
+        // dd($projects);
         // dd($id_project);
         $list_project = Project::get();
-        $projects = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->get();
+        
         // dd($projects);
         return view('laporan.daftartim.daftartimperproject', compact('projects','list_project'));
     }
@@ -122,8 +131,30 @@ class LaporanController extends Controller
     public function laporanPerProject() 
     {
         $user = Auth::user();
-        $id_project = Project::first()->id_project;
-        $project = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->firstOrFail();
+
+        $project = Project::first();
+        if ($project !== null) {
+            $id_project = $project->id_project;
+            $project = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->firstOrFail();
+        } else {
+            $project = null;
+        }
+        // $id_project = Project::first()->id_project;
+        // dd($id_project);
+       
+       
+
+        // $project = (object) [
+        //     'nama' => 'Nama Proyek',
+        //     'klien' => 'nasdasdasma',
+        //     'deskripsi' => 'Deskripsi Proyek',
+        //     'tanggal_mulai' => '2023-06-01',
+        //     'deadline' => 'dsfsdf',
+        //     'tgl_selesai' => 'asdasd'
+
+            
+        // ];
+        
         $list_project = Project::get();
         $list_tahun =  Project::selectRaw('extract(year FROM created_at) AS year')
         ->distinct()

@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
+use App\Notifications\WelcomeNotification;
     
 class UserController extends Controller
 {
@@ -76,6 +77,8 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));
+
+        $user->notify(new WelcomeNotification("Anda telah ditambahkan sebagai " .$request->roles. ""));
     
         return redirect()->route('admin.member')
                         ->with('success','User updated successfully');

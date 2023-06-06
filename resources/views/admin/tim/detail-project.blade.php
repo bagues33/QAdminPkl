@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Detail Project</x-slot>
+	<x-slot name="title">Daftar Tim</x-slot>
 	
 	{{-- show alert if there is errors --}}
 	<x-alert-error/>
@@ -46,7 +46,7 @@
 				<div class="col-6">{{ $project->budget }}</div>
 		</div>
 	</x-card>
-	<h3>Daftar Tim</h3>
+	{{-- <h3>Daftar Tim</h3> --}}
 	<x-card>
 		<x-slot name="option">
 			<a href="{{ route('pm.tim.create', $project->id_project) }}" class="btn btn-success">

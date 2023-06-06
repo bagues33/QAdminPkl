@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Laporan Per Project</x-slot>
+	<x-slot name="title">Laporan per Project</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
@@ -35,56 +35,122 @@
 				<tr>
 					<td>Nama Project</td>
                     <td>:</td>
-                    <td id="nama-project">{{ $project->nama }}</td>
+                    <td id="nama-project">
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->nama }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Nama Klien</td>
                     <td>:</td>
-                    <td id="nama-klien">{{ $project->klien->nama }}</td>
+                    <td id="nama-klien">
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->klien->nama }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Tanggal Mulai</td>
                     <td>:</td>
-                    <td id="tgl-mulai">{{ $project->tgl_mulai }}</td>
+                    <td id="tgl-mulai">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->tgl_mulai }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Deadline</td>
                     <td>:</td>
-                    <td id="deadline">{{ $project->deadline }}</td>
+                    <td id="deadline">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->deadline }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Tanggal Selesai</td>
                     <td>:</td>
-                    <td id="tgl-selesai">{{ $project->tgl_selesai }}</td>
+                    <td id="tgl-selesai">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->tgl_selesai }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Budget</td>
                     <td>:</td>
-                    <td id="budget">{{ $project->budget }}</td>
+                    <td id="budget">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->budget }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Status</td>
                     <td>:</td>
-                    <td id="status">{{ $project->status }}</td>
+                    <td id="status">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->status }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Project Manager</td>
                     <td>:</td>
-                    <td id="pm">{{ $project->user->name }}</td>
+                    <td id="pm">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->user->name }}
+						@endempty
+					</td>
 				</tr>
                 <tr>
 					<td>Jumlah Tenaga Ahli</td>
                     <td>:</td>
                     <td id="tenaga-ahli">
-						@foreach ($project->tim as $tim)
-							{{ count($tim->anggota) }}
-						@endforeach
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							@foreach ($project->tim as $tim)
+								{{ count($tim->anggota) }}
+							@endforeach
+						@endempty
 					</td>
 				</tr>
                 <tr>
 					<td>Deskripsi</td>
                     <td>:</td>
-                    <td id="deskripsi">{{ $project->deskripsi }}</td>
+                    <td id="deskripsi">
+						
+						@empty($project)
+							Data tidak tersedia
+						@else
+							{{ $project->deskripsi }}
+						@endempty
+					</td>
 				</tr>
 				{{-- @empty --}}
 				{{-- <tr>

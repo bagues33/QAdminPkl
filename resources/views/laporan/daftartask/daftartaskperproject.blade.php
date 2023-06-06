@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Laporan Daftar Task Per Project</x-slot>
+	<x-slot name="title">Laporan Daftar Task per Project</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />

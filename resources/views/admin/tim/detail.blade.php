@@ -8,7 +8,7 @@
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
 
-	<a class="mb-2 d-block" href="{{ route('pm.project.show', $tims->id_project) }}">
+	<a class="mb-4 d-block" href="{{ route('pm.project.show', $tims->id_project) }}">
 		<button class="btn-secondary"><i class="fas fa-arrow-left"></i> Back</button>
 	</a>
 	<x-card>

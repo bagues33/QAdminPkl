@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-slot name="title">Laporan Daftar Tim Per Project</x-slot>
+	<x-slot name="title">Laporan Daftar Tim per Project</x-slot>
 
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
@@ -21,43 +21,80 @@
              <option value="{{ $list->id_project }}">{{ $list->nama }}</option>
             @endforeach
         </select>
-        @forelse($projects as $no => $project)
-        {{-- <h6>Nama Project : </h6> --}}
-        <h5 id="nama_project" class="mt-4">{{ $project->nama }}</h5>
-        <div class="table-responsive mt-4">
-            <table id="data_tim" class="table table-bordered">
-                <thead>
-                    <th>No</th>
-                    <th>Nama Tim</th>
-                    <th>Deskripsi</th>
-                    <th>Jumlah Anggota</th>
-                </thead>
-                <tbody>
-                    @forelse($project->tim as $no => $tim)
-                    <tr class="data-row">
-                        <td>{{ ++$no }}</td>
-                        <td>{{ $tim->nama }}</td>
-                        <td>{{ $tim->deskripsi }}</td>
-                        <td>
-                            {{ count($tim->anggota) }}
-                        </td>
-                        {{-- <td class="text-center"> --}}
-                            {{-- <button type="button" class="btn btn-info mr-1 info"
-                            data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
-                                <i class="fas fa-eye"></i>
-                            </button> --}}
-                        {{-- </td> --}}
-                    </tr>
-                    @empty 
-                    <tr>
-                        <td colspan="3" class="text-center">No data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        @empty
-        @endforelse
+        @empty($projects)
+            @forelse($projects as $no => $project)
+            {{-- <h6>Nama Project : </h6> --}}
+            <h5 id="nama_project" class="mt-4">{{ $project->nama }}</h5>
+            <div class="table-responsive mt-4">
+                <table id="data_tim" class="table table-bordered">
+                    <thead>
+                        <th>No</th>
+                        <th>Nama Tim</th>
+                        <th>Deskripsi</th>
+                        <th>Jumlah Anggota</th>
+                    </thead>
+                    <tbody>
+                        @forelse($project->tim as $no => $tim)
+                        <tr class="data-row">
+                            <td>{{ ++$no }}</td>
+                            <td>{{ $tim->nama }}</td>
+                            <td>{{ $tim->deskripsi }}</td>
+                            <td>
+                                {{ count($tim->anggota) }}
+                            </td>
+                            {{-- <td class="text-center"> --}}
+                                {{-- <button type="button" class="btn btn-info mr-1 info"
+                                data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
+                                    <i class="fas fa-eye"></i>
+                                </button> --}}
+                            {{-- </td> --}}
+                        </tr>
+                        @empty 
+                        <tr>
+                            <td colspan="4" class="text-center">No data</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            @empty
+            @endforelse
+        @else
+            <h5 id="nama_project" class="mt-4"></h5>
+            <div class="table-responsive mt-4">
+                <table id="data_tim" class="table table-bordered">
+                    <thead>
+                        <th>No</th>
+                        <th>Nama Tim</th>
+                        <th>Deskripsi</th>
+                        <th>Jumlah Anggota</th>
+                    </thead>
+                    <tbody>
+                        
+                        <tr class="data-row">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                
+                            </td>
+                            {{-- <td class="text-center"> --}}
+                                {{-- <button type="button" class="btn btn-info mr-1 info"
+                                data-name="{{ $klien->nama }}" data-email="{{ $klien->email }}" data-notelpon="{{ $klien->no_telpon }}" data-alamat="{{ $klien->alamat }}" data-email="{{ $klien->photo }}" data-website="{{ $klien->website }}" data-deskripsi="{{ $klien->deskripsi }}" data-photo="{{ url('storage/posts/'.$klien->photo) }}">
+                                    <i class="fas fa-eye"></i>
+                                </button> --}}
+                            {{-- </td> --}}
+                        </tr>
+                        
+                        <tr>
+                            <td id="no-data" colspan="4" class="text-center">No data</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        @endempty
+    
 	</x-card>
 
 	<x-modal>
@@ -150,6 +187,7 @@
                                 }
                             });
                             $('.data-row').remove();
+                            $('#no-data').remove();
                             $('#data_tim').append(trHTML);
                         }
                     });
