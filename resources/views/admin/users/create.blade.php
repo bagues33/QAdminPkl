@@ -26,13 +26,16 @@
 			        <x-input text="Password" name="password" type="password" />
 				</div>
 				<div class="col-md-6">
-					<x-input text="Password" name="confirm-password" type="password" />
+					<x-input text="Confirm Password" name="confirm-password" type="password" />
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-6">
 					<x-select name="roles" text="Roles" :values="$roles" />
+				</div>
+				<div class="col-md-6">
+					<x-input text="No Hp" name="no_hp" type="text" />
 				</div>
 			</div>
 

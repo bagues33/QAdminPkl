@@ -102,7 +102,7 @@ class ProjectController extends Controller
             $user->assignRole('pm');
         }
         User::find(Auth::user()->id)->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah ditambahkan!"));
-        $user->notify(new WelcomeNotification("Project dengan nama " .$project->nama. " telah ditambahkan!"));
+        $user->notify(new WelcomeNotification("Anda telah dimasukkan sebagai PM dalam roject " .$project->nama. ""));
 
 
         //redirect to index
@@ -149,6 +149,7 @@ class ProjectController extends Controller
             'nama'  => 'required',
             'deskripsi'  => 'required',
             'tgl_mulai' => 'required',
+            'id_klien' => 'required',
             // 'tgl_selesai' => 'required',
             'deadline' => 'required',
             'budget' => 'required',
@@ -165,6 +166,7 @@ class ProjectController extends Controller
             'deskripsi'   => $request->deskripsi,
             'tgl_mulai'   => $request->tgl_mulai,
             'tgl_selesai'   => $request->tgl_selesai,
+            'id_klien' => $request->id_klien,
             'deadline'   => $request->deadline,
             'budget'   => $request->budget,
             'status'   => $request->status,

@@ -15,13 +15,31 @@
             background-color: black !important;
             color: black !important;
         }
+        @media print 
+        {
+            @page {
+              size: A4; /* DIN A4 standard, Europe */
+              margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 11px;
+                background: #FFF;
+                overflow: visible;
+            }
+            body {
+                padding-top: 5mm;
+            }
+        }
     </style>
   </head>
   <body onload="window.print()">
     {{-- <body> --}}
 
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="{{ asset('dist/img/logo-picsi-2.png') }}" alt="">
@@ -36,71 +54,73 @@
         {{-- <hr class="bg-dark" style="height: 3px"> --}}
        
         <div class="row">
-            <h3 class="text-center mt-5 mb-5">Laporan Per Project</h3>
-            <table class="table table-borderless">
-                <thead>
-                </thead>
-                <tbody>
-                    {{-- @forelse($projects as $no => $project) --}}
-                    <tr>
-                        <td>Nama Project</td>
-                        <td>:</td>
-                        <td id="nama-project">{{ $project->nama }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Klien</td>
-                        <td>:</td>
-                        <td id="nama-klien">{{ $project->klien->nama }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Mulai</td>
-                        <td>:</td>
-                        <td id="tgl-mulai">{{ $project->tgl_mulai }}</td>
-                    </tr>
-                    <tr>
-                        <td>Deadline</td>
-                        <td>:</td>
-                        <td id="deadline">{{ $project->deadline }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Selesai</td>
-                        <td>:</td>
-                        <td id="tgl-selesai">{{ $project->tgl_selesai ? $project->tgl_selesai : "Belum selesai" }}</td>
-                    </tr>
-                    <tr>
-                        <td>Budget</td>
-                        <td>:</td>
-                        <td id="budget">{{ $project->budget }}</td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td>:</td>
-                        <td id="status">{{ $project->status }}</td>
-                    </tr>
-                    <tr>
-                        <td>Project Manager</td>
-                        <td>:</td>
-                        <td id="pm">{{ $project->user->name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Jumlah Tenaga Ahli</td>
-                        <td>:</td>
-                        <td id="tenaga-ahli">
-                            @forelse ($project->tim as $tim)
-                                {{ count($tim->anggota) }}
-                            @empty
-                                {{ 0 }}
-                            @endforelse
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Deskripsi</td>
-                        <td>:</td>
-                        <td id="deskripsi">{{ $project->deskripsi }}</td>
-                    </tr>
-                 
-                </tbody>
-            </table>
+            <div class="col-12">
+                <h3 class="text-center mt-5 mb-5">Laporan Per Project</h3>
+                <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        {{-- @forelse($projects as $no => $project) --}}
+                        <tr>
+                            <td>Nama Project</td>
+                            <td>:</td>
+                            <td id="nama-project">{{ $project->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nama Klien</td>
+                            <td>:</td>
+                            <td id="nama-klien">{{ $project->klien->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Mulai</td>
+                            <td>:</td>
+                            <td id="tgl-mulai">{{ $project->tgl_mulai }}</td>
+                        </tr>
+                        <tr>
+                            <td>Deadline</td>
+                            <td>:</td>
+                            <td id="deadline">{{ $project->deadline }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Selesai</td>
+                            <td>:</td>
+                            <td id="tgl-selesai">{{ $project->tgl_selesai ? $project->tgl_selesai : "Belum selesai" }}</td>
+                        </tr>
+                        <tr>
+                            <td>Budget</td>
+                            <td>:</td>
+                            <td id="budget">{{ $project->budget }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>:</td>
+                            <td id="status">{{ $project->status }}</td>
+                        </tr>
+                        <tr>
+                            <td>Project Manager</td>
+                            <td>:</td>
+                            <td id="pm">{{ $project->user->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tenaga Ahli</td>
+                            <td>:</td>
+                            <td id="tenaga-ahli">
+                                @forelse ($project->tim as $tim)
+                                    {{ count($tim->anggota) }}
+                                @empty
+                                    {{ 0 }}
+                                @endforelse
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deskripsi</td>
+                            <td>:</td>
+                            <td id="deskripsi">{{ $project->deskripsi }}</td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="d-flex justify-content-end mt-5">

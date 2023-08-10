@@ -45,10 +45,11 @@
 			        <!-- <x-input text="Status" name="status" type="text" /> -->
 			        <label for="status">Status</label>
 			        <select id="status" class="form-control" value="{{ $project->status }}" text="Status" name="status">
-						<option value="Not Started">Not Started</option>
-						<option value="Cancelled">Cancelled</option>
-			        	<option value="In Progress">In Progress</option>
-			        	<option value="Completed">Completed</option>
+						<option value="Not Started" {{ $project->status == 'Not Started' ? 'selected' : '' }}>Not Started</option>
+						<option value="Cancelled" {{ $project->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+						<option value="In Progress" {{ $project->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+						<option value="Completed" {{ $project->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+			        	
 			        </select>
 				</div>
 				<div class="col-md-6">
@@ -56,9 +57,8 @@
 					<label for="klien">Klien</label>
 			        <select id="klien" class="form-control" text="Klien" name="id_klien">
 						@forelse($kliens as $klien)
-			        	<option value="{{ $klien->id_klien }}">{{ $klien->nama }}</option>
+			        		<option value="{{ $klien->id_klien }}" {{ $klien->id_klien == $project->id_klien ? 'selected' : '' }}>{{ $klien->nama }}</option>
 						@endforeach
-                        <option value="{{ $klien->id_klien }}">{{ $klien->nama }}</option>
 			        </select>
 					<!-- <x-input text="Budget" name="budget" type="text" /> -->
 				</div>

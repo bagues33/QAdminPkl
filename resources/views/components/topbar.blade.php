@@ -34,25 +34,27 @@
                 <h6 class="dropdown-header">
                     Alerts Center
                 </h6>
-                @if (auth()->user()->unreadNotifications)
+                <div style="height: 50vh; overflow: scroll" class="body">
+                    @if (auth()->user()->unreadNotifications)
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-sm btn-success d-inline-block text-end m-2" href="{{route('mark-as-read')}}">Mark All as Read</a>
                     </div>
-                
-                @endif
-                @foreach (auth()->user()->unreadNotifications as $notification)
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-file-alt text-white"></i>
+                    @endif
+                    @foreach (auth()->user()->unreadNotifications as $notification)
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">{{ date('Y-m-d H:i:s') }}</div>
-                            <span class="font-weight-bold">{{$notification->data['data']}}</span>
-                        </div>
-                    </a>
-                @endforeach
+                            <div>
+                                <div class="small text-gray-500">{{ date('Y-m-d H:i:s') }}</div>
+                                <span class="font-weight-bold">{{$notification->data['data']}}</span>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+               
                 {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">

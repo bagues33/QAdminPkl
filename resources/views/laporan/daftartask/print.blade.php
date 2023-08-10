@@ -15,13 +15,31 @@
             background-color: black !important;
             color: black !important;
         }
+        @media print 
+        {
+            @page {
+              size: A4; /* DIN A4 standard, Europe */
+              margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 11px;
+                background: #FFF;
+                overflow: visible;
+            }
+            body {
+                padding-top: 5mm;
+            }
+        }
     </style>
   </head>
   <body onload="window.print()">
     {{-- <body> --}}
 
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="{{ asset('dist/img/logo-picsi-2.png') }}" alt="">
@@ -36,41 +54,43 @@
         {{-- <hr class="bg-dark" style="height: 3px"> --}}
        
         <div class="row">
-            <h3 class="text-center mt-5 mb-5">Daftar Task Per Project</h3>
-            @forelse($tasks as $no => $task)
-                @if($no == 1)
-                    <h5 id="nama_project" class="mt-4">{{ $task->anggota->tim->project->nama }}</h5>
-                @else
-                @endif
-            @empty
-            @endforelse
-            <table class="table table-striped mt-2">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Task</th>
-                        <th scope="col">Deskripsi</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Prioritas</th>
-                        <th scope="col">Deadline</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                  <tbody>
-                    @forelse($tasks as $no => $task)
-                    <tr>
-                        <th scope="row">{{ ++$no }}</th>
-                        <td>{{ $task->nama }}</td>
-                        <td>{{ $task->deskripsi }}</td>
-                        <td>{{ $task->type }}</td>
-                        <td>{{ $task->prioritas }}</td>
-                        <td>{{ $task->deadline }}</td>
-                        <td>{{ $task->status }}</td>
-                    </tr>
-                    @empty
-                    @endforelse
-                  </tbody>
-            </table>
+            <div class="col-12">
+                <h3 class="text-center mt-5 mb-5">Daftar Task Per Project</h3>
+                @forelse($tasks as $no => $task)
+                    @if($no == 1)
+                        <h5 id="nama_project" class="mt-4">{{ $task->anggota->tim->project->nama }}</h5>
+                    @else
+                    @endif
+                @empty
+                @endforelse
+                <table class="table table-striped mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Task</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Prioritas</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                      <tbody>
+                        @forelse($tasks as $no => $task)
+                        <tr>
+                            <th scope="row">{{ ++$no }}</th>
+                            <td>{{ $task->nama }}</td>
+                            <td>{{ $task->deskripsi }}</td>
+                            <td>{{ $task->type }}</td>
+                            <td>{{ $task->prioritas }}</td>
+                            <td>{{ $task->deadline }}</td>
+                            <td>{{ $task->status }}</td>
+                        </tr>
+                        @empty
+                        @endforelse
+                      </tbody>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="d-flex justify-content-end mt-5">

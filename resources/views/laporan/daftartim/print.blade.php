@@ -15,13 +15,31 @@
             background-color: black !important;
             color: black !important;
         }
+        @media print 
+        {
+            @page {
+              size: A4; /* DIN A4 standard, Europe */
+              margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 11px;
+                background: #FFF;
+                overflow: visible;
+            }
+            body {
+                padding-top: 5mm;
+            }
+        }
     </style>
   </head>
   <body onload="window.print()">
     {{-- <body> --}}
 
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="{{ asset('dist/img/logo-picsi-2.png') }}" alt="">
@@ -36,6 +54,7 @@
         {{-- <hr class="bg-dark" style="height: 3px"> --}}
        
         <div class="row">
+          <div class="col-12">
             <h3 class="text-center mt-5">Daftar Tim Per Project</h3>
             @forelse($projects as $no => $project)
             <h5 class="mt-5">Nama Project : {{ $project->nama }}</h5>
@@ -64,6 +83,7 @@
             </table>
             @empty
             @endforelse
+          </div>
         </div>
         <div class="row">
             <div class="d-flex justify-content-end mt-5">

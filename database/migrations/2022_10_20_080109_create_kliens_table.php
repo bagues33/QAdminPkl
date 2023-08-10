@@ -20,8 +20,8 @@ class CreateKliensTable extends Migration
             $table->string('alamat');
             $table->string('email', 50);
             $table->string('photo')->nullable();
-            $table->string('website', 30)->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->string('website', 50)->nullable();
+            $table->text('deskripsi')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();

@@ -15,13 +15,31 @@
             background-color: black !important;
             color: black !important;
         }
+        @media print 
+        {
+            @page {
+              size: A4; /* DIN A4 standard, Europe */
+              margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 11px;
+                background: #FFF;
+                overflow: visible;
+            }
+            body {
+                padding-top: 5mm;
+            }
+        }
     </style>
   </head>
   <body onload="window.print()">
     {{-- <body> --}}
 
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="{{ asset('dist/img/logo-picsi-2.png') }}" alt="">
@@ -36,48 +54,50 @@
         {{-- <hr class="bg-dark" style="height: 3px"> --}}
        
         <div class="row">
-            <h3 class="text-center mt-5 mb-5">Laporan Per Project</h3>
-            <table class="table table-borderless">
-                <thead>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Deskripsi</th>
-                    <th>Tgl Mulai</th>
-                    <th>Deadline</th>
-                    <th>Tgl Selesai</th>
-                    <th>Budget</th>
-                    <th>Status</th>
-                    <th>Klien</th>
-                    <th>Project Manager</th>
-                    <th>Jumlah Tenaga Ahli</th>
-                </thead>
-                <tbody>
-                    @forelse($projects as $no => $project)
-                    <tr>
-                        <td>{{ ++$no }}</td>
-                        <td>{{ $project->nama }}</td>
-                        <td>{{ $project->deskripsi }}</td>
-                        <td>{{ $project->tgl_mulai }}</td>
-                        <td>{{ $project->deadline }}</td>
-                        <td>{{ $project->tgl_selesai ? $project->tgl_selesai : "Belum selesai" }}</td>
-                        <td>{{ $project->budget }}</td>
-                        <td>{{ $project->status }}</td>
-                        <td>{{ $project->klien->nama }}</td>
-                        <td>{{ $project->user->name }}</td>
-                        <td>@forelse($project->tim as $tim)
-                            {{ count($tim->anggota) }}
-                            @empty
-                                {{ 0 }}
-                            @endforelse
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="11" class="text-center">No data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div class="col-12">    
+                <h3 class="text-center mt-5 mb-5">Laporan Seluruh Project</h3>
+                <table class="table table-borderless">
+                    <thead>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
+                        <th>Tgl Mulai</th>
+                        <th>Deadline</th>
+                        <th>Tgl Selesai</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                        <th>Klien</th>
+                        <th>Project Manager</th>
+                        <th>Tenaga Ahli</th>
+                    </thead>
+                    <tbody>
+                        @forelse($projects as $no => $project)
+                        <tr>
+                            <td>{{ ++$no }}</td>
+                            <td>{{ $project->nama }}</td>
+                            <td>{{ $project->deskripsi }}</td>
+                            <td>{{ $project->tgl_mulai }}</td>
+                            <td>{{ $project->deadline }}</td>
+                            <td>{{ $project->tgl_selesai ? $project->tgl_selesai : "Belum selesai" }}</td>
+                            <td>{{ $project->budget }}</td>
+                            <td>{{ $project->status }}</td>
+                            <td>{{ $project->klien->nama }}</td>
+                            <td>{{ $project->user->name }}</td>
+                            <td>@forelse($project->tim as $tim)
+                                {{ count($tim->anggota) }}
+                                @empty
+                                    {{ 0 }}
+                                @endforelse
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="11" class="text-center">No data</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div> 
         </div>
         <div class="row">
             <div class="d-flex justify-content-end mt-5">

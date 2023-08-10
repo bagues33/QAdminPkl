@@ -3,6 +3,8 @@
         Login
     </x-slot>
 
+    <h2 class="mt-5 text-center">Sistem Informasi Project Management</h2>
+
     <x-auth-card>
     
         {{-- show alert if there is errors --}}

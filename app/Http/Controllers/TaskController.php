@@ -190,6 +190,10 @@ class TaskController extends Controller
         ]);
 
         // dd($task);
+        $anggota = Anggota::where('id_anggota', $task->id_anggota)->get()->pluck('id_user')->first();
+        // dd($anggota);
+        $user = User::where('id','=', $anggota)->firstOrFail();
+        Notification::send($user, new WelcomeNotification("Task dengan nama " .$task->nama. " dan deadline " .$task->deadline. " perlu di review!"));
 
         //redirect to index
         return redirect()->route('anggota.task.index')->with(['success' => 'Submit Task Berhasil Disimpan!']);
@@ -219,7 +223,7 @@ class TaskController extends Controller
         // $kliens = Klien::latest()->get();
         $user = Auth::user();
         $anggotas = Anggota::with('user')->where('id_user', '=', $user->id)->latest()->get();
-        $task = Task::where('id_task','=',$id)->firstOrFail();
+        $task = Task::with('anggota.user')->where('id_task','=',$id)->firstOrFail();
         return view('admin.task.edit', compact('anggotas','task'));
     }
 
@@ -264,6 +268,14 @@ class TaskController extends Controller
             'id_anggota'   => $request->id_anggota,
             'approved' => $request->has('approved'),
         ]);
+
+        // if($task->approved)
+        if($task->approved) {
+            $anggota = Anggota::where('id_anggota', $task->id_anggota)->get()->pluck('id_users')->first();
+            // dd($anggota);
+            $user = User::where('id','=', $anggota)->firstOrFail();
+            Notification::send($user, new WelcomeNotification("Task dengan nama " .$task->nama. " dan deadline " .$task->deadline. " telah di approved!"));
+        }
 
         //redirect to index
         return redirect()->route('pm.task')->with(['success' => 'Data Berhasil Diubah!']);

@@ -24,7 +24,7 @@
                 <th>Status</th>
                 <th>Klien</th>
                 <th>Project Manager</th>
-                <th>Jumlah Tenaga Ahli</th>
+                <th>Tenaga Ahli</th>
 			</thead>
 			<tbody>
 				@forelse($projects as $no => $project)

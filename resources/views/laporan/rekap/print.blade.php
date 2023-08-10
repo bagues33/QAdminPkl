@@ -15,13 +15,31 @@
             background-color: black !important;
             color: black !important;
         }
+        @media print 
+        {
+            @page {
+              size: A4; /* DIN A4 standard, Europe */
+              margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 11px;
+                background: #FFF;
+                overflow: visible;
+            }
+            body {
+                padding-top: 5mm;
+            }
+        }
     </style>
   </head>
   <body onload="window.print()">
     {{-- <body> --}}
 
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="{{ asset('dist/img/logo-picsi-2.png') }}" alt="">
@@ -36,43 +54,44 @@
         {{-- <hr class="bg-dark" style="height: 3px"> --}}
        
         <div class="row">
-            <h3 class="text-center mt-5 mb-5">Rekap Pekerjaan</h3>
-            
-            <table class="table table-striped mt-2">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tahun</th>
-                        <th>Jumlah Klien</th>
-                        <th>Jumlah Project</th>
-                    </tr>
-                </thead>
-                  <tbody>
-                    @forelse($rekaps as $no => $rekap)
-                    <tr>
-                        <th scope="row">{{ ++$no }}</th>
-					    <td>{{ $rekap->tahun }}</td>
-					    <td>{{ $rekap->jumlah_klien }}</td>
-					    <td>{{ $rekap->jumlah_project }}</td>
-                    </tr>
-                    @empty
-                    @endforelse
-                  </tbody>
-            </table>
+            <div class="col-12">    
+                <h3 class="text-center mt-5 mb-5">Rekap Pekerjaan</h3>
+                <table class="table table-striped mt-2">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tahun</th>
+                            <th>Jumlah Klien</th>
+                            <th>Jumlah Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($rekaps as $no => $rekap)
+                        <tr>
+                            <th scope="row">{{ ++$no }}</th>
+                            <td>{{ $rekap->tahun }}</td>
+                            <td>{{ $rekap->jumlah_klien }}</td>
+                            <td>{{ $rekap->jumlah_project }}</td>
+                        </tr>
+                        @empty
+                        @endforelse
+                    </tbody>
+                </table>
+            </div> 
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="d-flex justify-content-end mt-5">
+                <div class="d-flex justify-content-center mt-5">
                     <div class="text-center" style="width: 200px;">
-                        <p>Yogyakarta, {{ date('d-m-Y') }}</p>
+                        {{-- <p>Yogyakarta, {{ date('d-m-Y') }}</p>
                         <p>Mengetahui</p>
                         <br><br><br>
-                        <p>( {{ $user->name }} )</p>
+                        <p>( {{ $user->name }} )</p> --}}
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="d-flex justify-content-end mt-5">
+                <div class="d-flex justify-content-center mt-5">
                     <div class="text-center" style="width: 200px;">
                         <p>Yogyakarta, {{ date('d-m-Y') }}</p>
                         <p>Mengetahui</p>

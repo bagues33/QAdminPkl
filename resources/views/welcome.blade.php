@@ -4,6 +4,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Sistem Informasi Project Management</title>
+      <link href="{{ asset('storage/uploads/picsi.jpeg') }}" rel="shortcut icon" type="image/x-icon">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
     <body>
@@ -520,9 +521,7 @@
               INTEGRATIKA
             </h1>
             <p class="text-caption">
-              Hard to find a good mentor according to your wishes?<br class="d-sm-block d-none" />Don't
-              worry because we
-              are here to help you
+              The PILAR CIPTA SOLUSI INTEGRATIKA team specializes in Information Technology and Telecommunications with an emphasis on professionalism and experience in the field.
             </p>
             <div class="d-flex flex-sm-row flex-column align-items-center mx-auto mx-lg-0 justify-content-center gap-3">
               <button class="btn btn-get text-white d-inline-flex">
@@ -558,8 +557,8 @@
                         alt="" />
                     </div>
                     <div class="text-start">
-                      <p class="card-name">Felix Potah</p>
-                      <p class="card-job">Pro Mentor</p>
+                      <p class="card-name">Tofan Bagus A</p>
+                      <p class="card-job">Web Developer</p>
                     </div>
                   </div>
                   <div class="row text-start" style="margin-bottom: 1.25rem">
@@ -572,10 +571,12 @@
                       <p class="card-caption">Reviews</p>
                     </div>
                   </div>
-                  <button class="btn btn-hire text-white">
-                    <div class="test d-none">show</div>
-                    Hire Me
-                  </button>
+                  <a target="_blank" href="https://api.whatsapp.com/send?phone=6281225027507&text=Halo%20Tofan%20Bagus%20Apriyanto%20">
+                    <button class="btn btn-hire text-white">
+                      <div class="test d-none">show</div>
+                      Hire Me
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -660,7 +661,7 @@
 
       body .content .content .benefits .rectangle {
         max-width: 302px;
-        max-height: 334px;
+        /* max-height: 334px; */
         border: 1px solid #9BA8BE;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -735,8 +736,8 @@
             OUR FORMULA
           </div>
           <div class="headline mt-3">
-            3-Steps to Work at <br class="d-none d-md-block">
-            Your Dream Companies
+            INFORMATION TECHNOLOGY AND  <br class="d-none d-md-block">
+            COMMUNICATION SOLUTION
           </div>
           <div class="row benefits">
             <div class="col-md-4 mt-md-0">
@@ -745,11 +746,10 @@
                   src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-1.png"
                   alt="benefits-1" class="img-fluid">
                 <div class="headline-benefit">
-                  Sign Up
+                  DEVELOPMENT SYSTEM
                 </div>
                 <div class="subheadline-benefit mt-2">
-                  Get yourself ready and join <br class="d-none d-md-block">
-                  our great adventures
+                  PT Pilar Cipta Solusi Integratika Assists clients in providing application solutions, development and integration with other systems according to client needs.
                 </div>
               </div>
             </div>
@@ -759,11 +759,10 @@
                   src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-2.png"
                   alt="benefits-1" class="img-fluid">
                 <div class="headline-benefit">
-                  Finish The Quiz
+                  ENTERPRISE PORTAL
                 </div>
                 <div class="subheadline-benefit mt-2">
-                  Answer the question that we’ve <br class="d-none d-md-block">
-                  prepared for your career
+                  It is an application based on the internet and is a medium of communication either for the benefit of the company/government or to provide information to the public.
                 </div>
               </div>
             </div>
@@ -773,11 +772,10 @@
                   src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Job/benefit-job-3.png"
                   alt="benefits-1" class="img-fluid">
                 <div class="headline-benefit">
-                  Interview
+                  MULTIMEDIA INTERAKTIF
                 </div>
                 <div class="subheadline-benefit mt-2">
-                  We will setup the meeting with <br class="d-none d-md-block">
-                  your dream companies
+                  Multimedia Presentation is a service that designs and builds a Company Profile, Catalog Product or Company Annual Report.
                 </div>
               </div>
             </div>
@@ -862,7 +860,7 @@
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3 address">
                 <div class="logo font-red-hat-display">
-                    GivMoney
+                    PT. PICSI
                 </div>
                 <div class="social-media">
                     <a href="#">
@@ -883,7 +881,7 @@
                     </a>
                 </div>
                 <div class="copyright font-red-hat-display">
-                    2021 All rights reserved.
+                    2023 All rights reserved.
                 </div>
             </div>
             <hr class="clearfix w-100 d-md-none pb-3">

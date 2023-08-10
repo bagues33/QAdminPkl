@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Komentar;
 use App\Models\Task;
+use App\Models\Anggota;
+use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Notification;
 use Auth;
 
 class KomentarController extends Controller
@@ -46,6 +49,18 @@ class KomentarController extends Controller
             'id_task'   => $id_task,
             'id_user' => $user->id,
         ]);
+
+        $task = Task::where('id_task', $id_task)->get()->pluck('id_anggota');
+        // dd($anggota);
+        $nama_task = Task::where('id_task', $id_task)->first();
+        // dd($nama_task->nama);
+        if($user->hasRole('anggota')) {
+            $anggota = Anggota::where('id_anggota', $task)->get()->pluck('id_user')->first();
+        } elseif ($user->hasRole('pm')) {
+            $anggota = Anggota::where('id_anggota', $task)->get()->pluck('id_users')->first();
+        }
+        $user_notif = User::where('id','=', $anggota)->firstOrFail();
+        Notification::send($user_notif, new WelcomeNotification("Ada komentar baru pada task " .$nama_task->nama. ""));
 
         //redirect to index
         if($user->hasRole('anggota')) {

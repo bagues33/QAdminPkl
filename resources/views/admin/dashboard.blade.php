@@ -5,7 +5,7 @@
 
     <section class="row">
         
-        
+        @role('Admin')
         <x-card-sum 
             text="Total Klien" 
             value="{{ $totalklien }}" 
@@ -30,8 +30,27 @@
             icon="user" 
             color="danger"
         />
-
-        
+        @endrole
+        @role('pm')
+        <x-card-sum 
+            text="Total Project" 
+            value="{{ $totalproject }}" 
+            icon="archive" 
+            color="primary"
+        />
+        <x-card-sum 
+            text="Total Tim" 
+            value="{{ $totaltim }}" 
+            icon="users" 
+            color="success"
+        />
+        <x-card-sum 
+            text="Total Anggota" 
+            value="{{ $totalanggota }}" 
+            icon="user" 
+            color="danger"
+        />
+        @endrole
         <x-card-sum 
             text="Total Task" 
             value="{{ $totaltaskanggota }}" 

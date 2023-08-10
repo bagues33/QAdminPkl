@@ -127,7 +127,7 @@
 					</td>
 				</tr>
                 <tr>
-					<td>Jumlah Tenaga Ahli</td>
+					<td>Tenaga Ahli</td>
                     <td>:</td>
                     <td id="tenaga-ahli">
 						

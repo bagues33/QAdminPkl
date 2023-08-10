@@ -18,8 +18,9 @@
                 <div class="col-md-6">
                     <label for="prioritas">Prioritas</label>
                     <select id="prioritas" class="form-control" text="prioritas" name="prioritas">
-                            <option value="Low">Low</option>
-                            <option value="High">High</option>
+						<option value="Low" {{ $task->prioritas == 'Low' ? 'selected' : '' }}>Low</option>
+						<option value="Normal" {{ $task->prioritas == 'Normal' ? 'selected' : '' }}>Normal</option>
+						<option value="High" {{ $task->prioritas == 'High' ? 'selected' : '' }}>High</option>
                     </select>
                     
 				</div>
@@ -29,18 +30,20 @@
 				<div class="col-md-6">
                     <label for="type">Type</label>
                     <select id="type" class="form-control" text="type" name="type">
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-							<option value="Hard">Hard</option>
+							<option value="Easy" {{ $task->type == 'Easy' ? 'selected' : '' }}>Easy</option>
+							<option value="Medium" {{ $task->type == 'Medium' ? 'selected' : '' }}>Medium</option>
+                            <option value="Hard" {{ $task->type == 'Hard' ? 'selected' : '' }}>Hard</option>
                     </select>
 				</div>
                 <div class="col-md-6">
                     <label for="id_anggota">Nama Anggota</label>
-                    <select id="id_anggota" class="form-control" text="Nama Anggota" name="id_anggota">
+					<input type="hidden" name="id_anggota" class="form-control" id="id_anggota" value="{{ $task->id_anggota }}">
+					<input type="text" name="nama_anggota" class="form-control" id="nama_anggota" value="{{ $task->anggota->user->name }}" readonly>
+                    {{-- <select id="id_anggota" class="form-control" text="Nama Anggota" name="id_anggota">
                             @forelse($anggotas as $anggota)
                             <option value="{{ $anggota->id_anggota }}">{{ $anggota->user->name }}</option>
                             @endforeach
-                    </select>
+                    </select> --}}
 				</div>
 			</div>
 
@@ -53,10 +56,10 @@
 					<br>
                     <label for="type">Status</label>
                     <select id="type" class="form-control" text="type" name="status">
-                            <option value="notstarted">Not Started</option>
-                            <option value="inprogress">In Progress</option>
-							<option value="done">Done</option>
-							<option value="cancel">Cancel</option>
+						<option value="notstarted" {{ $task->status == 'notstarted' ? 'selected' : '' }}>Not Started</option>
+						<option value="inprogress" {{ $task->status == 'inprogress' ? 'selected' : '' }}>In Progress</option>
+						<option value="done" {{ $task->status == 'done' ? 'selected' : '' }}>Done</option>
+						<option value="cancel" {{ $task->status == 'cancel' ? 'selected' : '' }}>Cancel</option>
                     </select>
 				</div>
 			</div>

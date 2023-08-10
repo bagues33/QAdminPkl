@@ -18,9 +18,9 @@
                 <div class="col-md-6">
                     <label for="prioritas">Prioritas</label>
                     <select id="prioritas" class="form-control" text="prioritas" name="prioritas">
-                            <option value="low">Low</option>
-							<option value="normal">Normal</option>
-                            <option value="high">High</option>
+                            <option value="Low">Low</option>
+							<option value="Normal">Normal</option>
+                            <option value="High">High</option>
                     </select>
                     
 				</div>
@@ -30,9 +30,9 @@
 				<div class="col-md-6">
                     <label for="type">Type</label>
                     <select id="type" class="form-control" text="type" name="type">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-							<option value="hard">Hard</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+							<option value="Hard">Hard</option>
                     </select>
 				</div>
                 <div class="col-md-6">

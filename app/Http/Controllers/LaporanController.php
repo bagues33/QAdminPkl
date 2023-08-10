@@ -108,7 +108,7 @@ class LaporanController extends Controller
     public function rekapPekerjaan() 
     {
         $user = Auth::user();
-        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.created_at) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
+        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.tgl_mulai) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
 
         // dd($rekap);
 
@@ -119,7 +119,7 @@ class LaporanController extends Controller
     public function rekapPekerjaanPrint() 
     {
         $user = Auth::user();
-        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.created_at) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
+        $rekaps = DB::select('SELECT COUNT(distinct kliens.nama) as jumlah_klien, COUNT(projects.nama) as jumlah_project, YEAR(projects.tgl_mulai) as tahun FROM projects INNER JOIN kliens ON projects.id_klien = kliens.id_klien GROUP BY Tahun');
 
         // dd($rekap);
 
@@ -156,7 +156,7 @@ class LaporanController extends Controller
         // ];
         
         $list_project = Project::get();
-        $list_tahun =  Project::selectRaw('extract(year FROM created_at) AS year')
+        $list_tahun =  Project::selectRaw('extract(year FROM tgl_mulai) AS year')
         ->distinct()
         ->orderBy('year', 'desc')
         ->get();
@@ -174,7 +174,7 @@ class LaporanController extends Controller
     public function getListProject($tahun) 
     {
         
-        $list_project = Project::whereYear('created_at', $tahun)->get();
+        $list_project = Project::whereYear('tgl_mulai', $tahun)->get();
         // $projects = Project::with('tim.anggota.user','tim','klien','user')->where('id_project', $id_project)->get();
         // dd($projects);
         return response()->json($list_project);
